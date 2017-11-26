@@ -1,0 +1,16 @@
+{
+  "name": "front-camp",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "babel src -d dist --copy-files",
+    "start": "nodemon ./src/index.js --exec babel-node",
+    "server": "node dist/index.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "proxy-polyfill": "^0.1.6",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
+    "nodemon": "^1.11.0"
+  }
+}
