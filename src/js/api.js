@@ -27,4 +27,24 @@ class ApiInvoker
             .then(data => succesHandler(data))
             .catch(error => errorHandler(error))
     }
+
+    getHtml(endpointUrl, succesHandler, errorHandler) {
+        let url = endpointUrl;
+        if(url === undefined || url === null) {
+            url = this.Url;
+        }
+        if(errorHandler === undefined || errorHandler === null) {
+            errorHandler = function (error) { console.error(error) } ;
+        }
+        if(succesHandler === undefined || succesHandler === null) {
+            succesHandler = function (data) { console.log("success", data);} ;
+        }
+        let request = new Request(url);
+        let init = { method: "GET", mode: "cors" }
+        
+        fetch(request, init)
+            .then(response => response.text())
+            .then(data => succesHandler(data))
+            .catch(error => errorHandler(error))
+    }
 }

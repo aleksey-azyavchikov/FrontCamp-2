@@ -13,18 +13,18 @@ class ValidationFactory {
 
      getValidator(validatorIndex) {
          switch(validatorIndex) {
-             case 0 : {
+             case EnumFieldsValidators.ApiKeyField : {
                  return {
                      set: (obj, prop, value) => {
                          if(value.length != 32) {
-                             throw new RangeError('Api key should has 32 symbols');
+                             throw new RangeError('The api key should consist of 32 symbols');
                          }
                          obj[prop] = value;
                          return true;
                      }
                  }
              }
-             case 1 : 
+             case EnumFieldsValidators.OtherField : 
              default : {
                  return {
                      set: (obj, prop, value) => {

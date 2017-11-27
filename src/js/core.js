@@ -1,61 +1,61 @@
-const key = "BbcNews"
-
 window.onload = function () {
-    let apiKey = localStorage.getItem(key);
+    let apiKey = localStorage.getItem(Constants.key);
         let homePage = "home";
         let newsPage = "news";
 
         apiKey === null 
-            ? $("#content").load(getPage(homePage), loadHomePage) 
-            : $("#content").load(getPage(newsPage), loadNewsPage);
+            ? loadPage("content", getPage(homePage), loadHomePage) 
+            : loadPage("content", getPage(newsPage), loadNewsPage);
 }
 
 function getPage(page) {
     return `pages/${page}.html`
 }
 
+function loadPage(selector, url, handler) {
+    let apiInvoker = new ApiInvoker();
+    apiInvoker.getHtml(url, (html) => {
+        document.getElementById(selector).innerHTML = html;
+        handler();
+    })
+}
+
 function loadHomePage() {
-    let errorApi = $(".error-api");
-    errorApi.hide();
+    let buttonElement = document.getElementsByTagName("button")[0];
+    buttonElement.addEventListener("click", homePageHandler)
+}
 
-    $("button").click(() => {
-        let input = $("input");
-        let spanError = $("span");
-        let errorApi = $(".error-api");
-        let validationFactory = new ValidationFactory();
-        let proxy = validationFactory.getProxy(EnumFieldsValidators.ApiKeyField);
 
-        
-        try
-        {   
-            let apiKey = input.val();
-            proxy.value = apiKey;
-        } catch(error) {
-            setTimeout(() => {
-                spanError.text(error);
-                errorApi.show();
-            }, 1000)
-            return;
-        } 
+function homePageHandler() {
+    let inputElement = document.getElementsByTagName("input")[0];
+    let validationFactory = new ValidationFactory();
+    let proxy = validationFactory.getProxy(EnumFieldsValidators.ApiKeyField);
+    
+    try
+    {   
+        proxy.value = inputElement.value;;
+    } catch(error) {
+        setTimeout(() => {
+            showErrorPopup(error);
+        }, 1000)
+        return;
+    } 
 
-        errorApi.hide();
-        localStorage.setItem(key, proxy.value); 
-        input.val("");
-        location.reload();
-        });
+    localStorage.setItem(Constants.key, proxy.value); 
+    location.reload();
 }
 
 function loadNewsPage() {
-    let errorApi = $(".error-api");
-    errorApi.hide();
-
-    $("button").click(() => {
-        localStorage.removeItem(key);
+    let buttonElement = document.getElementsByTagName("button")[0];
+    buttonElement.addEventListener("click", () => {
+        localStorage.removeItem(Constants.key);
         location.reload();
-        return;
-    });
+    })
+    newsPageHandler();
+}
 
-    let apiKey = localStorage.getItem(key);
+function newsPageHandler() {
+    let apiKey = localStorage.getItem(Constants.key);
     if(apiKey === null) { 
         location.reload();
         return;
@@ -63,7 +63,7 @@ function loadNewsPage() {
 
     let apiInvoker = new ApiInvoker(apiKey);
     apiInvoker.getJson((data) => {
-        let ul = $("ul");
+        let ul = document.getElementsByTagName("ul")[0];
         const template = `${data.articles.map(article => `
             <li>
                 <h4 class="header">${article.title}</h4>
@@ -74,13 +74,18 @@ function loadNewsPage() {
                 <div class="time">${article.publishedAt}</div>
             </li>
         `)}`;
-        ul.append(template);
+        ul.innerHTML = template; 
     },
     (error) => {
-        let spanError = $("span");
-        spanError.text("Error on server side");
-        errorApi.show();
+        showErrorPopup(message);
     });
+}
+
+function showErrorPopup(text) {
+    let spanElement = document.getElementsByTagName("span")[0];
+    let popupElement = document.getElementsByClassName("error-api")[0];
+    spanElement.textContent = error
+    popupElement.style.display = "block";
 }
 
 

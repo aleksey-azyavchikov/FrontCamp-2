@@ -17,6 +17,7 @@
     border: 1px solid;
     margin-top: 10px;
     padding: 10px 15px;
+    display: none;
 }
 
 .error-api span{
@@ -75,7 +76,6 @@ h3 {
     max-width:auto;
     max-height:auto;
     display: block;
-    /* transform: translate(-50%, -50%); */
 }
 
 
