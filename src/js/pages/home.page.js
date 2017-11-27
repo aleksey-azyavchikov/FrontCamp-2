@@ -20,7 +20,7 @@ class HomePage extends BasePage {
             proxy.value = inputElement.value;;
         } catch(error) {
             setTimeout(() => {
-                this.showErrorPopup(error);
+                super.showErrorPopup(error);
             }, 1000)
             return;
         } 

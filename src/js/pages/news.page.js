@@ -39,7 +39,7 @@ class NewsPage extends BasePage {
             ul.innerHTML = template; 
         },
         (error) => {
-            this.showErrorPopup(Constants.requestErrorMessage);
+            super.showErrorPopup(Constants.requestErrorMessage);
         });
     }
 

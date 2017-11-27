@@ -1,10 +1,10 @@
 class PageLoader {
-    constructor() {
+    constructor(apiInvoker) {
+        this.apiInvoker = apiInvoker;
     }
-    
+
     loadPage(selector, page) {
-        let apiInvoker = new ApiInvoker();
-        apiInvoker.getHtml(page.getPagePath(), (html) => {
+        this.apiInvoker.getHtml(page.getPagePath(), (html) => {
             document.getElementById(selector).innerHTML = html;
             page.setup();
         })
