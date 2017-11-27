@@ -32,7 +32,7 @@ class NewsPage extends BasePage {
                         <div class="description">${article.description}</div>
                         <a class="source" href="${article.url}">Source</a>
                         <div class="author">${article.author}</div>
-                        <div class="time">${article.publishedAt}</div>
+                        <div class="time">${this.getActualDate(article.publishedAt)}</div>
                     </article>
                 </li>
             `)}`;
@@ -41,5 +41,13 @@ class NewsPage extends BasePage {
         (error) => {
             this.showErrorPopup(Constants.requestErrorMessage);
         });
+    }
+
+    getActualDate(str) {
+        let result = str === null 
+            ? ""
+            : str.substring(0, 10);
+
+        return result;
     }
 } 
