@@ -17,7 +17,7 @@ class ValidationFactory {
                  return {
                      set: (obj, prop, value) => {
                          if(value.length != 32) {
-                             throw new RangeError('The api key should consist of 32 symbols');
+                             throw new RangeError(Constants.validationMessage);
                          }
                          obj[prop] = value;
                          return true;
