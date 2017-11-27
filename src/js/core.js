@@ -77,14 +77,14 @@ function newsPageHandler() {
         ul.innerHTML = template; 
     },
     (error) => {
-        showErrorPopup(message);
+        showErrorPopup(Constants.requestErrorMessage);
     });
 }
 
 function showErrorPopup(text) {
     let spanElement = document.getElementsByTagName("span")[0];
     let popupElement = document.getElementsByClassName("error-api")[0];
-    spanElement.textContent = error
+    spanElement.textContent = text;
     popupElement.style.display = "block";
 }
 
