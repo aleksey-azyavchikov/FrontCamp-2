@@ -1,4 +1,10 @@
-class App {
+import { ApiInvoker } from "./api.js";
+import { PageLoader } from "./page.loader.js";
+import { HomePage } from "./pages/home.page.js";
+import { NewsPage } from "./pages/news.page.js";
+import { Constants } from "./constants.js";
+
+export class App {
     constructor() {
         let apiInvoker = new ApiInvoker();
         this.pageLoader = new PageLoader(apiInvoker);
@@ -13,3 +19,4 @@ class App {
                 : this.pageLoader.loadPage("content", newsPage)
     }
 }
+

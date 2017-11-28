@@ -1,4 +1,4 @@
-class PageLoader {
+export class PageLoader {
     constructor(apiInvoker) {
         this.apiInvoker = apiInvoker;
     }

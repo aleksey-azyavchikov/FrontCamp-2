@@ -1,5 +1,7 @@
+import { BasePage } from "./base.page.js";
+import { ValidationFactory, EnumFieldsValidators } from "../validation.js";
 
-class HomePage extends BasePage {
+export class HomePage extends BasePage {
     constructor() {
         super();
         this.pageName = "home";

@@ -1,9 +1,9 @@
-var EnumFieldsValidators = { 
+export const EnumFieldsValidators = { 
     ApiKeyField: 0,
     OtherField: 1
 }
 
-class ValidationFactory {
+export class ValidationFactory {
      constructor() {
      }
 

@@ -1,4 +1,4 @@
-class ApiInvoker
+export class ApiInvoker
 {
     constructor(apiKey) {
         this.apiKey = apiKey;

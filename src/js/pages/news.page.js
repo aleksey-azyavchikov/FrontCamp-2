@@ -1,5 +1,8 @@
+import { BasePage } from "./base.page.js";
+import { Constants } from "../constants.js";
+import { ApiInvoker } from "../api.js";
 
-class NewsPage extends BasePage {
+export class NewsPage extends BasePage {
     constructor() {
         super();
         this.pageName = "news";
