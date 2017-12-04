@@ -8,9 +8,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "proxy-polyfill": "^0.1.6",
+    "babel-plugin-proxy": "^1.1.0",
     "babel-polyfill": "^6.16.0",
-    "babel-preset-latest": "^6.16.0",
-    "nodemon": "^1.11.0"
+    "babel-preset-env": "^1.6.1",
+    "nodemon": "^1.11.0",
+    "proxy-polyfill": "^0.1.7",
+    "whatwg-fetch": "^2.0.3"
   }
 }

@@ -1,3 +1,10 @@
 {
-  "presets": ["latest"]
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["ie 10"]
+      }
+    }]
+  ],
+  "plugins": ["./plugins/console-remover.plugin.js"]
 }

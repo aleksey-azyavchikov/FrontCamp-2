@@ -3,21 +3,19 @@ class HomePage extends BasePage {
     constructor() {
         super();
         this.pageName = "home";
+        console.log("Test");
     }
 
     setup() {
         let buttonElement = document.getElementsByTagName("button")[0];
-        buttonElement.addEventListener("click", this.handler)
+        buttonElement.addEventListener("click", this.handler.bind(this))
     }
 
     handler() {
         let inputElement = document.getElementsByTagName("input")[0];
-        let validationFactory = new ValidationFactory();
-        let proxy = validationFactory.getProxy(EnumFieldsValidators.ApiKeyField);
-        
         try
         {   
-            proxy.value = inputElement.value;;
+            this.checkValue(inputElement.value);
         } catch(error) {
             setTimeout(() => {
                 super.showErrorPopup(error);
@@ -25,7 +23,13 @@ class HomePage extends BasePage {
             return;
         } 
     
-        localStorage.setItem(Constants.key, proxy.value); 
+        localStorage.setItem(Constants.key, inputElement.value); 
         location.reload();
+    }
+
+    checkValue(value) {
+        if(value.length > 32) {
+            throw new Error(Constants.validationMessage);
+        }
     }
 }
