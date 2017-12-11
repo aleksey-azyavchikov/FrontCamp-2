@@ -1,10 +1,15 @@
-import { BasePage } from "./base.page.js";
-import { ValidationFactory, EnumFieldsValidators } from "../validation.js";
+import { BasePage } from "../base.page.js";
+import { Constants } from "../../constants.js";
+import { ValidationFactory, EnumFieldsValidators } from "../../validation.js";
+
+import template from "./home.html";
+import css from "./home.css";
 
 export class HomePage extends BasePage {
     constructor() {
         super();
         this.pageName = "home";
+        this.template = template;
     }
 
     setup() {

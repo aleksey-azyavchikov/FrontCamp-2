@@ -2,17 +2,26 @@
   "name": "front-camp",
   "version": "1.0.0",
   "scripts": {
-    "build": "babel src -d dist --copy-files",
-    "start": "nodemon ./src/index.js --exec babel-node",
-    "server": "node dist/index.js"
+    "build:dev": "webpack --config configs/webpack/dev.config.js",
+    "build:prod": "webpack --config configs/webpack/prod.config.js",
+    "watch:dev": "npm run build:dev --watch",
+    "watch:prod": "npm run build:prod --watch",
+    "server:dev": "webpack-dev-server --config configs/webpack/dev.config.js --open"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.16.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-latest": "^6.16.0",
-    "nodemon": "^1.11.0",
-    "proxy-polyfill": "^0.1.6"
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "jquery": "^3.2.1",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1"
   }
 }

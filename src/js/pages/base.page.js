@@ -1,6 +1,7 @@
 export class BasePage {
     constructor() {
         this.pageName = null;
+        this.template = null;
     }
 
     getPagePath() {

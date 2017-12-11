@@ -4,9 +4,7 @@ export class PageLoader {
     }
 
     loadPage(selector, page) {
-        this.apiInvoker.getHtml(page.getPagePath(), (html) => {
-            document.getElementById(selector).innerHTML = html;
-            page.setup();
-        })
+        document.getElementById(selector).innerHTML = page.template;
+        page.setup();
     }
 }

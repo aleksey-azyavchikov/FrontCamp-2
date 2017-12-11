@@ -1,11 +1,15 @@
-import { BasePage } from "./base.page.js";
-import { Constants } from "../constants.js";
-import { ApiInvoker } from "../api.js";
+import { BasePage } from "../base.page.js";
+import { Constants } from "../../constants.js";
+import { ApiInvoker } from "../../api.js";
+
+import template from "./news.html";
+import css from "./news.css";
 
 export class NewsPage extends BasePage {
     constructor() {
         super();
         this.pageName = "news";
+        this.template = template;
     }
 
     setup() {

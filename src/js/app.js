@@ -1,9 +1,10 @@
 import { ApiInvoker } from "./api.js";
 import { PageLoader } from "./page.loader.js";
-import { HomePage } from "./pages/home.page.js";
-import { NewsPage } from "./pages/news.page.js";
+import { HomePage } from "./pages/home/home.page.js";
+import { NewsPage } from "./pages/news/news.page.js";
 import { Constants } from "./constants.js";
 
+import css from "../css/core.css";
 export class App {
     constructor() {
         let apiInvoker = new ApiInvoker();
