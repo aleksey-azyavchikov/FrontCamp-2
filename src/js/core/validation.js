@@ -36,4 +36,10 @@ export class ValidationFactory {
              }
          }
      }
+
+    static getInstance() {
+        return this.instance = !Boolean(this.instance)
+            ? new ValidationFactory()
+            : this.instance;
+    }
 }

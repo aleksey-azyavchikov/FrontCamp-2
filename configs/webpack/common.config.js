@@ -19,7 +19,8 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ["app", "vendor"]
+            name: ["app", "vendor"],
+            // filename: "[name].chunk"
         }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 5,

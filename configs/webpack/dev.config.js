@@ -18,7 +18,7 @@ module.exports = merge(common, {
     ],
     devServer: {
         hot: true,
-        contentBase: "../../dist/prod"
+        contentBase: "../../dist/dev"
     },
     devtool: "source-map",
     watch: false
