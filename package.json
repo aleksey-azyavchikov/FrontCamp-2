@@ -6,12 +6,13 @@
     "build:prod": "webpack --config configs/webpack/prod.config.js",
     "watch:dev": "npm run build:dev --watch",
     "watch:prod": "npm run build:prod --watch",
-    "server:dev": "webpack-dev-server --config configs/webpack/dev.config.js --open",
+    "server:dev": "webpack-dev-server --config configs/webpack/dev.config.js",
     "server:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-webpack": "^1.0.2",
     "babel-polyfill": "^6.16.0",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.7",

@@ -7,7 +7,7 @@ module.exports = merge(common, {
     output: {
         path: path.resolve(__dirname, "../../dist/dev"),
         filename: "[name].bundle.js",
-        sourceMapFilename: "[name].map",
+        sourceMapFilename: "[file].map",
         chunkFilename: "[id].chunk.js"
     },
     plugins: [
@@ -18,7 +18,8 @@ module.exports = merge(common, {
     ],
     devServer: {
         hot: true,
-        contentBase: "../../dist/dev"
+        contentBase: "../../dist/dev",
+        port: 3000
     },
     devtool: "source-map",
     watch: false

@@ -7,7 +7,8 @@ module.exports = {
     context: path.resolve(__dirname, "../../src"),
     entry: {
         app: "./js/root.js",
-        vendor: ["jquery"]
+        vendor: ["jquery"],
+        // apiInvoker: "./js/core/api.js"
     },
     resolve: {
         extensions: ['.js']
@@ -19,7 +20,10 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ["app", "vendor"],
+            name: [
+                "app", 
+                "vendor"
+            ],
             // filename: "[name].chunk"
         }),
         new webpack.optimize.LimitChunkCountPlugin({
@@ -39,7 +43,8 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader",
                 query: {
-                    presets: ["env"]
+                    presets: ["env"],
+                    plugins: ["dynamic-import-webpack"]
                 }
             },
             {

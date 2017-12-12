@@ -1,0 +1,13 @@
+.error-api {
+    width: 200px;
+    padding: 10px;
+    background: #ab4141;
+    border: 1px solid;
+    margin-top: 10px;
+    padding: 10px 15px;
+    display: none;
+}
+
+.error-api span{
+    color: white;
+}

@@ -1,4 +1,6 @@
 export class TemplateHelpers {
+    constructor() {
+    }
     static getArticleTemplate(data) {
         const template = `${data.articles.map(article => `
             <li>
@@ -8,7 +10,7 @@ export class TemplateHelpers {
                     <div class="description">${article.description}</div>
                     <a class="source" href="${article.url}">Source</a>
                     <div class="author">${article.author}</div>
-                    <div class="time">${this.getActualDate(article.publishedAt)}</div>
+                    <div class="time">${TemplateHelpers.getInstance().getActualDate(article.publishedAt)}</div>
                 </article>
             </li>
         `)}`;
@@ -21,5 +23,11 @@ export class TemplateHelpers {
             : str.substring(0, 10);
 
         return result;
+    }
+
+    static getInstance() {
+        return this.instance = !Boolean(this.instance)
+            ? new TemplateHelpers()
+            : this.instance;
     }
 }

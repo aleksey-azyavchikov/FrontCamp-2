@@ -3,33 +3,35 @@ import { StorageService } from "../services/storage.service";
 export class BaseComponent {
     constructor(config) {
         this.storage = config && config.storage || new StorageService(localStorage);
-        this.domElements = null;
     }
 
     buildComponent() {
-        this.bindHtml(this.selector, this.template);
-        this.defineDomElements();
-        this.bindHandlers();
-        this.load();
+        this.bindHtmlHook(this.selector, this.template);
+        this.defineDomElementsHook();
+        this.checkDomElementsHook();
+        this.bindHandlersHook();
+        this.initializeHook();
     }
 
-    bindHtml(selector, template) {
+    bindHtmlHook(selector, template) {
         let elements = document.getElementsByTagName(selector);
         for(let element of elements) {
             element.innerHTML = template;
         }
     }
 
-    defineDomElements() {}
+    defineDomElementsHook() {}
+    
+    checkDomElementsHook() {
+        for(let key of Object.keys(this.domElements)) {
+            let element = this.domElements[key];
+            if(!Boolean(element)) {
+                console.error("Dom elements is not found:", key);
+            }
+        }
+    }
 
-    bindHandlers() {}
+    bindHandlersHook() {}
 
-    load() {}
-
-    // showErrorPopup(text) {
-    //     let spanElement = document.getElementsByTagName("span")[0];
-    //     let popupElement = document.getElementsByClassName("error-api")[0];
-    //     spanElement.textContent = text;
-    //     popupElement.style.display = "block";
-    // }
+    initializeHook() {}
 }

@@ -3,6 +3,7 @@ import { BaseComponent } from "../base.component";
 import { ComponentLoader } from "../../core/component.loader";
 import { NewsComponent } from "../news/news.component";
 import { Constants } from "../../core/constants";
+import ModalWindowComponent from "../modal/modal-window.component";
 
 import template from "./home.component.html";
 import css from "./home.component.css";
@@ -19,7 +20,7 @@ export class HomeComponent extends BaseComponent {
         return selector;
     }
 
-    defineDomElements() {
+    defineDomElementsHook() {
         let domElements = {
             buttonElement: document.getElementsByTagName("button")[0],
             inputElement: document.getElementsByTagName("input")[0]
@@ -27,7 +28,7 @@ export class HomeComponent extends BaseComponent {
         this.domElements = domElements;
     }
     
-    bindHandlers() {
+    bindHandlersHook() {
         this.domElements.buttonElement.addEventListener("click", () => this.applyKey());
     }
 
@@ -38,10 +39,10 @@ export class HomeComponent extends BaseComponent {
         
         try
         {   
-            proxy.value = inputElement.value;;
+            proxy.value = this.domElements.inputElement.value;;
         } catch(error) {
             setTimeout(() => {
-                // super.showErrorPopup(error);
+                ComponentLoader.loadComponent(new ModalWindowComponent().showErrorPopup(error));
             }, 1000)
             return;
         } 
