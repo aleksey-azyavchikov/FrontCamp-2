@@ -4,6 +4,10 @@ export class ApiInvoker
         this.apiKey = apiKey;
     }
 
+    set key(value) {
+        this.apiKey = value;
+    }
+
     get Url() {
         return `https://newsapi.org/v1/articles?source=bbc-news&apiKey=${this.apiKey}`;
     }
@@ -13,24 +17,26 @@ export class ApiInvoker
         if(url === undefined || url === null) {
             url = this.Url;
         }
-        if(errorHandler === undefined || errorHandler === null) {
+        if(errorHandler === undefined) {
             errorHandler = function (error) { console.log("error"); console.log(error) } ;
         }
-        if(succesHandler === undefined || succesHandler === null) {
-            succesHandler = function (data) { console.log("success"); console.log(data) } ;
+        if(succesHandler === undefined) {
+            succesHandler = function (data) { console.log("success"); console.log(data);  return data} ;
         }
         let request = new Request(url);
         let init = { method: "GET", mode: "cors" }
         
-        fetch(request, init)
-            .then(response => response.json())
-            .then(data => succesHandler(data))
-            .catch(error => errorHandler(error))
+        return new Promise((resolve, reject) => { 
+            fetch(request, init)
+                .then(response => response.json())
+                .then(response => resolve(response))
+                .catch(error => reject(error));
+        });
     }
 
     static getInstance() {
         return this.instance = !Boolean(this.instance)
-            ? new ValidationFactory()
+            ? new ApiInvoker()
             : this.instance;
     }
 }

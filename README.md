@@ -3,4 +3,4 @@
 Setup:
 
 * npm i
-* npm run start:dev 
+* npm run server:dev 

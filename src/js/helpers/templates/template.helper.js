@@ -1,7 +1,9 @@
 export class TemplateHelpers {
     constructor() {
     }
-    static getArticleTemplate(data) {
+    
+    static async getArticleTemplate(data) {
+        const css = await import(/* webpackChunkName: "module" */ "./partial-styles/article.css");
         const template = `${data.articles.map(article => `
             <li>
                 <article>
@@ -14,6 +16,7 @@ export class TemplateHelpers {
                 </article>
             </li>
         `)}`;
+        
         return template;
     }
 
@@ -31,3 +34,5 @@ export class TemplateHelpers {
             : this.instance;
     }
 }
+
+export const getArticleTemplate = async (data) => TemplateHelpers.getArticleTemplate(data)

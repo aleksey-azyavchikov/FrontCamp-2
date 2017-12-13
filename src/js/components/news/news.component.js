@@ -1,8 +1,8 @@
 import { BaseComponent } from "../base.component.js";
 import { Constants } from "../../core/constants";
 import { ComponentLoader } from "../../core/component.loader.js";
-import { TemplateHelpers } from "../../helpers/template.helper";
 import { HomeComponent } from "../home/home.component";
+import { ApiInvoker } from "../../core/api";
 import ModalWindowComponent from "../modal/modal-window.component";
 
 import template from "./news.component.html";
@@ -46,15 +46,14 @@ export class NewsComponent extends BaseComponent {
             return;
         }
 
-        import(/* webpackChunkName: "apiInvoker" */ "../../core/api.js").then(module => { 
-            const apiInvoker = new module.ApiInvoker(apiKey);
-            apiInvoker.getJson(data => {
-                const template = TemplateHelpers.getArticleTemplate(data);
-                this.domElements.ulElement.innerHTML = template; 
-            },
-            (error) => {
-                ComponentLoader.loadComponent(new ModalWindowComponent().showErrorPopup(error));
-            });
-        })
+        let apiInvoker = ApiInvoker.getInstance();
+        apiInvoker.key = apiKey;
+        const articleData = apiInvoker.getJson();
+        const templateModule = import("../../helpers/templates/template.helper.js");
+
+        Promise.all([articleData, templateModule])
+            .then(values => values[1].getArticleTemplate(values[0]))
+            .then(template => this.domElements.ulElement.innerHTML = template)
+            .catch(error => ComponentLoader.loadComponent(new ModalWindowComponent().showErrorPopup(error)))
     }
 } 

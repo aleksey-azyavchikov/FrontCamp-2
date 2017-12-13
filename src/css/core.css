@@ -10,20 +10,6 @@
     padding-top: 10px;
 }
 
-.error-api {
-    width: 200px;
-    padding: 10px;
-    background: #ab4141;
-    border: 1px solid;
-    margin-top: 10px;
-    padding: 10px 15px;
-    display: none;
-}
-
-.error-api span{
-    color: white;
-}
-
 h1 {
     border: 2px solid black;
     background: #95C2DE;
@@ -36,11 +22,6 @@ h3 {
     background: #95C2DE;
     color: black;
     padding: 20px;
-}
-
-.header {
-    font-family: "Lucida Bright",Georgia,serif;
-    color: #d1c8c8;
 }
 
 

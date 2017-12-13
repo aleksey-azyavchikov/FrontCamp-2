@@ -6,7 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     context: path.resolve(__dirname, "../../src"),
     entry: {
-        app: "./js/root.js",
+        app: ["babel-polyfill", "./js/root.js"],
         vendor: ["jquery"],
         // apiInvoker: "./js/core/api.js"
     },
