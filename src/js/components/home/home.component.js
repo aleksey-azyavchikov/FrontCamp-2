@@ -42,7 +42,9 @@ export class HomeComponent extends BaseComponent {
             proxy.value = this.domElements.inputElement.value;;
         } catch(error) {
             setTimeout(() => {
-                ComponentLoader.loadComponent(new ModalWindowComponent().showErrorPopup(error));
+                ComponentLoader
+                    .loadComponent(new ModalWindowComponent())
+                    .showErrorPopup(error);
             }, 1000)
             return;
         } 

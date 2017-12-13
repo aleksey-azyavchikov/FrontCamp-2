@@ -5,5 +5,6 @@ export class ComponentLoader {
             config = {};
         }
         component.buildComponent();
+        return component;
     }
 }

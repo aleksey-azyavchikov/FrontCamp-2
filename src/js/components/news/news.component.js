@@ -48,12 +48,15 @@ export class NewsComponent extends BaseComponent {
 
         let apiInvoker = ApiInvoker.getInstance();
         apiInvoker.key = apiKey;
+
+        // These promises will be executed on runtime step.
+        // Need to find out how to make them as deferred. 
         const articleData = apiInvoker.getJson();
         const templateModule = import("../../helpers/templates/template.helper.js");
 
         Promise.all([articleData, templateModule])
             .then(values => values[1].getArticleTemplate(values[0]))
             .then(template => this.domElements.ulElement.innerHTML = template)
-            .catch(error => ComponentLoader.loadComponent(new ModalWindowComponent().showErrorPopup(error)))
+            .catch(error => ComponentLoader.loadComponent(new ModalWindowComponent()).showErrorPopup(error))
     }
 } 
