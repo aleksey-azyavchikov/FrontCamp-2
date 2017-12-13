@@ -3,7 +3,7 @@ export class TemplateHelpers {
     }
     
     static async getArticleTemplate(data) {
-        const css = await import("./partial-styles/article.css");
+        await import("./partial-styles/article.css");
         const template = `${data.articles.map(article => `
             <li>
                 <article>
