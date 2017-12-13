@@ -1,7 +1,7 @@
 import { BaseComponent } from "../base.component";
 
 import template from "./modal-window.component.html";
-import css from "./modal-window.component.css";
+import css from "./modal-window.component.scss";
 
 export default class ModalWindowComponent extends BaseComponent {
     constructor(config) {

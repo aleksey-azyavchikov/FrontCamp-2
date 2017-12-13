@@ -6,7 +6,7 @@ import { ApiInvoker } from "../../core/api";
 import ModalWindowComponent from "../modal/modal-window.component";
 
 import template from "./news.component.html";
-import css from "./news.component.css";
+import css from "./news.component.scss";
 
 export class NewsComponent extends BaseComponent {
     constructor(config) {

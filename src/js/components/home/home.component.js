@@ -6,7 +6,7 @@ import { Constants } from "../../core/constants";
 import ModalWindowComponent from "../modal/modal-window.component";
 
 import template from "./home.component.html";
-import css from "./home.component.css";
+import css from "./home.component.scss";
 
 export class HomeComponent extends BaseComponent {
     constructor(config) {

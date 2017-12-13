@@ -59,10 +59,31 @@ module.exports = {
                 })
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.scss$/,
+                exclude: /node_modules/,
                 use: [
-                    'file-loader'
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader"
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            outputStyle: "compressed"
+                        }
+                    }
                 ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                      limit: 8192
+                    }
+                }]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
