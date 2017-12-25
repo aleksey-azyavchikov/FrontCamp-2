@@ -4,7 +4,7 @@ import { ComponentLoader } from "./core/component.loader";
 import { HomeComponent } from "./components/home/home.component";
 import { NewsComponent } from "./components/news/news.component";
 
-import css from "../css/core.css";
+import scss from "../css/core.scss";
 export class App {
     constructor() {
         this.storage = new StorageService();

@@ -2,13 +2,14 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
     context: path.resolve(__dirname, "../../src"),
     entry: {
         app: ["babel-polyfill", "./js/root.js"],
         vendor: ["jquery"],
-        // apiInvoker: "./js/core/api.js"
     },
     resolve: {
         extensions: ['.js']
@@ -17,7 +18,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jquery: "jquery",
-            jQuery: "jquery"
+            jQuery: "jquery",
+            Popper: ["popper.js", "default"]
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: [
@@ -67,6 +69,12 @@ module.exports = {
                     },
                     {
                         loader: "css-loader"
+                    },
+                    {
+                        loader: 'postcss-loader', 
+                        options: {
+                            plugins: () => [precss, autoprefixer]
+                        }
                     },
                     {
                         loader: "sass-loader",
