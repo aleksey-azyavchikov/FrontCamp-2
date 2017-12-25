@@ -1,12 +1,13 @@
 import { StorageService } from "../services/storage.service";
 
-export class BaseComponent {
-    constructor(config) {
-        this.storage = config && config.storage || new StorageService(localStorage);
+export default class BaseComponent {
+    constructor() {
+        this.config = {};
     }
 
-    buildComponent() {
-        this.bindHtmlHook(this.selector, this.template);
+    buildComponent(newConfig) {
+        this.setup(newConfig);
+        this.bindHtmlHook(this.config.selector, this.config.template);
         this.defineDomElementsHook();
         this.checkDomElementsHook();
         this.bindHandlersHook();
@@ -23,6 +24,9 @@ export class BaseComponent {
     defineDomElementsHook() {}
     
     checkDomElementsHook() {
+        if(!Boolean(this.domElements)) {
+            return;
+        }
         for(let key of Object.keys(this.domElements)) {
             let element = this.domElements[key];
             if(!Boolean(element)) {
@@ -34,4 +38,9 @@ export class BaseComponent {
     bindHandlersHook() {}
 
     initializeHook() {}
+
+    setup(newConfig) {
+        this.config.template = newConfig && newConfig.template || this.config.template;
+        this.config.selector = newConfig && newConfig.selector || this.config.selector;
+    }
 }

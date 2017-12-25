@@ -1,10 +1,10 @@
 export class ComponentLoader {
 
-    static loadComponent(component, config) {
+    static loadComponent(module, config) {
         if (config === undefined || config === null) {
             config = {};
         }
-        component.buildComponent();
+        const component = new module().buildComponent(config);
         return component;
     }
 }

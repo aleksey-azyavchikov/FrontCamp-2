@@ -1,22 +1,19 @@
 import { ValidationFactory, EnumFieldsValidators } from "../../core/validation.js";
-import { BaseComponent } from "../base.component";
 import { ComponentLoader } from "../../core/component.loader";
-import { NewsComponent } from "../news/news.component";
 import { Constants } from "../../core/constants";
 import ModalWindowComponent from "../modal/modal-window.component";
-
-import template from "./home.component.html";
-import scss from "./home.component.scss";
-export class HomeComponent extends BaseComponent {
-    constructor(config) {
-        super(config);
-        this.template = config && config.template || template;
-        this.selector = config && config.selector || this.defaultSelector;
-    }
-
-    get defaultSelector() {
-        const selector = "page";
-        return selector;
+import NewsComponent from "../news/news.component";
+import BaseComponent from "../base.component";
+import { StorageService } from "../../services/storage.service";
+export default class HomeComponent extends BaseComponent {
+    constructor() {
+        super();
+        this.config = {
+            selector: "page",
+            template: require("./home.component.html"),
+            styles: require("./home.component.scss"),
+        };
+        this.storage = new StorageService(localStorage);
     }
 
     defineDomElementsHook() {
@@ -31,7 +28,6 @@ export class HomeComponent extends BaseComponent {
         this.domElements.buttonElement.addEventListener("click", () => this.applyKey());
     }
 
-
     applyKey() {
         let validationFactory = ValidationFactory.getInstance();
         let proxy = validationFactory.getProxy(EnumFieldsValidators.ApiKeyField);
@@ -42,13 +38,13 @@ export class HomeComponent extends BaseComponent {
         } catch(error) {
             setTimeout(() => {
                 ComponentLoader
-                    .loadComponent(new ModalWindowComponent())
+                    .loadComponent(ModalWindowComponent)
                     .showErrorPopup(error);
             }, 1000)
             return;
         } 
     
         this.storage.setItem(Constants.key, proxy.value);
-        ComponentLoader.loadComponent(new NewsComponent());
+        ComponentLoader.loadComponent(NewsComponent);
     }
 }

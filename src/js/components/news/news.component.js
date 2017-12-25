@@ -1,23 +1,20 @@
-import { BaseComponent } from "../base.component.js";
 import { Constants } from "../../core/constants";
 import { ComponentLoader } from "../../core/component.loader.js";
-import { HomeComponent } from "../home/home.component";
 import { ApiInvoker } from "../../core/api";
 import ModalWindowComponent from "../modal/modal-window.component";
+import HomeComponent from "../home/home.component";
+import BaseComponent from "../base.component.js";
+import { StorageService } from "../../services/storage.service";
 
-import template from "./news.component.html";
-import css from "./news.component.scss";
-
-export class NewsComponent extends BaseComponent {
-    constructor(config) {
-        super(config);
-        this.template = config && config.template || template;
-        this.selector = config && config.selector || this.defaultSelector;
-    }
-
-    get defaultSelector() {
-        const selector = "page";
-        return selector;
+export default class NewsComponent extends BaseComponent {
+    constructor() {
+        super();
+        this.config = {
+            selector: "page",
+            template: require("./news.component.html"),
+            styles: require("./news.component.scss")
+        };
+        this.storage = new StorageService(localStorage);
     }
 
     defineDomElementsHook() {
@@ -36,13 +33,13 @@ export class NewsComponent extends BaseComponent {
 
     resetHandler() {
         this.storage.removeItem(Constants.key);
-        ComponentLoader.loadComponent(new HomeComponent())
+        ComponentLoader.loadComponent(HomeComponent)
     }
 
     showHandler() {
         let apiKey = this.storage.getItem(Constants.key);
         if(apiKey === null) { 
-            ComponentLoader.loadComponent(new HomeComponent());
+            ComponentLoader.loadComponent(HomeComponent);
             return;
         }
 
@@ -57,6 +54,7 @@ export class NewsComponent extends BaseComponent {
         Promise.all([articleData, templateModule])
             .then(values => values[1].getArticleTemplate(values[0]))
             .then(template => this.domElements.ulElement.innerHTML = template)
-            .catch(error => ComponentLoader.loadComponent(new ModalWindowComponent()).showErrorPopup(error))
+            .catch(error => ComponentLoader.loadComponent(ModalWindowComponent)
+                .showErrorPopup(error))
     }
 } 

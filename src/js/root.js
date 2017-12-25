@@ -1,4 +1,4 @@
-import { App } from "./app.js";
+import { ComponentLoader } from "./core/component.loader";
+import App from "./components/app/app.component.js";
 
-const app = new App();
-app.run();
+ComponentLoader.loadComponent(App);
