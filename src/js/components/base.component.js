@@ -1,5 +1,3 @@
-import { StorageService } from "../services/storage.service";
-
 export default class BaseComponent {
     constructor() {
         this.config = {};
