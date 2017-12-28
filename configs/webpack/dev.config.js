@@ -21,6 +21,6 @@ module.exports = merge(common, {
         contentBase: "../../dist/dev",
         port: 3000
     },
-    devtool: "source-map",
+    devtool: "cheap-module-source-map",
     watch: false
 });

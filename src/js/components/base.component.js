@@ -1,22 +1,25 @@
+import { Guid } from "../core/guid";
+import { DirectiveAnalyzer } from "../core/directives/directive.analyzer";
+
 export default class BaseComponent {
     constructor() {
         this.config = {};
     }
 
+    static get selector() { return null }
+
     buildComponent(newConfig) {
         this.setup(newConfig);
-        this.bindHtmlHook(this.config.selector, this.config.template);
+        this.bindHtmlHook(this.config.ref, this.config.template);
         this.defineDomElementsHook();
         this.checkDomElementsHook();
         this.bindHandlersHook();
         this.initializeHook();
     }
 
-    bindHtmlHook(selector, template) {
-        let elements = document.getElementsByTagName(selector);
-        for(let element of elements) {
-            element.innerHTML = template;
-        }
+    bindHtmlHook(ref, template) {
+        ref.innerHTML = template;
+        DirectiveAnalyzer.getInstance().analyze(ref, this);
     }
 
     defineDomElementsHook() {}
@@ -28,7 +31,7 @@ export default class BaseComponent {
         for(let key of Object.keys(this.domElements)) {
             let element = this.domElements[key];
             if(!Boolean(element)) {
-                console.error("Dom elements is not found:", key);
+                console.error("Dom elements is not found:", key, this.config.selector);
             }
         }
     }
@@ -38,7 +41,10 @@ export default class BaseComponent {
     initializeHook() {}
 
     setup(newConfig) {
+        this.config.id = Guid.create();
         this.config.template = newConfig && newConfig.template || this.config.template;
         this.config.selector = newConfig && newConfig.selector || this.config.selector;
+        this.config.ref = newConfig && newConfig.ref || this.config.ref;
+        console.log("Setup", this.config.selector);
     }
 }

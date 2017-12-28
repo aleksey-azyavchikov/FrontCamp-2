@@ -9,11 +9,16 @@ export default class HomeComponent extends BaseComponent {
     constructor() {
         super();
         this.config = {
-            selector: "page",
+            selector: HomeComponent.selector,
             template: require("./home.component.html"),
             styles: require("./home.component.scss"),
         };
         this.storage = new StorageService(localStorage);
+    }
+
+    static get selector() {
+        const selector = "fc-page";
+        return selector;
     }
 
     defineDomElementsHook() {

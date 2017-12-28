@@ -10,11 +10,16 @@ export default class NewsComponent extends BaseComponent {
     constructor() {
         super();
         this.config = {
-            selector: "page",
+            selector: NewsComponent.selector,
             template: require("./news.component.html"),
             styles: require("./news.component.scss")
         };
         this.storage = new StorageService(localStorage);
+    }
+
+    static get selector() {
+        const selector = "fc-page";
+        return selector;
     }
 
     defineDomElementsHook() {
