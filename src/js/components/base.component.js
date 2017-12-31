@@ -1,30 +1,37 @@
 import { Guid } from "../core/guid";
 import { DirectiveAnalyzer } from "../core/directives/directive.analyzer";
+import { ComponentLoader } from "../core/component.loader";
 
 export default class BaseComponent {
     constructor() {
-        this.config = {};
     }
 
-    static get selector() { return null }
-
-    buildComponent(newConfig) {
-        this.setup(newConfig);
-        this.bindHtmlHook(this.config.ref, this.config.template);
+    buildComponent(additional) {
+        const config = this.config;
+        this.mergeConfigs(config, additional);
+        this.bindHtml();
         this.defineDomElementsHook();
-        this.checkDomElementsHook();
+        this.checkDomElements();
         this.bindHandlersHook();
+        this.loadChildComponents();
         this.initializeHook();
     }
 
-    bindHtmlHook(ref, template) {
+    render() {
+        this.bindHtmlHook(this.config.ref, this.config.template);
+    }
+
+    bindHtml() {
+        const config = this.config;
+        const { ref } = config;
+        const { template } = config;
         ref.innerHTML = template;
         DirectiveAnalyzer.getInstance().analyze(ref, this);
     }
 
     defineDomElementsHook() {}
     
-    checkDomElementsHook() {
+    checkDomElements() {
         if(!Boolean(this.domElements)) {
             return;
         }
@@ -38,13 +45,22 @@ export default class BaseComponent {
 
     bindHandlersHook() {}
 
-    initializeHook() {}
+    initializeHook() { console.log("Component", this.config)};
 
-    setup(newConfig) {
-        this.config.id = Guid.create();
-        this.config.template = newConfig && newConfig.template || this.config.template;
-        this.config.selector = newConfig && newConfig.selector || this.config.selector;
-        this.config.ref = newConfig && newConfig.ref || this.config.ref;
-        console.log("Setup", this.config.selector);
+    mergeConfigs(baseConfig, additionalConfig) {
+        Object.assign(this.config, baseConfig, additionalConfig, { id: Guid.create() });
     }
+
+    loadChildComponents() {
+        const config = this.config;
+        const { children = [] } = config
+        const defaultChildConfig = this.getDefauldChildConfig(config);
+        children.forEach(child => ComponentLoader.loadComponent(child, defaultChildConfig))
+    }
+
+    getDefauldChildConfig(config) {
+        return {
+            pref: config.ref
+        }
+    } 
 }

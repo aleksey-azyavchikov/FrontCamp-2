@@ -46,7 +46,10 @@ module.exports = {
                 loader: "babel-loader",
                 query: {
                     presets: ["env"],
-                    plugins: ["dynamic-import-webpack"]
+                    plugins: [
+                        "dynamic-import-webpack",
+                        "transform-decorators-legacy"
+                    ]
                 }
             },
             {

@@ -2,7 +2,6 @@ import { Constants } from "../../core/constants";
 import { ComponentLoader } from "../../core/component.loader.js";
 import { ApiInvoker } from "../../core/api";
 import ModalWindowComponent from "../modal/modal-window.component";
-import HomeComponent from "../home/home.component";
 import BaseComponent from "../base.component.js";
 import { StorageService } from "../../services/storage.service";
 
@@ -18,7 +17,7 @@ export default class NewsComponent extends BaseComponent {
     }
 
     static get selector() {
-        const selector = "fc-page";
+        const selector = "fc-news-page";
         return selector;
     }
 
@@ -38,13 +37,13 @@ export default class NewsComponent extends BaseComponent {
 
     resetHandler() {
         this.storage.removeItem(Constants.key);
-        ComponentLoader.loadComponent(HomeComponent)
+        // ComponentLoader.loadComponent(HomeComponent)
     }
 
     showHandler() {
         let apiKey = this.storage.getItem(Constants.key);
         if(apiKey === null) { 
-            ComponentLoader.loadComponent(HomeComponent);
+            // ComponentLoader.loadComponent(HomeComponent);
             return;
         }
 

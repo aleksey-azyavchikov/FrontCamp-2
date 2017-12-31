@@ -1,22 +1,24 @@
-import BaseComponent from "../base.component";
 import brand from "../../../content/images/brand.png";
 import { ComponentLoader } from "../../core/component.loader";
 import ModalWindowComponent from "../modal/modal-window.component";
+import { Component } from "../../core/decorators/component.decorator";
+import BaseComponent from "../base.component";
 
+@Component({
+    selector: "fc-header",
+    template: require("./header.component.html"),
+    styles: require("./header.component.scss"),
+})
 export default class HeaderComponent extends BaseComponent {
     constructor() {
         super();
-        this.config = {
-            selector: HeaderComponent.selector,
-            template: require("./header.component.html"),
-            styles: require("./header.component.scss"),
-        };
+        // super();
+        // this.config = {
+        //     selector: HeaderComponent.selector,
+        //     template: require("./header.component.html"),
+        //     styles: require("./header.component.scss"),
+        // };
         this.isSearchEnabled = true;
-    }
-
-    static get selector() {
-        const selector = "fc-header";
-        return selector;
     }
 
     bindHandlersHook() {
@@ -32,6 +34,7 @@ export default class HeaderComponent extends BaseComponent {
     }
 
     initializeHook() {
+        super.initializeHook();
         this.domElements.brandImage.src = brand;
     }
 }

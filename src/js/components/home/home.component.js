@@ -1,8 +1,5 @@
 import { ValidationFactory, EnumFieldsValidators } from "../../core/validation.js";
-import { ComponentLoader } from "../../core/component.loader";
 import { Constants } from "../../core/constants";
-import ModalWindowComponent from "../modal/modal-window.component";
-import NewsComponent from "../news/news.component";
 import BaseComponent from "../base.component";
 import { StorageService } from "../../services/storage.service";
 export default class HomeComponent extends BaseComponent {
@@ -17,7 +14,7 @@ export default class HomeComponent extends BaseComponent {
     }
 
     static get selector() {
-        const selector = "fc-page";
+        const selector = "fc-home-page";
         return selector;
     }
 
@@ -42,14 +39,14 @@ export default class HomeComponent extends BaseComponent {
             proxy.value = this.domElements.inputElement.value;;
         } catch(error) {
             setTimeout(() => {
-                ComponentLoader
-                    .loadComponent(ModalWindowComponent)
-                    .showErrorPopup(error);
+                // ComponentLoader
+                //     .loadComponent(ModalWindowComponent, this.config)
+                //     .showErrorPopup(error);
             }, 1000)
             return;
         } 
     
         this.storage.setItem(Constants.key, proxy.value);
-        ComponentLoader.loadComponent(NewsComponent);
+        // ComponentLoader.loadComponent(NewsComponent, this.config);
     }
 }
