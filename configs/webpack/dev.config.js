@@ -8,7 +8,7 @@ module.exports = merge(common, {
         path: path.resolve(__dirname, "../../dist/dev"),
         filename: "[name].bundle.js",
         sourceMapFilename: "[file].map",
-        chunkFilename: "[id].chunk.js"
+        chunkFilename: "[name].chunk.js"
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -21,6 +21,5 @@ module.exports = merge(common, {
         contentBase: "../../dist/dev",
         port: 3000
     },
-    devtool: "cheap-module-source-map",
-    watch: false
+    devtool: "source-map"
 });

@@ -4,21 +4,22 @@ import { ApiInvoker } from "../../core/api";
 import ModalWindowComponent from "../modal/modal-window.component";
 import BaseComponent from "../base.component.js";
 import { StorageService } from "../../services/storage.service";
+import { Component } from "../../core/decorators/component.decorator";
 
+@Component({
+    selector: "fc-news-page",
+    template: require("./news.component.html"),
+    styles: require("./news.component.scss")
+})
 export default class NewsComponent extends BaseComponent {
     constructor() {
         super();
         this.config = {
-            selector: NewsComponent.selector,
+            selector: "fc-news-page",
             template: require("./news.component.html"),
             styles: require("./news.component.scss")
         };
         this.storage = new StorageService(localStorage);
-    }
-
-    static get selector() {
-        const selector = "fc-news-page";
-        return selector;
     }
 
     defineDomElementsHook() {
@@ -53,7 +54,7 @@ export default class NewsComponent extends BaseComponent {
         // These promises will be executed on runtime step.
         // Need to find out how to make them as deferred. 
         const articleData = apiInvoker.getJson();
-        const templateModule = import("../../helpers/templates/template.helper.js");
+        const templateModule = import(/* webpackChunkName="olol" */ "../../helpers/templates/template.helper.js");
 
         Promise.all([articleData, templateModule])
             .then(values => values[1].getArticleTemplate(values[0]))

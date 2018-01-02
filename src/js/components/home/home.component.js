@@ -2,20 +2,17 @@ import { ValidationFactory, EnumFieldsValidators } from "../../core/validation.j
 import { Constants } from "../../core/constants";
 import BaseComponent from "../base.component";
 import { StorageService } from "../../services/storage.service";
+import { Component } from "../../core/decorators/component.decorator";
+
+@Component({
+    selector: "fc-home-page",
+    template: require("./home.component.html"),
+    styles: require("./home.component.scss"),
+})
 export default class HomeComponent extends BaseComponent {
     constructor() {
         super();
-        this.config = {
-            selector: HomeComponent.selector,
-            template: require("./home.component.html"),
-            styles: require("./home.component.scss"),
-        };
         this.storage = new StorageService(localStorage);
-    }
-
-    static get selector() {
-        const selector = "fc-home-page";
-        return selector;
     }
 
     defineDomElementsHook() {

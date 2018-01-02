@@ -3,7 +3,7 @@ export class TemplateHelpers {
     }
     
     static async getArticleTemplate(data) {
-        await import("./partial-styles/article.css");
+        await import(/* webpackChunkName: "oolod" */ "./partial-styles/article.scss");
         const template = `${data.articles.map(article => `
             <li>
                 <article>

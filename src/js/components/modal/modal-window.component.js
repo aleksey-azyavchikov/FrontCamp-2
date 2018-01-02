@@ -1,17 +1,14 @@
 import BaseComponent from "../base.component";
+import { Component } from "../../core/decorators/component.decorator";
+
+@Component({
+    selector: "fc-popup",
+    template: require("./modal-window.component.html"),
+    styles: require("./modal-window.component.scss") 
+})
 export default class ModalWindowComponent extends BaseComponent {
     constructor() {
         super();
-        this.config = {
-            selector: ModalWindowComponent.selector,
-            template: require("./modal-window.component.html"),
-            styles: require("./modal-window.component.scss")
-        };
-    }
-
-    static get selector() {
-        const selector = "fc-popup";
-        return selector;
     }
 
     defineDomElementsHook() {

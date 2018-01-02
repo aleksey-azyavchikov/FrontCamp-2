@@ -1,24 +1,18 @@
-import brand from "../../../content/images/brand.png";
 import { ComponentLoader } from "../../core/component.loader";
-import ModalWindowComponent from "../modal/modal-window.component";
 import { Component } from "../../core/decorators/component.decorator";
+import ModalWindowComponent from "../modal/modal-window.component";
 import BaseComponent from "../base.component";
+import brand from "../../../content/images/brand.png";
 
 @Component({
     selector: "fc-header",
     template: require("./header.component.html"),
-    styles: require("./header.component.scss"),
+    styles: require("./header.component.scss")
 })
 export default class HeaderComponent extends BaseComponent {
     constructor() {
         super();
-        // super();
-        // this.config = {
-        //     selector: HeaderComponent.selector,
-        //     template: require("./header.component.html"),
-        //     styles: require("./header.component.scss"),
-        // };
-        this.isSearchEnabled = true;
+        this.isSearchEnabled = false;
     }
 
     bindHandlersHook() {
