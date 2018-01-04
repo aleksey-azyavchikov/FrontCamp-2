@@ -5,18 +5,20 @@ export class Store {
         this.dispatch({});
     }
 
-    static createStore = (reducer) => {
+    static createStore(reducer) {
         return new Store(reducer);
     }
 
-    dispatch = (action) => {
+    dispatch(action) {
         this.state = this.reducer(this.state, action);
-        this.listeners.forEach(listener => listener());
+        this.listeners.forEach(listener => listener(this.state));
     }
 
-    getState = () => this.state;
+    getState() {
+        return this.state;
+    }
 
-    subscribe = (listener) => {
+    subscribe(listener) {
         this.listeners.push(listener);
         return () => this.listeners = this.listeners.filter(l => l !== listener);
     }

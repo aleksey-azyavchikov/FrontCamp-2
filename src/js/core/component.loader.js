@@ -4,23 +4,30 @@ export class ComponentLoader {
         if (config === undefined || config === null) {
             config = {};
         }
-        
-        const { selector } = module;
-        if(!Boolean(selector)) {
-            throw new Error("The component doesn't provide selector", module);
-        }
-        const { pref } = config; 
-        if(!Boolean(pref)) {
-            throw new Error("The component doesn't provide parent ref", module);
-        }
+    
+        ComponentLoader.checkProperty("selector", module.selector, module);
+        ComponentLoader.checkProperty("pref", config.pref, config);
+        ComponentLoader.checkProperty("store", config.store, config);
 
-        const refs = pref.getElementsByTagName(module.selector);
+        const refs = config.pref.getElementsByTagName(module.selector);
         let components = [];
         for (let ref of refs) {
-            components.push(new module().buildComponent({pref: pref, ref: ref }))
+            let component = new module();
+            component.buildComponent({
+                pref: config.pref, 
+                store: config.store,
+                ref: ref
+            });
+            components.push(component)
         }
 
-        // need refactor.
-        return components[0];
+        return components;
+    }
+
+    static checkProperty(propertyName, value, object) {
+        const message = `The component doesn't provide property: ${propertyName}`;
+        if(!Boolean(value)) {
+            throw new Error(message, object);
+        }
     }
 }

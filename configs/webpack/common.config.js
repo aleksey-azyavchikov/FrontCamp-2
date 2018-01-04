@@ -8,18 +8,23 @@ const autoprefixer = require("autoprefixer");
 module.exports = {
     context: path.resolve(__dirname, "../../src"),
     entry: {
-        app: ["babel-polyfill", "./index.js"],
-        vendor: ["jquery"],
+        polyfills: ["babel-polyfill"],
+        libraries: ["jquery", "bootstrap"],
+        app: ["./index.js"],
     },
     resolve: {
         extensions: ['.js']
     },
     plugins:[
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ["app", "libraries", "polyfills"]
+        }),
         new webpack.ProvidePlugin({
             $: "jquery",
             jquery: "jquery",
             jQuery: "jquery",
-            Popper: ["popper.js", "default"]
+            Popper: ["popper.js", "default"],
+            popper: ["popper.js", "default"]
         }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 5,

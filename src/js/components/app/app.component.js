@@ -1,12 +1,12 @@
 
+import { Component } from "../../core/decorators/component.decorator";
 import { StorageService } from "../../services/storage.service";
 import HomeComponent from "../home/home.component";
 import NewsComponent from "../news/news.component";
 import BaseComponent from "../base.component";
 import HeaderComponent from "../header/header.component";
 import FooterComponent from "../footer/footer.component";
-import ModalWindowComponent from "../modal/modal-window.component";
-import { Component } from "../../core/decorators/component.decorator";
+import PopupContainerComponent from "../popups/popup-container/popup-container.component";
 
 @Component({
     selector: "fc-app",
@@ -17,7 +17,7 @@ import { Component } from "../../core/decorators/component.decorator";
         HomeComponent,
         NewsComponent,
         FooterComponent,
-        ModalWindowComponent
+        PopupContainerComponent
     ]
 })
 export default class AppComponent extends BaseComponent {

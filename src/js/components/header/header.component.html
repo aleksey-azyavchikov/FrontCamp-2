@@ -15,13 +15,15 @@
                 </a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form cmIf="scope.isSearchEnabled" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-info my-2 my-sm-0 cs-btn" type="submit">Search</button>
         </form>
         <form class="form-inline">
             <div class="container">
-                <button id="sign-in" class="btn btn-outline-info my-2 cs-btn" type="button">Sign In</button>
+                <button type="button" class="btn btn-outline-info my-2 cs-btn" data-toggle="modal" data-target="#signInModal">
+                    Sign In
+                </button>
             </div>
         </form>
     </div>

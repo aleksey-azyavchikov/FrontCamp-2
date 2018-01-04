@@ -1,44 +1,44 @@
 import { Guid } from "../core/guid";
-import { DirectiveAnalyzer } from "../core/directives/directive.analyzer";
 import { ComponentLoader } from "../core/component.loader";
+import { HtmlAnalyzer } from "../core/html/html.analyzer";
 
 export default class BaseComponent {
     constructor() {
     }
 
     buildComponent(additional) {
+        this.mergeConfigs(this.config, additional);
+
         const config = this.config;
-        this.mergeConfigs(config, additional);
-        this.bindHtml();
+        this.bindHtml(config);
         this.defineDomElementsHook();
-        this.checkDomElements();
+        this.checkDomElements(config);
         this.bindHandlersHook();
-        this.loadChildComponents();
+        this.loadChildComponents(config);
         this.initializeHook();
     }
 
     render() {
-        this.bindHtmlHook(this.config.ref, this.config.template);
+        const config = this.config;
+        this.bindHtml(config);
+        this.renderChildComponents(config)
     }
 
-    bindHtml() {
-        const config = this.config;
-        const { ref } = config;
-        const { template } = config;
+    bindHtml({ ref, template }) {
         ref.innerHTML = template;
-        DirectiveAnalyzer.getInstance().analyze(ref, this);
+        HtmlAnalyzer.getInstance().analyze(ref, this);
     }
 
     defineDomElementsHook() {}
     
-    checkDomElements() {
+    checkDomElements({ selector }) {
         if(!Boolean(this.domElements)) {
             return;
         }
         for(let key of Object.keys(this.domElements)) {
             let element = this.domElements[key];
             if(!Boolean(element)) {
-                console.error("Dom elements is not found:", key, this.config.selector);
+                console.error("Dom elements is not found:", key, selector);
             }
         }
     }
@@ -48,19 +48,36 @@ export default class BaseComponent {
     initializeHook() { console.log("Component", this.config)};
 
     mergeConfigs(baseConfig, additionalConfig) {
-        Object.assign(this.config, baseConfig, additionalConfig, { id: Guid.create() });
+        Object.assign(
+            baseConfig, 
+            additionalConfig, 
+            { 
+                id: Guid.create(),
+                childComponents: []
+            }
+        );
     }
 
-    loadChildComponents() {
-        const config = this.config;
-        const { children = [] } = config
+    loadChildComponents(config) {
+        const { children = [] }  = config;
         const defaultChildConfig = this.getDefauldChildConfig(config);
-        children.forEach(child => ComponentLoader.loadComponent(child, defaultChildConfig))
+        children.forEach(child => { 
+           let childComponents = ComponentLoader.loadComponent(child, defaultChildConfig);
+           childComponents.forEach(childComponent => config.childComponents.push(childComponent))
+        });
     }
 
-    getDefauldChildConfig(config) {
+    renderChildComponents(config) {
+        const { childComponents = [] }  = config;
+        childComponents.forEach(childComponent => {
+            childComponent.render();
+        });
+    }
+
+    getDefauldChildConfig({ref, store}) {
         return {
-            pref: config.ref
+            pref: ref,
+            store: store
         }
     } 
 }

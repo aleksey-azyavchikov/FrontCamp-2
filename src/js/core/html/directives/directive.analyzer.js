@@ -14,10 +14,4 @@ export class DirectiveAnalyzer {
     analyze(domElement, scope) {
         this.analyzers.forEach(analyzer => analyzer.analyze(domElement, scope));
     }
-
-    static getInstance() {
-        return this.instance = !Boolean(this.instance)
-            ? new DirectiveAnalyzer()
-            : this.instance;
-    }
 }

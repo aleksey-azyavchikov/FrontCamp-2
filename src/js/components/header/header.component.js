@@ -1,6 +1,4 @@
-import { ComponentLoader } from "../../core/component.loader";
 import { Component } from "../../core/decorators/component.decorator";
-import ModalWindowComponent from "../modal/modal-window.component";
 import BaseComponent from "../base.component";
 import brand from "../../../content/images/brand.png";
 
@@ -16,7 +14,11 @@ export default class HeaderComponent extends BaseComponent {
     }
 
     bindHandlersHook() {
-        this.domElements.signInButton.addEventListener("click", () => ComponentLoader.loadComponent(ModalWindowComponent));
+        // this.domElements.signInButton.addEventListener("click", () => {
+        //     $('#myModal').on('shown.bs.modal', function () {
+        //         $('#myInput').trigger('focus')
+        //     })
+        // });
     }
 
     defineDomElementsHook() {
