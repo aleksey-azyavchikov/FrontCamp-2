@@ -16,15 +16,15 @@ export default class HomeComponent extends BaseComponent {
     }
 
     defineDomElementsHook() {
-        let domElements = {
-            buttonElement: document.getElementsByTagName("button")[0],
-            inputElement: document.getElementsByTagName("input")[0]
-        };
-        this.domElements = domElements;
+        // let domElements = {
+        //     buttonElement: document.getElementsByTagName("button")[0],
+        //     inputElement: document.getElementsByTagName("input")[0]
+        // };
+        // this.domElements = domElements;
     }
     
     bindHandlersHook() {
-        this.domElements.buttonElement.addEventListener("click", () => this.applyKey());
+        // this.domElements.buttonElement.addEventListener("click", () => this.applyKey());
     }
 
     applyKey() {

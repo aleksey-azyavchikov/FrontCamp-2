@@ -25,5 +25,14 @@ export default class AppComponent extends BaseComponent {
         super();
         this.storage = new StorageService(localStorage);
     }
+
+    initializeHook() {
+        this.config.store.state$
+            .filter(state => state.user !== this.user)
+            .do(state => this.user = state.user)
+            .do(() => this.render())
+            .do(() => console.log("User", this.user, this.config.selector))
+            .subscribe()
+    }
 }
 

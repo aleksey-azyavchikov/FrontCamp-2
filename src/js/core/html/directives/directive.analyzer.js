@@ -1,17 +1,11 @@
-import { CmIfDirective } from "./custom-directives/cmIf-directive";
+import { CmIfDirective } from "./custom-directives/cm-if.directive";
+import { AnalyzerSingleton } from "../../decorators/analyzer-singleton.decorator";
+import { SwitchCaseAnalyzer } from "./custom-directives/switch-case.analyzer";
 
-export class DirectiveAnalyzer {
-    constructor() {
-        this.analyzers = [new CmIfDirective()];
-    }
-
-    static getInstance() {
-        return this.instance = !Boolean(this.instance)
-            ? new DirectiveAnalyzer()
-            : this.instance;
-    }
-
-    analyze(domElement, scope) {
-        this.analyzers.forEach(analyzer => analyzer.analyze(domElement, scope));
-    }
-}
+@AnalyzerSingleton({
+    analyzers: [
+        CmIfDirective.getInstance(),
+        SwitchCaseAnalyzer.getInstance()
+    ]
+})
+export class DirectiveAnalyzer {}

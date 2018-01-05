@@ -1,7 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark cs-bar">
-    <a class="navbar-brand" href="#">
-        <img id="brand" width="50" height="50" alt="">
-    </a>
+    <fc-brand-section></fc-brand-section>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,12 +17,6 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-info my-2 my-sm-0 cs-btn" type="submit">Search</button>
         </form>
-        <form class="form-inline">
-            <div class="container">
-                <button type="button" class="btn btn-outline-info my-2 cs-btn" data-toggle="modal" data-target="#signInModal">
-                    Sign In
-                </button>
-            </div>
-        </form>
+        <fc-sign-in-section></fc-sign-in-section>
     </div>
 </nav>

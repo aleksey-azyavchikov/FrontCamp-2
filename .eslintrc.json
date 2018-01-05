@@ -7,6 +7,9 @@
         "node": true,
         "jquery": true
     },
+    "globals": {
+        "Rx": true
+    },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": false

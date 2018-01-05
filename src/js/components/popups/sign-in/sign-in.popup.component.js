@@ -1,7 +1,6 @@
 import { Component } from "../../../core/decorators/component.decorator";
 import BaseComponent from "../../base.component";
 import { ActionType } from "../../../reducers/action-type";
-import { setTimeout } from "timers";
 
 @Component({
     selector: "fc-sign-in-popup",
@@ -13,13 +12,6 @@ export default class SignInPopupComponent extends BaseComponent {
         super();
         
     }
-
-    initializeHook() {
-        this.config.store.subscribe(newState => {
-            console.log("State", newState);
-        });
-    }
-
     defineDomElementsHook() {
         const { ref } = this.config;
         let domElements = {
@@ -33,16 +25,12 @@ export default class SignInPopupComponent extends BaseComponent {
 
     bindHandlersHook() {
         this.domElements.signInButton.addEventListener("click", () => {
-            console.log(this.domElements.inputName.value);
             const name = this.domElements.inputName.value;
             const apiKey = this.domElements.inputApiKey.value;
             this.config.store.dispatch({ 
                 type: ActionType.AddUserInfo,
                 payload: { name, apiKey }
             });
-            setTimeout(() => {
-
-            }, 0)
             this.domElements.signInModal.modal("hide");
         });
     }

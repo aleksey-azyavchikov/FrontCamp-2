@@ -9,7 +9,7 @@ module.exports = {
     context: path.resolve(__dirname, "../../src"),
     entry: {
         polyfills: ["babel-polyfill"],
-        libraries: ["jquery", "bootstrap"],
+        libraries: ["jquery", "bootstrap", "rxjs"],
         app: ["./index.js"],
     },
     resolve: {
@@ -24,7 +24,8 @@ module.exports = {
             jquery: "jquery",
             jQuery: "jquery",
             Popper: ["popper.js", "default"],
-            popper: ["popper.js", "default"]
+            popper: ["popper.js", "default"],
+            Rx: "rxjs/Rx"
         }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 5,

@@ -1,8 +1,13 @@
+import { Guid } from "../guid";
+
 export function Component(config) {
     return function (target) {
         target.selector = config.selector;
-        // target.prototype = Object.create(BaseComponent.prototype);
+        Object.assign(config, {
+            id: Guid.create(),
+            childComponents: [],
+            stable: false
+        }, config);
         target.prototype.config = config;
-        // target.prototype.constructor = target;
     }
 }

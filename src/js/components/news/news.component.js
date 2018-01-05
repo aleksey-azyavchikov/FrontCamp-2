@@ -16,17 +16,17 @@ export default class NewsComponent extends BaseComponent {
     }
 
     defineDomElementsHook() {
-        let domElements = {
-            showNewsbuttonElement: document.getElementById("show-news"),
-            resetNewsbuttonElement: document.getElementById("reset-news"),
-            ulElement: document.getElementsByTagName("ul")[0]
-        };
-        this.domElements = domElements;
+        // let domElements = {
+        //     showNewsbuttonElement: document.getElementById("show-news"),
+        //     resetNewsbuttonElement: document.getElementById("reset-news"),
+        //     ulElement: document.getElementsByTagName("ul")[0]
+        // };
+        // this.domElements = domElements;
     }
 
     bindHandlersHook() {
-        this.domElements.showNewsbuttonElement.addEventListener("click", () => this.showHandler());
-        this.domElements.resetNewsbuttonElement.addEventListener("click", () => this.resetHandler());
+        // this.domElements.showNewsbuttonElement.addEventListener("click", () => this.showHandler());
+        // this.domElements.resetNewsbuttonElement.addEventListener("click", () => this.resetHandler());
     }
 
     resetHandler() {

@@ -5,7 +5,7 @@ import { combineReducers } from "./js/core/redux/reducer";
 import { userReducer } from "./js/reducers/user";
 import App from "./js/components/app/app.component.js";
 
-ComponentLoader.loadComponent(App, { 
+ComponentLoader.getInstance().loadComponent(App, { 
     pref: document.body,
     store: Store.createStore(combineReducers({
         user: userReducer

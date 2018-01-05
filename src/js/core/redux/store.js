@@ -1,8 +1,9 @@
 export class Store {
-    constructor(reducer) {
+    constructor(reducer, initialState = {}) {
         this.reducer = reducer;
         this.listeners = [];
-        this.dispatch({});
+        this.stateObservable = new Rx.Subject(initialState);
+        this.dispatch(initialState);
     }
 
     static createStore(reducer) {
@@ -11,11 +12,12 @@ export class Store {
 
     dispatch(action) {
         this.state = this.reducer(this.state, action);
+        this.stateObservable.next(this.state);
         this.listeners.forEach(listener => listener(this.state));
     }
 
-    getState() {
-        return this.state;
+    get state$() {
+        return this.stateObservable.asObservable();
     }
 
     subscribe(listener) {
