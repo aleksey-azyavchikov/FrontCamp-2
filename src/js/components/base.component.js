@@ -142,6 +142,9 @@ export default class BaseComponent {
         config.childComponents.forEach(childComponent => childComponent.destroy());
         config.childComponents = [];
         this.destroyHook();
-
+        const after = config.childComponents;
+        if(before.length !== after.length) {
+            console.log("Destroy: ", config.selector, ": ", before, " -> ", after);
+        }
     }
 }
