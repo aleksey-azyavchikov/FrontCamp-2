@@ -2,7 +2,7 @@ export class Store {
     constructor(reducer, initialState = {}) {
         this.reducer = reducer;
         this.listeners = [];
-        this.stateObservable = new Rx.Subject(initialState);
+        this.stateObservable = new Rx.BehaviorSubject(initialState);
         this.dispatch(initialState);
     }
 

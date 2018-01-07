@@ -6,7 +6,8 @@ export function Component(config) {
         Object.assign(config, {
             id: Guid.create(),
             childComponents: [],
-            stable: false
+            stable: false,
+            params: {}
         }, config);
         target.prototype.config = config;
     }

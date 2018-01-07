@@ -4,12 +4,8 @@ import { Singleton } from "./decorators/singleton.decorator";
 export class ComponentLoader {
 
     loadComponent(module, config) {
-        let components = [];
         const refs = this.defineRefComponents(module, config);
-        for(let ref of refs) {
-            const component = this.createComponent(module, config, ref);
-            components.push(component);
-        }
+        const components = this.createComponents(module, config, refs);
         return components;
     }
 
@@ -26,13 +22,19 @@ export class ComponentLoader {
         return refs;
     }
 
+    createComponents(module, config, refs) {
+        let components = [];
+        for(let ref of refs) {
+            const component = this.createComponent(module, config, ref);
+            components.push(component);
+        }
+        return components;
+    }
+
     createComponent(module, config, ref) {
         let component = new module();
-        component.buildComponent({
-            pref: config.pref, 
-            store: config.store,
-            ref: ref
-        });
+        Object.assign(config, {ref})
+        component.buildComponent(config);
 
         return component;
     }

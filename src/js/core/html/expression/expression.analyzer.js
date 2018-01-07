@@ -1,17 +1,12 @@
-import { CmIfDirective } from "./custom-directives/cmIf-directive";
+import { AnalyzerSingleton } from "../../decorators/analyzers/analyzer-singleton.decorator";
+import { ContentExpression } from "./custom-expressions/content.expression";
 
+@AnalyzerSingleton({
+    analyzers: [
+        ContentExpression.getInstance()
+    ]
+})
 export class ExpressionAnalyzer {
     constructor() {
-        this.analyzers = [new CmIfDirective()];
-    }
-
-    static getInstance() {
-        return this.instance = !Boolean(this.instance)
-            ? new ExpressionAnalyzer()
-            : this.instance;
-    }
-
-    analyze(domElement, scope) {
-        this.analyzers.forEach(analyzer => analyzer.analyze(domElement, scope));
     }
 }

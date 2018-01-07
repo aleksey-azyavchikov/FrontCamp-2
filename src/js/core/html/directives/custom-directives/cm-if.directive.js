@@ -1,7 +1,7 @@
 import { BaseDirective } from "./base.directive";
-import { DirectiveSingleton } from "../../../decorators/directive-singleton.decorator";
+import { DirectiveAnalyzerSingleton } from "../../../decorators/analyzers/directive-analyzer-singleton.decorator";
 
-@DirectiveSingleton({
+@DirectiveAnalyzerSingleton({
     directiveName: "cmIf"
 })
 export class CmIfDirective extends BaseDirective {
@@ -10,12 +10,12 @@ export class CmIfDirective extends BaseDirective {
     }
 
     analyzeDirective(innerDomElement, scope) {
-        if(this.checklDirective(innerDomElement, scope)) {
+        if(this.checkDirective(innerDomElement, scope)) {
             this.applyDirective(innerDomElement)
         }
     }
 
-    checklDirective(innerDomElement, scope) {
+    checkDirective(innerDomElement, scope) {
         return !super.execute(innerDomElement, scope);
     }
 

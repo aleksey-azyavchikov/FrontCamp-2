@@ -1,9 +1,8 @@
 import { AnalyzerSingleton } from "./analyzer-singleton.decorator";
 
-export function DirectiveSingleton(config) {
+export function ExpressionAnalyzerSingleton(config) {
     return function (target) {
-        target.prototype.directiveName = config.directiveName;
+        target.prototype.pattern = config.pattern;
         AnalyzerSingleton(config)(target);
-        let a = target;
     }
 }

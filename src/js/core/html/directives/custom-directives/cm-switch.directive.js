@@ -1,7 +1,7 @@
 import { BaseDirective } from "./base.directive";
-import { DirectiveSingleton } from "../../../decorators/directive-singleton.decorator";
+import { DirectiveAnalyzerSingleton } from "../../../decorators/analyzers/directive-analyzer-singleton.decorator";
 
-@DirectiveSingleton({
+@DirectiveAnalyzerSingleton({
     directiveName: "cmSwitch"
 })
 export class CmSwitchDirective extends BaseDirective {

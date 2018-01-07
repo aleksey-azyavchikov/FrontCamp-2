@@ -30,8 +30,8 @@ export default class AppComponent extends BaseComponent {
         this.config.store.state$
             .filter(state => state.user !== this.user)
             .do(state => this.user = state.user)
-            .do(() => this.render())
             .do(() => console.log("User", this.user, this.config.selector))
+            .do(() => this.render())
             .subscribe()
     }
 }

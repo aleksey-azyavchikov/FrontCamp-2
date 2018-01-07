@@ -1,6 +1,7 @@
 import { Guid } from "../core/guid";
 import { ComponentLoader } from "../core/component.loader";
 import { HtmlAnalyzer } from "../core/html/html.analyzer";
+import { CmParamsDirective } from "../core/html/directives/custom-directives/cm-params.directive";
 
 export default class BaseComponent {
     constructor() {
@@ -19,14 +20,8 @@ export default class BaseComponent {
     }
 
     render() {
+        this.destroyChildrenComponents();
         this.buildComponent({});
-        // const config = this.config;
-        // this.bindHtml(config);
-        // // this.defineDomElementsHook();
-        // // this.checkDomElements(config);
-        // // this.bindHandlersHook();
-        // // this.loadChildComponents(config);
-        // this.renderChildComponents(config)
     }
 
     bindHtml({ ref, template }) {
@@ -39,8 +34,7 @@ export default class BaseComponent {
     bindHandlersHook() {}
 
     initializeHook() { 
-        //console.log("Component: ", this.config.selector, this.config); 
-        console.log("Component: ", this.config.selector); 
+        console.log("Component: ", this.config.selector, this.config.params); 
     }
 
     destroyHook() {}
@@ -69,60 +63,19 @@ export default class BaseComponent {
     }
 
     loadChildComponents(config) {
-        // this.renderChildComponents(config);
         const { children = [] }  = config;
-        const defaultChildConfig = this.getDefauldChildConfig(config);
-        children.forEach(child => { 
-           let childComponents = ComponentLoader.getInstance().loadComponent(child, defaultChildConfig);
-           childComponents.forEach(childComponent => config.childComponents.push(childComponent))
-        });
-    }
-
-    renderChildComponents(config) {
-        this.updateChildren(config);
-        this.renderChildren(config);
-    }
-
-    renderChildren(config) {
-        const { childComponents = [] } = config;
-        const unstableChildComponents = childComponents.filter(childComponents => !childComponents.stable);
-        unstableChildComponents.forEach(childComponent => childComponent.render());
-    }
-
-    updateChildren(config) {
-        this.removeUnvisibleChildren(config);
-        this.createNewChildren(config);
-    }
-
-    removeUnvisibleChildren(config) {
-        const before = config.childComponents;
-        const removedChildComponents = config.childComponents.filter(childComponent => !Boolean(childComponent.config.ref));
-        removedChildComponents.forEach(removedChildComponent => removedChildComponent.destroy(config));
-        config.childComponents = config.childComponents.filter(childComponent => Boolean(childComponent.config.ref));
-        const after = config.childComponents;
-        if(before.length !== after.length) {
-            console.log("Remove: ", config.selector, ": ", before, " -> ", after);
-        }
-    }
-
-    createNewChildren(config) {
-        const before = config.childComponents;
-        const { children = [] }  = config;
-        const componentLoader = ComponentLoader.getInstance();
-        let defaultChildConfig = this.getDefauldChildConfig(config);
+        const loader = ComponentLoader.getInstance();
+        const defaultChildConfiga = this.getDefauldChildConfig(config);
         children.forEach(child => {
-            let childRefs = componentLoader.defineRefComponents(child, defaultChildConfig);
+            const childRefs = loader.defineRefComponents(child, defaultChildConfiga);
             for(let childRef of childRefs) {
-                if(!this.checkChildRefExist(config, childRef)) {
-                    const component = componentLoader.createComponent(child, defaultChildConfig, childRef);
-                    config.childComponents.push(component);
-                }
+                let defaultChildConfig = this.getDefauldChildConfig(config);
+                let params = CmParamsDirective.getInstance().analyze(childRef, this);
+                Object.assign(defaultChildConfig, { params });
+                const component = loader.createComponent(child, defaultChildConfig, childRef);
+                config.childComponents.push(component);
             }
         });
-        const after = config.childComponents;
-        if(before.length !== after.length) {
-            console.log("Create: ", config.selector, ": ", before, " -> ", after);
-        }
     }
 
     checkChildRefExist(config, childRef) {
@@ -137,14 +90,13 @@ export default class BaseComponent {
         }
     }
 
-    destroy(config) {
-        const before = config.childComponents;
-        config.childComponents.forEach(childComponent => childComponent.destroy());
-        config.childComponents = [];
+    destroyChildrenComponents() {
+        this.config.childComponents.forEach(childComponent => childComponent.destroy());
+        this.config.childComponents = [];
+    }
+
+    destroy() {
+        this.destroyChildrenComponents();
         this.destroyHook();
-        const after = config.childComponents;
-        if(before.length !== after.length) {
-            console.log("Destroy: ", config.selector, ": ", before, " -> ", after);
-        }
     }
 }

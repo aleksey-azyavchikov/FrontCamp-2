@@ -1,7 +1,6 @@
 import { BaseDirective } from "./base.directive";
-import { DirectiveSingleton } from "../../../decorators/directive-singleton.decorator";
-
-@DirectiveSingleton({
+import { DirectiveAnalyzerSingleton } from "../../../decorators/analyzers/directive-analyzer-singleton.decorator";
+@DirectiveAnalyzerSingleton({
     directiveName: "cmCase",
 })
 export class CmCaseDirective extends BaseDirective {

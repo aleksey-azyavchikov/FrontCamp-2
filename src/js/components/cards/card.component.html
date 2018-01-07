@@ -1,0 +1,8 @@
+<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+    <div class="card-header">{{ this.config.params.header }}</div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush" cmFor="let point of this.config.params.points">
+            <li class="list-group-item cs-card-text">{{this.point}}</li>        
+        </ul>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { CmCaseDirective } from "./cm-case.directive";
 import { CmSwitchDirective } from "./cm-switch.directive";
-import { AnalyzerSingleton } from "../../../decorators/analyzer-singleton.decorator";
+import { AnalyzerSingleton } from "../../../decorators/analyzers/analyzer-singleton.decorator";
 
 @AnalyzerSingleton({
     analyzers: [

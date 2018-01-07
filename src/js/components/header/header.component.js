@@ -16,5 +16,6 @@ export default class HeaderComponent extends BaseComponent {
     constructor() {
         super();
         this.isSearchEnabled = false;
+        this.name = "OLO";
     }
 }

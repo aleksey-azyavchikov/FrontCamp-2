@@ -10,17 +10,24 @@ export default class SignInSectionComponent extends BaseComponent {
     constructor() {
         super();
         this.num = 3;
+        this.name = "Sing Off";
+        this.subscriptions = [];
+        this.user = {};
     }
 
     initializeHook() {
         super.initializeHook();
         
-        this.config.store.state$
+        this.subscriptions.push(this.config.store.state$
             .filter(state => state.user !== this.user)
             .do(state => this.user = state.user)
-            .do(() => this.render())
             .do(() => console.log("User", this.user, this.config.selector))
-            .subscribe()
+            .do(() => this.render())
+            .subscribe());
+    }
+
+    destroyHook() {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
     isUserNameDefined() {
