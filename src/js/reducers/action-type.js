@@ -1,3 +1,6 @@
 export const ActionType = {
-    AddUserInfo: 0
+    AddUserInfo: 0,
+
+    // Card
+    AddCard: 1
 }

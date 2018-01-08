@@ -3,13 +3,14 @@ import { Constants } from "../../core/constants";
 import BaseComponent from "../base.component";
 import { StorageService } from "../../services/storage.service";
 import { Component } from "../../core/decorators/component.decorator";
-import CardComponent from "../cards/card.component";
+// import CardComponent from "../cards/card.component";
+import CardsShowerComponent from "../card/cards-shower/cards-shower.component";
 
 @Component({
     selector: "fc-home-page",
     template: require("./home.component.html"),
     styles: require("./home.component.scss"),
-    children: [CardComponent]
+    children: [CardsShowerComponent]
 })
 export default class HomeComponent extends BaseComponent {
     constructor() {

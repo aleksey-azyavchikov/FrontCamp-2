@@ -29,8 +29,8 @@ export class BaseDirective {
 
     execute(innerDomElement, scope) {
         let value = innerDomElement.getAttribute(this.directiveName);
-        let fun = new Function("scope", this.getExpression(value));
-        let result = fun(scope);
+        let fun = new Function("", this.getExpression(value));
+        let result = fun.call(scope);
         return result;
     }
 

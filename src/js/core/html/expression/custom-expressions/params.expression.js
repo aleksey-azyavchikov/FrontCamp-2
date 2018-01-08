@@ -2,9 +2,9 @@ import { ExpressionAnalyzerSingleton } from "../../../decorators/analyzers/conte
 import { BaseExpression } from "./base.expression";
 
 @ExpressionAnalyzerSingleton({
-    pattern: /{{.*}}/g
+    pattern: /cmParams="(.*)"/ig
 })
-export class ContentExpression extends BaseExpression {
+export class ParamsExpression extends BaseExpression {
     constructor() {
         super();
     }
@@ -17,11 +17,17 @@ export class ContentExpression extends BaseExpression {
         return result;
     }
 
-    applyExpression(html, scope) {
-        let result = html.replace(this.pattern, (str) => {
-            let strToProcess = str.substring(2, str.length - 2).replace(/amp;/g, "");
-            return this.execute(strToProcess, scope);   
+    applyExpression(content, scope) {
+        let result = content.replace(this.pattern, () => {
+            let newResult = this.execute(scope);
+            return newResult;  
         });
         return result; 
+    }
+
+    execute(scope) {
+        let str = JSON.stringify(scope);
+        str = str.replace(/\"/g, "'");
+        return `cmParams="${str}"`;
     }
 }

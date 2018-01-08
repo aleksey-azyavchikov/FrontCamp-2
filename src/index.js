@@ -4,10 +4,12 @@ import { Store } from "./js/core/redux/store";
 import { combineReducers } from "./js/core/redux/reducer";
 import { userReducer } from "./js/reducers/user";
 import App from "./js/components/app/app.component.js";
+import { cardReducer } from "./js/reducers/card";
 
 ComponentLoader.getInstance().loadComponent(App, { 
     pref: document.body,
     store: Store.createStore(combineReducers({
-        user: userReducer
+        user: userReducer,
+        cards: cardReducer
     }))
 }); 

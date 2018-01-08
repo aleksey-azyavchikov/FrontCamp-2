@@ -11,7 +11,8 @@ export class CmParamsDirective extends BaseDirective {
 
     analyze(domElement, scope) {
         let params = {};
-        if(domElement.hasAttribute(this.directiveName)) {
+        if(domElement.hasAttribute(this.directiveName) || 
+            domElement.hasAttribute(this.directiveName.toLowerCase())) {
             params = super.execute(domElement, scope);
             this.removeDirective(domElement);
         }
