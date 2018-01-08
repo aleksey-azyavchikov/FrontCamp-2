@@ -1,5 +1,6 @@
 import { Component } from "../../../../core/decorators/component.decorator";
 import BaseComponent from "../../../base.component";
+import { ActionType } from "../../../../reducers/action-type";
 
 @Component({
     selector: "fc-sign-in-section",
@@ -9,10 +10,27 @@ import BaseComponent from "../../../base.component";
 export default class SignInSectionComponent extends BaseComponent {
     constructor() {
         super();
-        this.num = 3;
-        this.name = "Sing Off";
         this.subscriptions = [];
         this.user = {};
+    }
+
+    defineDomElementsHook() {
+        let domElements = {
+            signOffButton: this.config.ref.querySelector("#signOff")
+        }
+        this.domElements = domElements;
+    }
+
+    bindHandlersHook() {
+        this.bindEvent(this.domElements.signOffButton, "click", () => {
+            this.config.store.dispatch({ 
+                type: ActionType.AddUserInfo,
+                payload: {
+                    name: "",
+                    apiKey: ""
+                }
+            });
+        });
     }
 
     initializeHook() {
@@ -28,10 +46,5 @@ export default class SignInSectionComponent extends BaseComponent {
 
     destroyHook() {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    }
-
-    isUserNameDefined() {
-        let result = Boolean(this.user) && Boolean(this.user.name);
-        return result
     }
 }

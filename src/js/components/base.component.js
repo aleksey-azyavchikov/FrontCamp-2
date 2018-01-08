@@ -33,6 +33,12 @@ export default class BaseComponent {
 
     bindHandlersHook() {}
 
+    bindEvent(element, eventName,  action) {
+        if(element) {
+            element.addEventListener(eventName, () => action());
+        }
+    }
+
     initializeHook() { 
         console.log("Component: ", this.config.selector, this.config.params); 
     }

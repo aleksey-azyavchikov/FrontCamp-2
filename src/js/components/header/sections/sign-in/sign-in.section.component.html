@@ -1,7 +1,10 @@
 <form class="form-inline">
     <div class="container">
-        <button type="button" class="btn btn-outline-info my-2 cs-btn" data-toggle="modal" data-target="#signInModal">
-            {{this.user && this.user.name ? "Sign Off" : "Sign On"}}
+        <button cmIf="!this.user.name" type="button" class="btn btn-outline-info my-2 cs-btn" data-toggle="modal" data-target="#signInModal">
+            Sign On
+        </button>
+        <button cmIf="this.user.name" id="signOff" type="button" class="btn btn-outline-info my-2 cs-btn" data-toggle="modal">
+            Sign Off
         </button>
     </div>
 </form>

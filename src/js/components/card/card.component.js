@@ -9,6 +9,6 @@ import BaseComponent from "../base.component";
 export default class CardComponent extends BaseComponent {
     constructor() {
         super();
-        this.config.params;
+        this.card = this.config.params;
     }
 }

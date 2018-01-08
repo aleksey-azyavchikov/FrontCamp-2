@@ -5,8 +5,8 @@ import { CmForDirective } from "./custom-directives/cm-for.directive";
 
 @AnalyzerSingleton({
     analyzers: [
-        CmForDirective.getInstance(),
         CmIfDirective.getInstance(),
+        CmForDirective.getInstance(),
         SwitchCaseAnalyzer.getInstance()
     ]
 })
