@@ -1,12 +1,12 @@
 <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
     <div class="card-header">{{ this.card.header }}</div>
     <div class="card-body">
-        <h6 class="card-title">{{ this.card.title }}</h5>
+        <h6 cmIf="this.card && this.card.title" class="card-title">{{ this.card.title }}</h5>
+        <ul cmIf="this.card && this.card.points && this.card.linked" class="list-group" cmFor="let point of this.card.points">
+            {{this.point}}       
+        </ul>
         <ul cmIf="this.card && this.card.points && !this.card.linked" class="list-group" cmFor="let point of this.card.points">
             <li class="list-group-item cs-card-text">{{this.point}}</li>        
-        </ul>
-        <ul cmIf="this.card && this.card.points && this.card.linked" class="list-group" cmFor="let point of this.card.points">
-           {{this.point}}       
         </ul>
     </div>
 </div>

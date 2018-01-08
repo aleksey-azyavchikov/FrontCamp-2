@@ -9,6 +9,9 @@ import BaseComponent from "../base.component";
 export default class CardComponent extends BaseComponent {
     constructor() {
         super();
+    }
+
+    initializeHook() {
         this.card = this.config.params;
     }
 }

@@ -11,12 +11,12 @@ export default class BaseComponent {
         this.mergeConfigs(this.config, additional);
 
         const config = this.config;
+        this.initializeHook();
         this.bindHtml(config);
         this.defineDomElementsHook();
-        this.checkDomElements(config);
+        // this.checkDomElements(config);
         this.bindHandlersHook();
         this.loadChildComponents(config);
-        this.initializeHook();
     }
 
     render() {
@@ -40,7 +40,7 @@ export default class BaseComponent {
     }
 
     initializeHook() { 
-        console.log("Component: ", this.config.selector, this.config.params); 
+        // console.log("Component: ", this.config.selector, this.config.params); 
     }
 
     destroyHook() {}

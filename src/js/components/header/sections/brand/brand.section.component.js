@@ -18,9 +18,6 @@ export default class BrandSectionComponent extends BaseComponent {
             brandImage: this.config.ref.querySelector("#brand")
         };
         this.domElements = domElements;
-    }
-
-    initializeHook() {
         this.domElements.brandImage.src = brand;
     }
 }

@@ -3,22 +3,17 @@ import { CmSwitchDirective } from "./cm-switch.directive";
 import { AnalyzerSingleton } from "../../../decorators/analyzers/analyzer-singleton.decorator";
 
 @AnalyzerSingleton({
-    analyzers: [
-        CmSwitchDirective.getInstance(),
-        CmCaseDirective.getInstance()
-    ]
 })
 export class SwitchCaseAnalyzer {
     constructor() {
+        let switchDirective = new CmSwitchDirective();
+        let caseDirective = new CmCaseDirective();
+        switchDirective.analyzers.push(caseDirective);
+        caseDirective.analyzers.push(switchDirective);
+        this.analyzers = [switchDirective];
     }
 
     analyze(domElement, scope) {
-        let switchDirective = this.analyzers[0];
-        let caseDirective = this.analyzers[1];
-
-        switchDirective.analyzers.push(caseDirective);
-        caseDirective.analyzers.push(switchDirective);
-        
-        switchDirective.analyze(domElement, scope);
+        this.analyzers.forEach(analyzer => analyzer.analyze(domElement, scope));
     }
 }

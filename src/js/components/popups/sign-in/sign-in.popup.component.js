@@ -1,6 +1,9 @@
 import { Component } from "../../../core/decorators/component.decorator";
 import BaseComponent from "../../base.component";
 import { ActionType } from "../../../reducers/action-type";
+import { PageType } from "../../../core/enums/page-type.enum";
+import { ValidationFactory, ValidationConditions } from "../../../core/validation";
+import { ExpressionAnalyzer } from "../../../core/html/expression/expression.analyzer";
 
 @Component({
     selector: "fc-sign-in-popup",
@@ -25,13 +28,31 @@ export default class SignInPopupComponent extends BaseComponent {
 
     bindHandlersHook() {
         this.domElements.signInButton.addEventListener("click", () => {
-            const name = this.domElements.inputName.value;
-            const apiKey = this.domElements.inputApiKey.value;
-            this.config.store.dispatch({ 
-                type: ActionType.AddUserInfo,
-                payload: { name, apiKey }
-            });
-            this.domElements.signInModal.modal("hide");
+            let requiredValidator = ValidationFactory
+                .getInstance()
+                .getValidator(ValidationConditions.RequiredField);
+
+            const name = requiredValidator.validate(this.domElements.inputName.value);
+            const apiKey = requiredValidator.validate(this.domElements.inputApiKey.value);
+
+            if(Boolean(name) && Boolean(apiKey)) {
+                this.dispatchData(name, apiKey);
+                this.domElements.signInModal.modal("hide");
+            }
+        });
+    }
+
+    dispatchData(name, apiKey) {
+        this.config.store.dispatch({ 
+            type: ActionType.AddUserInfo,
+            payload: { name, apiKey }
+        });
+
+        this.config.store.dispatch({ 
+            type: ActionType.SetActivePage,
+            payload: {
+                activePage: PageType.News
+            }
         });
     }
 }

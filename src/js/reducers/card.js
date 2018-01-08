@@ -17,16 +17,23 @@ export const cardReducer = (state = getDefaultCards(), action) => {
 function getDefaultCards() {
     return [
         {
-            header: "Features",
+            header: "Libraries",
             title: "Support:",
             points: [
-                "Bootstrap v4",
+                "Bootstrap",
+                "RxJs",
+                "jQuery",
+            ]
+        },
+        {
+            header: "Bundler",
+            points: [
                 "Webpack"
             ]
         },
         {
-            header: "Directives",
-            title: "Support:",
+            header: "Features",
+            title: "Directives:",
             points: [
                 "If",
                 "Switch-Case",
@@ -36,7 +43,7 @@ function getDefaultCards() {
         },
         {
             header: "Patterns",
-            title: "Support:",
+            title: "Architectural pattern: Redux",
             linked: true,
             points: [  
                 `<a href="https://github.com/aleksey-azyavchikov/FrontCamp-2/blob/module-4-patterns/src/js/core/decorators/singleton.decorator.js" 
@@ -47,6 +54,8 @@ function getDefaultCards() {
                 class="list-group-item list-group-item-action cs-card-text"><b>Composite</b></a>`,
                 `<a href="https://github.com/aleksey-azyavchikov/FrontCamp-2/blob/module-4-patterns/src/js/core/decorators/analyzers/analyzer-singleton.decorator.js" 
                 class="list-group-item list-group-item-action cs-card-text"><b>Decorator</b></a>`,
+                `<a href="https://github.com/aleksey-azyavchikov/FrontCamp-2/blob/module-4-patterns/src/js/core/redux/old-store.js" 
+                class="list-group-item list-group-item-action cs-card-text"><b>Observer</b></a>`,
             ]
         }
     ];

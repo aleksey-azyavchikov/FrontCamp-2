@@ -1,5 +1,7 @@
 <fc-header></fc-header>
-<fc-news-page cmIf="false"></fc-news-page>
-<fc-home-page></fc-home-page>
+<div cmSwitch="this.activePage">
+    <fc-news-page cmCase="this.PageType.News"></fc-news-page>
+    <fc-home-page cmCase="this.PageType.Home"></fc-home-page>
+</div> 
 <fc-popup-container></fc-popup-container>
 <fc-footer></fc-footer>

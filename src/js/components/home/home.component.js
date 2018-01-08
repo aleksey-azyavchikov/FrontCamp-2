@@ -3,7 +3,6 @@ import { Constants } from "../../core/constants";
 import BaseComponent from "../base.component";
 import { StorageService } from "../../services/storage.service";
 import { Component } from "../../core/decorators/component.decorator";
-// import CardComponent from "../cards/card.component";
 import CardsShowerComponent from "../card/cards-shower/cards-shower.component";
 
 @Component({
@@ -16,7 +15,22 @@ export default class HomeComponent extends BaseComponent {
     constructor() {
         super();
         this.storage = new StorageService(localStorage);
-        this.config.params;
+        this.subscriptions = [];
+    }
+
+    initializeHook() {
+        this.subscriptions.push(this.config.store.state$
+            .map(state => state.cards)
+            .filter(cards => cards !== this.cards)
+            .do(cards => this.cards = cards)
+            .do(() => console.log("Rerer", this.cards))
+            .do(() => this.render())
+            .subscribe()
+        );
+    }
+
+    destroyHook() {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
     defineDomElementsHook() {

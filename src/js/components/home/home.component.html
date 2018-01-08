@@ -1,9 +1,8 @@
 <div class="page">
-    <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+    <div class="container-fluid">
         <div class="row"></div>
         <div class="row">
             <div class="col-md-8">
-                <div class="container">
                     <div class="jumbotron">
                         <h1 class="display-3">Wellcome to FrontCamp!</h1>
                         <p class="lead">This is test application</p>
@@ -12,14 +11,12 @@
                             <a href="http://newsapi.org" role="link">News Api.</a>
                         </p>
                     </div>
-                </div>
             </div>
-            <div class="col-md-4">
-                <!-- <div class="container">
-                    <div class="row"> -->
-                <fc-cards-shower></fc-cards-shower>
-                <!-- </div>
-                </div> -->
+            <div class="col-md-2">
+                    <fc-cards-shower cmIf="this.cards" cmParams="{ cards: this.cards.filter(x => x.header !== 'Patterns') }"></fc-cards-shower>
+            </div>
+            <div class="col-md-2">
+                    <fc-cards-shower cmIf="this.cards" cmParams="{ cards: this.cards.filter(x => x.header === 'Patterns') }"></fc-cards-shower>
             </div>
         </div>
     </div>

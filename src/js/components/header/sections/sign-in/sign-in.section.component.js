@@ -1,6 +1,7 @@
 import { Component } from "../../../../core/decorators/component.decorator";
 import BaseComponent from "../../../base.component";
 import { ActionType } from "../../../../reducers/action-type";
+import { PageType } from "../../../../core/enums/page-type.enum";
 
 @Component({
     selector: "fc-sign-in-section",
@@ -30,6 +31,12 @@ export default class SignInSectionComponent extends BaseComponent {
                     apiKey: ""
                 }
             });
+            this.config.store.dispatch({ 
+                type: ActionType.SetActivePage,
+                payload: {
+                    activePage: PageType.Home
+                }
+            });
         });
     }
 
@@ -37,9 +44,9 @@ export default class SignInSectionComponent extends BaseComponent {
         super.initializeHook();
         
         this.subscriptions.push(this.config.store.state$
-            .filter(state => state.user !== this.user)
-            .do(state => this.user = state.user)
-            .do(() => console.log("User", this.user, this.config.selector))
+            .map(state => state.user)
+            .filter(user => this.user !== user)
+            .do(user => this.user = user)
             .do(() => this.render())
             .subscribe());
     }
