@@ -21,7 +21,6 @@ export class TemplateHelpers {
     }
 
     static async getCarouselTemplate(data) {
-        await import(/* webpackChunkName: "chunck" */ "./partial-styles/carousel.scss");
         const carouselTemplate = `
         <ol class="carousel-indicators">
             ${data.articles.map((article, index) => `

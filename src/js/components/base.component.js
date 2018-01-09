@@ -78,7 +78,6 @@ export default class BaseComponent {
                 let defaultChildConfig = this.getDefauldChildConfig(config);
                 let params = CmParamsDirective.getInstance().analyze(childRef, this);
                 Object.assign(defaultChildConfig, { params });
-                console.log("Confog", defaultChildConfig);
                 const component = loader.createComponent(child, defaultChildConfig, childRef);
                 config.childComponents.push(component);
             }
