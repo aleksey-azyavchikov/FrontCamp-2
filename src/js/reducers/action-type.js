@@ -5,5 +5,8 @@ export const ActionType = {
     AddCard: "AddCard",
 
     // Page
-    SetActivePage: "SetActivePage" 
+    SetActivePage: "SetActivePage",
+
+    // News
+    AddNews: "AddNews"
 }

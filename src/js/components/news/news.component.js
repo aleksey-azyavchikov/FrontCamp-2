@@ -1,48 +1,44 @@
-import { Constants } from "../../core/constants";
+
 import { ApiInvoker } from "../../core/api";
 import { StorageService } from "../../services/storage.service";
 import { Component } from "../../core/decorators/component.decorator";
 import BaseComponent from "../base.component.js";
+import CarouselComponent from "../carousel/carousel.component";
 
 @Component({
     selector: "fc-news-page",
     template: require("./news.component.html"),
-    styles: require("./news.component.scss")
+    styles: require("./news.component.scss"),
+    children: [CarouselComponent]
 })
 export default class NewsComponent extends BaseComponent {
     constructor() {
         super();
         this.storage = new StorageService(localStorage);
+        this.subscriptions = [];
+        this.apiKey = null;
+        this.template = null;
     }
 
-    defineDomElementsHook() {
-        // let domElements = {
-        //     showNewsbuttonElement: document.getElementById("show-news"),
-        //     resetNewsbuttonElement: document.getElementById("reset-news"),
-        //     ulElement: document.getElementsByTagName("ul")[0]
-        // };
-        // this.domElements = domElements;
+    initializeHook() {
+        super.initializeHook();
+        
+        this.subscriptions.push(this.config.store.state$
+            .map(state => state.user)
+            .filter(user => Boolean(user) && Boolean(user.apiKey) && this.apiKey !== user.apiKey)
+            .do(user => this.apiKey = user.apiKey)
+            .do(() => this.showNews())
+            .subscribe()
+        );
     }
 
-    bindHandlersHook() {
-        // this.domElements.showNewsbuttonElement.addEventListener("click", () => this.showHandler());
-        // this.domElements.resetNewsbuttonElement.addEventListener("click", () => this.resetHandler());
+    destroyHook() {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
-    resetHandler() {
-        this.storage.removeItem(Constants.key);
-        // ComponentLoader.loadComponent(HomeComponent)
-    }
-
-    showHandler() {
-        let apiKey = this.storage.getItem(Constants.key);
-        if(apiKey === null) { 
-            // ComponentLoader.loadComponent(HomeComponent);
-            return;
-        }
-
+    showNews() {
         let apiInvoker = ApiInvoker.getInstance();
-        apiInvoker.key = apiKey;
+        apiInvoker.key = this.apiKey;
 
         // These promises will be executed on runtime step.
         // Need to find out how to make them as deferred. 
@@ -50,8 +46,9 @@ export default class NewsComponent extends BaseComponent {
         const templateModule = import(/* webpackChunkName="olol" */ "../../helpers/templates/template.helper.js");
 
         Promise.all([articleData, templateModule])
-            .then(values => values[1].getArticleTemplate(values[0]))
-            .then(template => this.domElements.ulElement.innerHTML = template)
+            .then(values => values[1].getCarouselTemplate(values[0]))
+            .then(template => this.template = template)
+            .then(_ => this.render())
             .catch(error => console.error(error));
     }
 } 

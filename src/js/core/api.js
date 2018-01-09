@@ -1,3 +1,6 @@
+import { Singleton } from "./decorators/singleton.decorator";
+
+@Singleton()
 export class ApiInvoker
 {
     constructor(apiKey) {
@@ -32,11 +35,5 @@ export class ApiInvoker
                 .then(response => resolve(response))
                 .catch(error => reject(error));
         });
-    }
-
-    static getInstance() {
-        return this.instance = !Boolean(this.instance)
-            ? new ApiInvoker()
-            : this.instance;
     }
 }

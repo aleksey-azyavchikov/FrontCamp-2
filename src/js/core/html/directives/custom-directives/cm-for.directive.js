@@ -22,7 +22,6 @@ export class CmForDirective extends BaseDirective {
         let body = this.getBodyExpression(expression, innerHtml);
         let fun = new Function("innerHtml", "transformParams", "transformExpression", body);
         let result = fun.call(scope, innerHtml, this.transformParams, this.transformExpression);
-        console.log("Result", result);
         return result;
     }
 
@@ -41,7 +40,6 @@ export class CmForDirective extends BaseDirective {
             html = transformExpression(html, { ${forVariableName}: ${forVariableName} });
             result += html;
         }
-        console.log("Result", result);
         return result;`
     }
 

@@ -6,12 +6,14 @@ import App from "./js/components/app/app.component.js";
 import { userReducer } from "./js/reducers/user";
 import { cardReducer } from "./js/reducers/card";
 import { pageReducer } from "./js/reducers/page";
+import { newsReducer } from "./js/reducers/news";
 
 ComponentLoader.getInstance().loadComponent(App, { 
     pref: document.body,
     store: Store.createStore(combineReducers({
         user: userReducer,
         cards: cardReducer,
-        activePage: pageReducer
+        activePage: pageReducer,
+        news: newsReducer
     }))
 }); 

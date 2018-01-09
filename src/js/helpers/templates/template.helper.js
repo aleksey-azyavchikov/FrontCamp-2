@@ -20,6 +20,29 @@ export class TemplateHelpers {
         return template;
     }
 
+    static async getCarouselTemplate(data) {
+        await import(/* webpackChunkName: "chunck" */ "./partial-styles/carousel.scss");
+        const carouselTemplate = `
+        <ol class="carousel-indicators">
+            ${data.articles.map((article, index) => `
+                <li data-target="#carouselExampleIndicators" data-slide-to="${index}" ${index === 0 ? 'class="active"' : ''}></li>`).join("")}
+        </ol>
+        <div class="carousel-inner">
+            ${data.articles.map((article, index) => `
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img class="d-block w-100" src="${article.urlToImage}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>${article.title}</h5>
+                        <p>${article.description}</p>
+                        <a href="${article.url}">Source</a>
+                        <p>${article.author}</p>
+                    </div>
+                </div>`).join("")}
+        </div>`;
+        
+        return carouselTemplate;
+    }
+
     getActualDate(str) {
         let result = str === null 
             ? ""
@@ -36,3 +59,4 @@ export class TemplateHelpers {
 }
 
 export const getArticleTemplate = async (data) => TemplateHelpers.getArticleTemplate(data)
+export const getCarouselTemplate = async (data) => TemplateHelpers.getCarouselTemplate(data)
