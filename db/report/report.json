@@ -1,0 +1,19 @@
+{
+	[{
+			task: "3.1",
+			query: {
+				$and: [{
+						borough: "Queens"
+					}, {
+						cuisine: "Chinese"
+					}
+				]
+			},
+			rawQuery: "db.restaurants.find({$and:[{borough: " Queens "}, {cuisine: " Chinese "}]}).count()"
+			result: 728
+		}, {
+			task: "3.2",
+			query: {}
+		}
+	]
+}
