@@ -1,1 +1,1 @@
-if not exist ..\db\mongodb mkdir ..\db\mongodb
+if not exist .\db\mongodb mkdir .\db\mongodb

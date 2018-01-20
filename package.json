@@ -7,7 +7,8 @@
     "watch:dev": "npm run build:dev --watch",
     "watch:prod": "npm run build:prod --watch",
     "server:dev": "webpack-dev-server --config configs/webpack/dev.config.js",
-    "server:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open"
+    "server:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open",
+    "setup:db": "start .\\scripts\\setup-and-run.bat"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

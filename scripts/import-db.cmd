@@ -1,6 +1,6 @@
 @ECHO off
 SETLOCAL
-FOR /f %%I IN ('dir /b /s ..\db\sets\*.json') DO (CALL :callimportf %%~nI, %%I) 
+FOR /f %%I IN ('dir /b /s .\db\sets\*.json') DO (CALL :callimportf %%~nI, %%I) 
 pause
 Goto :eof
 
