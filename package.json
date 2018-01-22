@@ -2,13 +2,18 @@
   "name": "front-camp",
   "version": "1.0.0",
   "scripts": {
-    "build:dev": "webpack --config configs/webpack/dev.config.js",
-    "build:prod": "webpack --config configs/webpack/prod.config.js",
-    "watch:dev": "npm run build:dev --watch",
-    "watch:prod": "npm run build:prod --watch",
-    "server:dev": "webpack-dev-server --config configs/webpack/dev.config.js",
-    "server:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open",
-    "setup:db": "start .\\scripts\\setup-and-run.bat"
+    "ui:build:dev": "webpack --config configs/webpack/dev.config.js",
+    "ui:build:prod": "webpack --config configs/webpack/prod.config.js",
+    "ui:watch:dev": "npm run ui:build:dev --watch",
+    "ui:watch:prod": "npm run ui:build:prod --watch",
+    "ui:server:dev": "webpack-dev-server --config configs/webpack/dev.config.js",
+    "ui:server:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open",
+    "db:setup": "start .\\scripts\\setup-and-run.bat",
+    "db:run:server": "start cmd /c .\\scripts\\run-db-server.cmd",
+    "db:run:client": "start cmd /c .\\scripts\\run-db-client.cmd",
+    "db:run:both": "npm run db:run:server && npm run db:run:client",
+    "db:export": "start cmd /c .\\scripts\\export-collections.cmd",
+    "db:import":  "start cmd /c .\\scripts\\import-db.cmd"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
