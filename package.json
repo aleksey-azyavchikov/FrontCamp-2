@@ -8,12 +8,13 @@
     "ui:watch:prod": "npm run ui:build:prod --watch",
     "ui:server:dev": "webpack-dev-server --config configs/webpack/dev.config.js",
     "ui:server:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open",
+    
     "db:setup": "start .\\scripts\\setup-and-run.bat",
     "db:run:server": "start cmd /c .\\scripts\\run-db-server.cmd",
     "db:run:client": "start cmd /c .\\scripts\\run-db-client.cmd",
     "db:run:both": "npm run db:run:server && npm run db:run:client",
     "db:export": "start cmd /c .\\scripts\\export-collections.cmd",
-    "db:import":  "start cmd /c .\\scripts\\import-db.cmd"
+    "db:import":  "start .\\scripts\\import-db.bat"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
