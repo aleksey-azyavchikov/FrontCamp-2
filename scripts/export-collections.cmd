@@ -2,7 +2,7 @@ if not exist .\db\exports mkdir .\db\exports
 
 @ECHO off
 SETLOCAL
-FOR /f %%I IN ('dir /b /s .\db\sets\*.json') DO (CALL :callimportf %%~nI, %%I) 
+FOR /f %%I IN ('dir /b /s .\db\sets\*.*') DO (CALL :callimportf %%~nI, %%I) 
 pause
 Goto :eof
 

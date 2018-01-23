@@ -483,6 +483,17 @@ var module = {
 				{ "_id" : "Norwegian Air Shuttle ASA", "total" : 13344 },
 				{ "_id" : "VistaJet Limited", "total" : 183 }
 			]
+		},
+		{
+			task: "4.5",
+			rawQuery: "db.airlines.aggregate([{$match:{originCountry:'United States'}},{$group:{_id:{originCity:'$originCity',originState:'$originState'},total:{$sum:'$passengers'}}},{$sort:{total:-1}},{$group:{_id:{originState:'$_id.originState',},total:{$max:'$total'},doc:{$first:'$$ROOT'}}},{$sort:{'_id.originState':1}},{$limit:5},{$project:{_id:0,totalPassengers:'$total',location:{state:'$doc._id.originState',city:'$doc._id.originCity'}}}])",
+			results: [
+				{ "totalPassengers" : 760120, "location" : { "state" : "Alabama", "city" : "Birmingham, AL" } },
+				{ "totalPassengers" : 1472404, "location" : { "state" : "Alaska", "city" : "Anchorage, AK" } },
+				{ "totalPassengers" : 13152753, "location" : { "state" : "Arizona", "city" : "Phoenix, AZ" } },
+				{ "totalPassengers" : 571452, "location" : { "state" : "Arkansas", "city" : "Little Rock, AR" } },
+				{ "totalPassengers" : 23701556, "location" : { "state" : "California", "city" : "Los Angeles, CA" } },
+			]
 		}
 		
 	]
