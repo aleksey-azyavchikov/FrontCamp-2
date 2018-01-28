@@ -8,13 +8,13 @@
     "ui:watch:prod": "npm run ui:build:prod --watch",
     "ui:server:dev": "webpack-dev-server --config configs/webpack/dev.config.js",
     "ui:server:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open",
-    
     "db:setup": "start .\\scripts\\setup-and-run.bat",
     "db:run:server": "start cmd /c .\\scripts\\run-db-server.cmd",
     "db:run:client": "start cmd /c .\\scripts\\run-db-client.cmd",
     "db:run:both": "npm run db:run:server && npm run db:run:client",
     "db:export": "start cmd /c .\\scripts\\export-collections.cmd",
-    "db:import":  "start .\\scripts\\import-db.bat"
+    "db:import": "start .\\scripts\\import-db.bat",
+    "server:run": "nodemon ./server/bin/www"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -43,6 +43,15 @@
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
-    "webpack-merge": "^4.1.1"
+    "webpack-merge": "^4.1.1",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "jade": "^1.11.0",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.4.5",
+    "mongoose": "^5.0.1",
+    "nodemon": "^1.14.11"
   }
 }
