@@ -17,6 +17,7 @@ export default class BaseComponent {
         // this.checkDomElements(config);
         this.bindHandlersHook();
         this.loadChildComponents(config);
+        this.postInitializeHook();
     }
 
     render() {
@@ -33,7 +34,7 @@ export default class BaseComponent {
 
     bindHandlersHook() {}
 
-    bindEvent(element, eventName,  action) {
+    bindEvent(element, eventName, action) {
         if(element) {
             element.addEventListener(eventName, () => action());
         }
@@ -42,6 +43,8 @@ export default class BaseComponent {
     initializeHook() { 
         // console.log("Component: ", this.config.selector, this.config.params); 
     }
+
+    postInitializeHook() {}
 
     destroyHook() {}
     

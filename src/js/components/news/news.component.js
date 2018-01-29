@@ -4,12 +4,16 @@ import { StorageService } from "../../services/storage.service";
 import { Component } from "../../core/decorators/component.decorator";
 import BaseComponent from "../base.component.js";
 import CarouselComponent from "../carousel/carousel.component";
+import EditorAreaComponent from "../areas/editor-area/editor-area.component";
 
 @Component({
     selector: "fc-news-page",
     template: require("./news.component.html"),
     styles: require("./news.component.scss"),
-    children: [CarouselComponent]
+    children: [
+        CarouselComponent,
+        EditorAreaComponent
+    ]
 })
 export default class NewsComponent extends BaseComponent {
     constructor() {
@@ -23,17 +27,17 @@ export default class NewsComponent extends BaseComponent {
     initializeHook() {
         super.initializeHook();
         
-        this.subscriptions.push(this.config.store.state$
-            .map(state => state.user)
-            .filter(user => Boolean(user) && Boolean(user.apiKey) && this.apiKey !== user.apiKey)
-            .do(user => this.apiKey = user.apiKey)
-            .do(() => this.showNews())
-            .subscribe()
-        );
+        // this.subscriptions.push(this.config.store.state$
+        //     .map(state => state.user)
+        //     .filter(user => Boolean(user) && Boolean(user.apiKey) && this.apiKey !== user.apiKey)
+        //     .do(user => this.apiKey = user.apiKey)
+        //     .do(() => this.showNews())
+        //     .subscribe()
+        // );
     }
 
     destroyHook() {
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
+        // this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
     showNews() {

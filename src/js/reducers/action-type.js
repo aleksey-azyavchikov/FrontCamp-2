@@ -8,5 +8,9 @@ export const ActionType = {
     SetActivePage: "SetActivePage",
 
     // News
-    AddNews: "AddNews"
+    AddNews: "AddNews",
+
+     // SubPage
+     SetActiveSubPage: "SetActiveSubPage",
+
 }

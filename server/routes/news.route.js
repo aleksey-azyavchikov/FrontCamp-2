@@ -18,6 +18,7 @@ router.post('/article', function (request, response) {
         destination.image.data = source.image.data;
         destination.image.contentType = source.image.contentType
     });
+    
     let ArticleSchema = database.shemes.ArticleSchema;
     new ArticleSchema(article).save((error, document) => {
         if (error) request.send("Error");

@@ -11,6 +11,9 @@ import CardComponent from "../card.component";
 export default class CardsShowerComponent extends BaseComponent {
     constructor() {
         super();
+    }
+
+    initializeHook() {
         this.cards = this.config.params.cards;
     }
 }
