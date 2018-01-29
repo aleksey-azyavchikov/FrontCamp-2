@@ -46,7 +46,9 @@ module.exports = {
                     presets: ["env"],
                     plugins: [
                         "dynamic-import-webpack",
-                        "transform-decorators-legacy"
+                        "transform-decorators-legacy",
+                        "transform-class-properties"
+                        
                     ]
                 }
             },

@@ -31,14 +31,16 @@ export class CmForDirective extends BaseDirective {
         let check = Boolean(paramVariableName) ? "true" : "false"; 
         return `
         let result = "";
+        let index = 0;
         for(${expression})
         {
             let html = innerHtml;
             if(${check}) {
                 html = transformParams(html, ${paramVariableName});
             }
-            html = transformExpression(html, { ${forVariableName}: ${forVariableName} });
+            html = transformExpression(html, { ${forVariableName}: ${forVariableName}, index, scope: this });
             result += html;
+            index++;
         }
         return result;`
     }

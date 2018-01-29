@@ -2,7 +2,7 @@ import { ExpressionAnalyzerSingleton } from "../../../decorators/analyzers/conte
 import { BaseExpression } from "./base.expression";
 
 @ExpressionAnalyzerSingleton({
-    pattern: /{{.*}}/g
+    pattern: /{{.*?}}/g
 })
 export class ContentExpression extends BaseExpression {
     constructor() {

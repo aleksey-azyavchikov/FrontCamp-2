@@ -5,13 +5,13 @@ var database = require("../db/database");
 
 /* GET home page. */
 router.get('/', function (request, response) {
-    let ArticleSchema = database.shemes.ArticleSchema;
+    let ArticleSchema = database.schemes.articleSchema;
     ArticleSchema.find({}, function (error, data) {
         error ? response.send(error) : response.send({ articles: data });
     })
 });
 
-router.post('/article', function (request, response) {
+router.post('/', function (request, response) {
     let Article = database.models.Article;
     let article = new Article();
     mapper.mapProperties(request.body, article, (source, destination) => {
@@ -19,7 +19,7 @@ router.post('/article', function (request, response) {
         destination.image.contentType = source.image.contentType
     });
     
-    let ArticleSchema = database.shemes.ArticleSchema;
+    let ArticleSchema = database.schemes.articleSchema;
     new ArticleSchema(article).save((error, document) => {
         if (error) request.send("Error");
     });

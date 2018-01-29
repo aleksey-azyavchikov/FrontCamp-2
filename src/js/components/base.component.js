@@ -7,11 +7,13 @@ export default class BaseComponent {
     constructor() {
     }
 
-    buildComponent(additional) {
+    buildComponent(additional, initialize = true) {
         this.mergeConfigs(this.config, additional);
 
         const config = this.config;
-        this.initializeHook();
+        if(initialize) {
+            this.initializeHook();
+        }
         this.bindHtml(config);
         this.defineDomElementsHook();
         // this.checkDomElements(config);
@@ -22,7 +24,7 @@ export default class BaseComponent {
 
     render() {
         this.destroyChildrenComponents();
-        this.buildComponent({});
+        this.buildComponent({}, false);
     }
 
     bindHtml({ ref, template }) {
@@ -36,7 +38,7 @@ export default class BaseComponent {
 
     bindEvent(element, eventName, action) {
         if(element) {
-            element.addEventListener(eventName, () => action());
+            element.addEventListener(eventName, (event) => action(event));
         }
     }
 

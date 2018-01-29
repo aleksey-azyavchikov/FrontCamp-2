@@ -2,19 +2,24 @@ import { Component } from "../../../core/decorators/component.decorator";
 import BaseComponent from "../../base.component";
 import NavigationComponent from "../../navigation/navigation.component";
 import { SubPageType } from "../../../core/enums/subpage-type.enum";
+import ArchiveComponent from "./archive/archive.component";
+import PreviewComponent from "./preview/preview.component";
 
 @Component({
     selector: "fc-editor-area",
     template: require("./editor-area.component.html"),
     styles: require("./editor-area.component.scss"),
     children: [
-        NavigationComponent
+        NavigationComponent,
+        ArchiveComponent,
+        PreviewComponent
     ]
 })
 export default class EditorAreaComponent extends BaseComponent {
     constructor() {
         super();
         this.subscriptions = [];
+        this.SubPageType = SubPageType;
         this.navigationItems = [
             SubPageType.Archive, 
             SubPageType.Preview

@@ -36,12 +36,4 @@ export default class NavigationComponent extends BaseComponent {
             })
         }
     }
-
-    postInitializeHook() {
-        for (let link of this.domElements.links) {
-            if (link.textContent === this.active) {
-                link.className += " active";
-            }
-        }
-    }
 }

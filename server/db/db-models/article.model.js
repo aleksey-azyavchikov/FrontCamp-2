@@ -23,7 +23,7 @@ class Article {
 
         return {
             name: "Article",
-            collection: "news",
+            collection: "articles",
             mongoseConfig
         }
     }

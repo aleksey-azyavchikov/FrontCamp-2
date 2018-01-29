@@ -2,3 +2,8 @@
      items: this.navigationItems,
      selected: this.activeSubPage
 }"></fc-navigation>
+
+<div cmSwitch="this.activeSubPage">
+    <fc-archive cmCase="this.SubPageType.Archive"></fc-archive>
+    <fc-preview cmCase="this.SubPageType.Preview"></fc-preview>
+</div> 
