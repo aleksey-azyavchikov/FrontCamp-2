@@ -1,17 +1,17 @@
-<div>
+<div class="panel">
     <div class="row">
         <div class="col">
-            <span class="oi oi-plus icon"></span>
+            <span id="{{this.EditorMode.Add}}" class="oi oi-plus icon {{this.mode === this.EditorMode.Add ? 'selected-mode' : '' }}"></span>
         </div>
     </div>
     <div cmIf="this.selected" class="row">
         <div class="col">
-            <span class="oi oi-pencil icon"></span>
+            <span id="{{this.EditorMode.Edit}}" class="oi oi-pencil icon {{this.mode === this.EditorMode.Edit ? 'selected-mode' : '' }}"></span>
         </div>
     </div>
     <div cmIf="this.selected" class="row">
         <div class="col">
-            <span class="oi oi-x icon"></span>
+            <span id="{{this.EditorMode.Delete}}" class="oi oi-x icon {{this.mode === this.EditorMode.Delete ? 'selected-mode' : '' }}"></span>
         </div>
     </div>
 </div>

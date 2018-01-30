@@ -10,6 +10,8 @@ import { cardReducer } from "./js/reducers/card";
 import { pageReducer } from "./js/reducers/page";
 import { newsReducer } from "./js/reducers/news";
 import { subpageReducer } from "./js/reducers/subpage";
+import { articleReducer } from "./js/reducers/article";
+import { editorReducer } from "./js/reducers/editor";
 
 ComponentLoader.getInstance().loadComponent(App, { 
     pref: document.body,
@@ -18,6 +20,8 @@ ComponentLoader.getInstance().loadComponent(App, {
         cards: cardReducer,
         activePage: pageReducer,
         news: newsReducer,
-        activeSubPage: subpageReducer
+        activeSubPage: subpageReducer,
+        selectedArticle: articleReducer,
+        editorModes: editorReducer
     }))
 }); 

@@ -3,7 +3,6 @@ import BaseComponent from "../../base.component";
 import NavigationComponent from "../../navigation/navigation.component";
 import { SubPageType } from "../../../core/enums/subpage-type.enum";
 import ArchiveComponent from "./archive/archive.component";
-import PreviewComponent from "./preview/preview.component";
 
 @Component({
     selector: "fc-editor-area",
@@ -11,8 +10,7 @@ import PreviewComponent from "./preview/preview.component";
     styles: require("./editor-area.component.scss"),
     children: [
         NavigationComponent,
-        ArchiveComponent,
-        PreviewComponent
+        ArchiveComponent
     ]
 })
 export default class EditorAreaComponent extends BaseComponent {
@@ -21,8 +19,7 @@ export default class EditorAreaComponent extends BaseComponent {
         this.subscriptions = [];
         this.SubPageType = SubPageType;
         this.navigationItems = [
-            SubPageType.Archive, 
-            SubPageType.Preview
+            SubPageType.Archive
         ];
         this.activeSubPage = this.navigationItems[0];
     }

@@ -13,4 +13,11 @@ export const ActionType = {
      // SubPage
      SetActiveSubPage: "SetActiveSubPage",
 
+     // Article
+     SelectArticle: "SelectArticle",
+     UnselectArticle: "UnselectArticle",
+
+     // Editor mode
+     SetArchiveEditorMode: "SetArchiveEditorMode"
+
 }

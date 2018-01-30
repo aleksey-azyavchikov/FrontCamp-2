@@ -1,0 +1,27 @@
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Title</th>
+
+            <th cmIf="this.isEnabled()" scope="col">Description</th>
+            <th cmIf="this.isEnabled()" scope="col">Handle</th>
+
+            <th scope="col">Link</th>
+        </tr>
+    </thead>
+    <tbody cmIf="this.articles" cmFor="let article of this.articles">
+        <tr id="{{this.article._id}}" class="article {{this.scope.selected && this.article._id === this.scope.selected._id ? 'selected-row' : ''}}">
+            <th scope="row">{{this.index + 1}}</th>
+            <td>{{this.article.title}}</td>
+
+            <td cmIf="this.isEnabled()">{{this.article.description}}</td>
+            <!-- <td cmIf="this.selected">...</td> -->
+            
+            <td cmIf="this.isEnabled()">{{this.article.publishedAt}}</td>
+            <!-- <td cmIf="this.selected">...</td> -->
+
+            <td><a href="{{this.article.url}}">Link</a></td>
+        </tr>
+    </tbody>
+</table>

@@ -11,6 +11,7 @@ export default class BaseComponent {
         this.mergeConfigs(this.config, additional);
 
         const config = this.config;
+        this.initializeParamsHook();
         if(initialize) {
             this.initializeHook();
         }
@@ -45,6 +46,8 @@ export default class BaseComponent {
     initializeHook() { 
         // console.log("Component: ", this.config.selector, this.config.params); 
     }
+
+    initializeParamsHook() {}
 
     postInitializeHook() {}
 

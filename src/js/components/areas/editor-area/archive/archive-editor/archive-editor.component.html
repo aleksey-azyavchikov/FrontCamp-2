@@ -1,0 +1,25 @@
+<form>
+    <div class="form-group">
+        <label for="inputTitle">Title</label>
+        <input type="text" value="{{this.selected ? this.selected.title : ''}}" class="form-control" id="inputTitle" placeholder="Title">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputSource">Source</label>
+            <input type="url" value="{{this.selected ? this.selected.url : ''}}" class="form-control"  id="inputSource" placeholder="Source">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputImageUrl">Image url</label>
+            <input type="url" value="{{this.selected ? this.selected.urlToImage : ''}}" class="form-control" id="inputImageUrl" placeholder="Image url">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <textarea name="description" class="form-control" id="inputDescription" placeholder="Description">{{this.selected ? this.selected.description : ''}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="inputAuthor">Author</label>
+        <input type="text" value="{{this.selected ? this.selected.author : ''}}" class="form-control" id="inputAuthor" placeholder="Author">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

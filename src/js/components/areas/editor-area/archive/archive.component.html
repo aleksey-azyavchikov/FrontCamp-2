@@ -1,31 +1,15 @@
 <div class="archive">
     <div class="row justify-content-center">
-        <div class="col-11">
-            <table class="table table-bordered table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">№</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Handle</th>
-                        <th scope="col">Link</th>
-                    </tr>
-                </thead>
-                <tbody cmIf="this.articles" cmFor="let article of this.articles">
-                    <tr id="{{this.article._id}}" class="article {{this.scope.selected && this.article._id === this.scope.selected._id ? 'selected' : ''}}">
-                        <th scope="row">{{this.index + 1}}</th>
-                        <td>{{this.article.title}}</td>
-                        <td>{{this.article.description}}</td>
-                        <td>{{this.article.publishedAt}}</td>
-                        <td>
-                            <a href="{{this.article.url}}">Link</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="{{this.isFullTable() ? 'col-11' : 'col-6' }}">
+            <fc-archive-table cmParams="{articles: this.articles, selected: this.selected, mode: this.mode}"></fc-archive-table>
         </div>
         <div class="col-1">
-            <fc-archive-panel cmParams="{selected: this.selected}"></fc-archive-panel>
+            <fc-archive-panel cmParams="{mode: this.mode, selected: this.selected}"></fc-archive-panel>
+        </div>
+        <div cmIf="this.isEditorEnable()" class="col-5">
+            <div class="container">
+                <fc-archive-editor cmParams="{mode: this.mode, selected: this.selected}"></fc-archive-editor>
+            </div>
         </div>
     </div>
 </div>

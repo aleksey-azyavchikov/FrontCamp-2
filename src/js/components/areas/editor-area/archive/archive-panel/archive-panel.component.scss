@@ -1,4 +1,12 @@
-.icon:hover {
+.icon:hover, .selected-mode {
     color: rgb(134, 217, 230);
     cursor: pointer;
+}
+
+.panel div, div.panel {
+    pointer-events: none
+}
+
+.panel span {
+    pointer-events: auto
 }
