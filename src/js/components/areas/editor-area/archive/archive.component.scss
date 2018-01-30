@@ -6,6 +6,6 @@ tr.article  {
     cursor: pointer
 }
 
-tr.article:hover, .selected  {
-    background: rgb(134, 217, 230)
+.selected  {
+    background: rgb(134, 217, 230) !important;
 }

@@ -3,12 +3,15 @@ import { Component } from "../../../../core/decorators/component.decorator";
 import { ApiInvoker } from "../../../../core/api";
 import { Endpoints } from "../../../../core/endpoints";
 import { TemplateHelpers } from "../../../../helpers/templates/template.helper";
+import ArchivePanelComponent from "./archive-panel/archive-panel.component";
 
 @Component({
     selector: "fc-archive",
     template: require("./archive.component.html"),
     styles: require("./archive.component.scss"),
-    children: []
+    children: [
+        ArchivePanelComponent
+    ]
 })
 export default class ArchiveComponent extends BaseComponent {
     constructor() {
@@ -35,8 +38,8 @@ export default class ArchiveComponent extends BaseComponent {
 
     bindHandlersHook() {
         this.bindEvent(this.domElements.body, "click", (event) => {
-            this.selected = this.articles.find(article => article._id === event.target.parentNode.id);
-            console.log(this.selected);
+            let finded = this.articles.find(article => article._id === event.target.parentNode.id);
+            this.selected = finded === this.selected ? null : finded;
             this.render();
         })
     }
