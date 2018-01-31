@@ -5,14 +5,14 @@ export const articleReducer = (state = { articles: [], selected: null }, action)
     switch(action.type) {
         case ActionType.SelectArticle: {
             newState = {
-                selected: { ...action.payload },
+                selected: action.payload,
                 articles: newState.articles
             }
         } break;
         case ActionType.UpdateArticles: {
             newState = {
                 selected: newState.selected,
-                articles: [...action.payload]
+                articles: action.payload
             }
         } break;
         default: break;

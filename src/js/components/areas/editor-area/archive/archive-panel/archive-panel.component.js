@@ -21,10 +21,13 @@ export default class ArchivePanelComponent extends BaseComponent {
         this.EditorMode = EditorMode;
     }
 
-    initializeHook() {
+    initializeParamsHook() {
+        console.log(this.config.params);
         this.selected = this.config.params.selected;
         this.mode = this.config.params.mode;
+    }
 
+    initializeHook() {
         let commandService = CommandService.getInstance();
         this.subscriptions.push(commandService.removeArticle
             .do(() => this.removeArticleHttp(this.selected._id))
