@@ -18,8 +18,16 @@
         <textarea name="description" class="form-control" id="inputDescription" placeholder="Description">{{this.selected ? this.selected.description : ''}}</textarea>
     </div>
     <div class="form-group">
+        <img id="image" class="img-thumbnail" name="image">
+    </div>
+    <div class="form-group">
+        <label for="fileInput">Example file input</label>
+        <input type="file" class="form-control-file" id="fileInput">
+    </div>
+    <div class="form-group">
         <label for="inputAuthor">Author</label>
         <input type="text" value="{{this.selected ? this.selected.author : ''}}" class="form-control" id="inputAuthor" placeholder="Author">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button id="submit" type="button" class="btn btn-primary">Submit</button>
+    <button id="cancel" type="button" class="btn btn-secondary">Cancel</button>
 </form>

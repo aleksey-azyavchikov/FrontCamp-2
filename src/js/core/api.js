@@ -20,11 +20,21 @@ export class ApiInvoker
     }
 
     invokePost(endpointUrl, requestInit = {}) {
-        return this.invoke(endpointUrl, requestInit, { method: "POST", mode: "cors" });
+        let init = { 
+            method: "POST", 
+            mode: "cors",
+            headers: { "Content-Type": "application/json" }
+        };
+        return this.invoke(endpointUrl, requestInit, init);
     }
 
     invokePut(endpointUrl, requestInit = {}) {
-        return this.invoke(endpointUrl, requestInit, { method: "PUT", mode: "cors" });
+        let init = { 
+            method: "PUT", 
+            mode: "cors",
+            headers: { "Content-Type": "application/json" }
+        };
+        return this.invoke(endpointUrl, requestInit, init);
     }
 
     invokeDelete(endpointUrl, requestInit = {}) {
@@ -32,7 +42,7 @@ export class ApiInvoker
     }
 
     invoke(endpointUrl, requestInit = {}, init = {}) {
-        Object(init, requestInit)
+        Object.assign(init, requestInit);
         let request = new Request(endpointUrl);
         return new Promise((resolve, reject) => { 
             fetch(request, init)

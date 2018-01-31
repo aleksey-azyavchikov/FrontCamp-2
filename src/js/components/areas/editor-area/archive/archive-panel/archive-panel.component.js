@@ -23,16 +23,20 @@ export default class ArchivePanelComponent extends BaseComponent {
     }
 
     defineDomElementsHook() {
-        let defineElements = {
-            panel: this.config.ref.querySelector(".panel")
+        let domElements = {
+            panel: this.config.ref.querySelector(".panel"),
+            removeItemModal: $("#removeItemModal")
         };
         
-        this.defineElements = defineElements;
+        this.domElements = domElements;
     }
 
     bindHandlersHook() {
-        this.bindEvent(this.defineElements.panel, "click", (event) => { 
+        this.bindEvent(this.domElements.panel, "click", (event) => { 
             console.log(event);
+            if(event.target.id === EditorMode.Delete) {
+                this.domElements.removeItemModal.modal("show");
+            }
             this.dispatchMode(event.target.id);
         });
     }
