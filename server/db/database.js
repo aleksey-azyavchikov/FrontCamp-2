@@ -27,7 +27,7 @@ class DatabaseBuilder {
 
     configureArticle() {
         let config = this._models.Article.configMongoose();
-        let article = new mongoose.Schema(config.mongoseConfig, { collection: config.collection });
+        let article = new mongoose.Schema(config.mongoseConfig, { collection: config.collection, versionKey: false });
         let articleSchema = mongoose.model(config.name, article, config.collection);
         Object.assign(this._schemes, { articleSchema });
         return this;

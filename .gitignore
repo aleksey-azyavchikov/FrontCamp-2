@@ -2,3 +2,4 @@
 /dist
 /db/mongodb
 /db/exports
+/.vscode

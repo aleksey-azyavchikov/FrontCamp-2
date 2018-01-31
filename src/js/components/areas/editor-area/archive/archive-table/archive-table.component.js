@@ -2,7 +2,6 @@ import { Component } from "../../../../../core/decorators/component.decorator";
 import BaseComponent from "../../../../base.component";
 import { ActionType } from "../../../../../reducers/action-type";
 import { EditorMode } from "../../../../../core/enums/editor-mode.enum";
-import { Boolean } from "tcomb";
 
 @Component({
     selector: "fc-archive-table",
@@ -52,9 +51,7 @@ export default class ArchiveTableComponent extends BaseComponent {
     }
 
     isEnabled() {
-        console.log("mode", this.mode);
         let result = this.mode === EditorMode.None || this.mode === EditorMode.Delete;
-        console.log("re", result);
         return result; 
     }
 }

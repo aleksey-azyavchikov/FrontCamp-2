@@ -6,8 +6,8 @@ class Article {
         this.description = "";
         this.url = "";
         this.urlToImage = "";
-        this.publishedAt = "";
-        this.image = { data: Buffer, contentType: String };
+        this.publishedAt = (new Date()).toISOString();
+        this.image = { data: null, contentType: null };
     }
 
     static configMongoose() {
@@ -18,7 +18,7 @@ class Article {
             url: String,
             urlToImage: String,
             publishedAt: String,
-            image: { data: Buffer , contentType: String }
+            image: { data: String , contentType: String }
         };
 
         return {

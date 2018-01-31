@@ -1,7 +1,7 @@
 import { Component } from "../../../core/decorators/component.decorator";
 import BaseComponent from "../../base.component";
 import { ActionType } from "../../../reducers/action-type";
-import { PageType } from "../../../core/enums/page-type.enum";
+import { EditorMode } from "../../../core/enums/editor-mode.enum";
 
 @Component({
     selector: "fc-remove-item-popup",
@@ -17,6 +17,7 @@ export default class RemoveItemPopupComponent extends BaseComponent {
         const { ref } = this.config;
         let domElements = {
             yesButton: ref.querySelector("#yesButton"),
+            noButton: ref.querySelector("#noButton"),
             removeItemModal: $("#removeItemModal")
         };
         this.domElements = domElements;
@@ -25,7 +26,18 @@ export default class RemoveItemPopupComponent extends BaseComponent {
     bindHandlersHook() {
         this.bindEvent(this.domElements.yesButton, "click", () => {
             this.domElements.removeItemModal.modal("hide");
+            this.dispatchMode(EditorMode.None);
+        });
+
+        this.bindEvent(this.domElements.noButton, "click", () => {
+            this.dispatchMode(EditorMode.None);
         });
     }
 
+    dispatchMode(mode) {
+        this.config.store.dispatch({ 
+            type: ActionType.SetArchiveEditorMode,
+            payload: mode
+        });
+    }
 }

@@ -1,13 +1,15 @@
 
 class Mapper {
-    static mapProperties(source, destination, handler) {
+    static mapProperties(source, destination, handler, ignore = () => true) {
         if (!source) return;
+        
         for (let index in source) {
             if (!source.hasOwnProperty(index)) continue;
             let objectIndex = this.firstLetterToLowerCase(index);
-            if (typeof source[index] === "string" ||
+            let flag = ignore(index);
+            if ((typeof source[index] === "string" ||
                 typeof source[index] === "number" ||
-                typeof source[index] === "boolean") {
+                typeof source[index] === "boolean") && flag) {
                 destination[objectIndex] = source[index];
             }
         }

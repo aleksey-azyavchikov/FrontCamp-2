@@ -14,7 +14,8 @@
     "db:run:both": "npm run db:run:server && npm run db:run:client",
     "db:export": "start cmd /c .\\scripts\\export-collections.cmd",
     "db:import": "start .\\scripts\\import-db.bat",
-    "server:run": "nodemon ./server/bin/www"
+    "server:run": "nodemon ./server/bin/www",
+    "server:run:debug": "nodemon --debug ./server/bin/www"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

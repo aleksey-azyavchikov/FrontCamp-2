@@ -5,6 +5,7 @@ import defaultImage from "../../../../../../content/images/default-thumbnail.jpg
 import { ApiInvoker } from "../../../../../core/api";
 import { Endpoints } from "../../../../../core/endpoints";
 import { Article } from "../../../../../models/article";
+import { ActionType } from "../../../../../reducers/action-type";
 
 @Component({
     selector: "fc-archive-editor",
@@ -55,7 +56,14 @@ export default class ArchiveEditorComponent extends BaseComponent {
     }
 
     postInitializeHook() {
-        this.domElements.image.src = this.isAddMode ? defaultImage : this.selected.urlToImage;
+        if(!this.isNoImage()) {
+            this.domElements.image.src = this.isAddMode ? defaultImage : this.getImageData(this.selected);
+        }
+    }
+
+    getImageData(selected) {
+        let result = selected && selected.image && selected.image.data ? selected.image.data.toString("base64") : selected.urlToImage;
+        return result;
     }
 
     loadImage(event) {
@@ -65,13 +73,7 @@ export default class ArchiveEditorComponent extends BaseComponent {
             this.image.data = loadEvent.target.result;
             this.domElements.image.setAttribute("src", this.image.data);
         }
-        fileReader.readAsDataURL(this.image.url);
-    }
-
-    submit() {
-        let apiInvoker = ApiInvoker.getInstance();
-        let article = this.getArticle();
-        apiInvoker.invokePost(Endpoints.Articles(), { body: JSON.stringify(article) });
+        fileReader.readAsDataURL(this.image.path);
     }
 
     getArticle() {
@@ -81,13 +83,13 @@ export default class ArchiveEditorComponent extends BaseComponent {
             author: this.domElements.authorInput.value,
             url: this.domElements.sourceInput.value,
             urlToImage: this.domElements.urlImageInput.value,
-            image: this.getImageData(),
+            image: this.getImageDataForRequest(),
          });
          console.log(article);
          return article;
     }
 
-    getImageData() {
+    getImageDataForRequest() {
         let image = {
             data: this.isAddMode && this.image && this.image.data || null,
             contentType: this.isAddMode && this.image && this.image.path && this.image.path.type || null
@@ -95,7 +97,34 @@ export default class ArchiveEditorComponent extends BaseComponent {
         return image;
     }
 
+    submit() {
+        let apiInvoker = ApiInvoker.getInstance();
+        let article = this.getArticle();
+        let call = this.isAddMode 
+            ? apiInvoker.invokePost(Endpoints.Articles(), { body: JSON.stringify(article) })
+            : apiInvoker.invokePut(Endpoints.Articles({ id: this.selected._id }), { body: JSON.stringify(article) });
+        
+        call.then(_ => this.dispatchMode(EditorMode.None));
+    }
+
     cancel() {
 
+    }
+
+    isNoImage() {
+        let result = !this.isAddMode && 
+            (this.selected.urlToImage === null || 
+            this.selected.urlToImage === "") &&
+            (this.selected.image === undefined ||
+            this.selected.image.data === null);
+
+        return result;
+    }
+
+    dispatchMode(mode) {
+        this.config.store.dispatch({ 
+            type: ActionType.SetArchiveEditorMode,
+            payload: mode
+        });
     }
 }

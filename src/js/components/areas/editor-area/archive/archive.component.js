@@ -43,7 +43,7 @@ export default class ArchiveComponent extends BaseComponent {
         );
 
         this.subscriptions.push(this.config.store.state$
-            .map(state => { console.log(state); return state.editorModes.archiveMode })
+            .map(state => state.editorModes.archiveMode)
             .filter(mode => this.mode !== mode)
             .do(mode => this.mode = mode)
             .do(() => this.render())
