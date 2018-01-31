@@ -42,6 +42,13 @@ export class TemplateHelpers {
         return carouselTemplate;
     }
 
+    formatArticles(articles) {
+        return articles.map(article => {
+             article.publishedAt = this.getActualDate(article.publishedAt);
+             return article;
+        });
+    }
+
     getActualDate(str) {
         let result = str === null 
             ? ""

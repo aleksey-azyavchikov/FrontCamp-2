@@ -6,6 +6,7 @@ import { ApiInvoker } from "../../../../../core/api";
 import { Endpoints } from "../../../../../core/endpoints";
 import { Article } from "../../../../../models/article";
 import { ActionType } from "../../../../../reducers/action-type";
+import { CommandService } from "../../../../../services/command.service";
 
 @Component({
     selector: "fc-archive-editor",
@@ -100,15 +101,18 @@ export default class ArchiveEditorComponent extends BaseComponent {
     submit() {
         let apiInvoker = ApiInvoker.getInstance();
         let article = this.getArticle();
-        let call = this.isAddMode 
+        let httpCall = this.isAddMode 
             ? apiInvoker.invokePost(Endpoints.Articles(), { body: JSON.stringify(article) })
             : apiInvoker.invokePut(Endpoints.Articles({ id: this.selected._id }), { body: JSON.stringify(article) });
         
-        call.then(_ => this.dispatchMode(EditorMode.None));
+        let commandService = CommandService.getInstance();
+        httpCall
+            .then(() => this.dispatchMode(EditorMode.None))
+            .then(() => commandService.updateArticles.next());
     }
 
     cancel() {
-
+        this.dispatchMode(EditorMode.None);
     }
 
     isNoImage() {

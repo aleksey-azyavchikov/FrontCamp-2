@@ -1,13 +1,19 @@
 import { ActionType } from "./action-type";
 
-export const articleReducer = (state = null, action) => {
+export const articleReducer = (state = { articles: [], selected: null }, action) => {
     let newState = state;
     switch(action.type) {
         case ActionType.SelectArticle: {
-            newState = action.payload;
+            newState = {
+                selected: { ...action.payload },
+                articles: newState.articles
+            }
         } break;
-        case ActionType.UnselectArticle: {
-            newState = null;
+        case ActionType.UpdateArticles: {
+            newState = {
+                selected: newState.selected,
+                articles: [...action.payload]
+            }
         } break;
         default: break;
     }

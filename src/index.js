@@ -21,7 +21,7 @@ ComponentLoader.getInstance().loadComponent(App, {
         activePage: pageReducer,
         news: newsReducer,
         activeSubPage: subpageReducer,
-        selectedArticle: articleReducer,
+        articleModel: articleReducer,
         editorModes: editorReducer
     }))
 }); 

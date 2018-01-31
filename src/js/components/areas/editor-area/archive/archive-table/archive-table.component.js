@@ -31,9 +31,8 @@ export default class ArchiveTableComponent extends BaseComponent {
     bindHandlersHook() {
         this.bindEvent(this.domElements.body, "click", (event) => {
             let finded = this.articles.find(article => article._id === event.target.parentNode.id);
-            this.selected = finded === this.selected ? null : finded;
+            this.selected = this.selected &&  this.selected._id === finded._id ? null : finded;
             this.dispatch(this.selected);
-            this.render();
         });
     }
 

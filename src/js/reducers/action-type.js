@@ -15,7 +15,7 @@ export const ActionType = {
 
      // Article
      SelectArticle: "SelectArticle",
-     UnselectArticle: "UnselectArticle",
+     UpdateArticles: "UpdateArticles",
 
      // Editor mode
      SetArchiveEditorMode: "SetArchiveEditorMode"
