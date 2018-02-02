@@ -30,9 +30,8 @@ router.post('/', (request, response) => {
 
     let ArticleSchema = database.schemes.articleSchema;
     new ArticleSchema(article).save((error, document) => {
-        if (error) response.json("Error");
+        error ? response.json("Error") : response.json('ok');
     });
-    response.json('ok');
 });
 
 router.put('/:id', (request, response) => {

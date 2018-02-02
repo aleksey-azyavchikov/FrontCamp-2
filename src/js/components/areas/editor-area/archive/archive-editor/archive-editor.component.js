@@ -92,8 +92,8 @@ export default class ArchiveEditorComponent extends BaseComponent {
 
     getImageDataForRequest() {
         let image = {
-            data: this.isAddMode && this.image && this.image.data || null,
-            contentType: this.isAddMode && this.image && this.image.path && this.image.path.type || null
+            data: this.domElements.image.getAttribute("src"),
+            contentType: ""
         }
         return image;
     }

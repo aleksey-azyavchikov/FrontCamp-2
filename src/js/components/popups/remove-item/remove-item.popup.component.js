@@ -30,6 +30,7 @@ export default class RemoveItemPopupComponent extends BaseComponent {
             commandService.removeArticle.next();
             this.domElements.removeItemModal.modal("hide");
             this.dispatchMode(EditorMode.None);
+            this.dispatchSelectedArticle(null);
         });
 
         this.bindEvent(this.domElements.noButton, "click", () => {
@@ -41,6 +42,13 @@ export default class RemoveItemPopupComponent extends BaseComponent {
         this.config.store.dispatch({ 
             type: ActionType.SetArchiveEditorMode,
             payload: mode
+        });
+    }
+
+    dispatchSelectedArticle(article) {
+        this.config.store.dispatch({ 
+            type: ActionType.SelectArticle,
+            payload: article
         });
     }
 }

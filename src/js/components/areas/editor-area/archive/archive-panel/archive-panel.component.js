@@ -51,8 +51,7 @@ export default class ArchivePanelComponent extends BaseComponent {
 
     bindHandlersHook() {
         this.bindEvent(this.domElements.panel, "click", (event) => { 
-            this.processDeleteAction(event.target.id);
-            this.dispatchMode(event.target.id);
+            this.processActions(event.target.id);
         });
     }
 
@@ -63,10 +62,15 @@ export default class ArchivePanelComponent extends BaseComponent {
         });
     }
 
-    processDeleteAction(mode) {
-        if(mode === EditorMode.Delete) {
-            this.domElements.removeItemModal.modal("show");
-        }
+    processDeleteAction() {
+        this.domElements.removeItemModal.modal("show");
+    }
+
+    processEditAction() {
+        this.config.store.dispatch({ 
+            type: ActionType.SetArchiveEditorMode,
+            payload: mode
+        });
     }
 
     removeArticleHttp(id) {
@@ -74,5 +78,19 @@ export default class ArchivePanelComponent extends BaseComponent {
         let apiInvoker = ApiInvoker.getInstance();
         apiInvoker.invokeDelete(Endpoints.Articles({ id: id }))
             .then(() => commandService.updateArticles.next());
+    }
+
+    processActions(mode) {
+        switch(mode) {
+            case EditorMode.Add: {
+            } break;
+            case EditorMode.Edit: {
+            } break;
+            case EditorMode.Delete: {
+                this.processDeleteAction();
+            } break;
+            default: break;
+        }
+        this.dispatchMode(mode);
     }
 }
