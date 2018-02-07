@@ -41,21 +41,14 @@ app.use((request, response, next) => {
     next();
 })
 
-// app.use((request, response, next) => {
-//     database.connect(appConfig.dbName);
-//     let afterResponse = () => {
-//         // any other clean ups
-//         mongoose.connection.close(() => console.log('Mongoose connection disconnected'));
-//     }
-
-//     // hooks to execute after response
-//     response.on('finish', afterResponse);
-//     response.on('close', afterResponse);
-//     next();
-// })
 
 app.use('/', index);
 app.use('/news', news);
+
+// Go to Welcome page.
+app.get('*', function(req, res) {
+    res.redirect('/');
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
