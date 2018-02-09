@@ -25,13 +25,6 @@ export default class NewsComponent extends BaseComponent {
     }
 
     initializeHook() {
-        // this.subscriptions.push(this.config.store.state$
-        //     .map(state => state.user)
-        //     .filter(user => Boolean(user) && Boolean(user.apiKey) && this.apiKey !== user.apiKey)
-        //     .do(user => this.apiKey = user.apiKey)
-        //     .do(() => this.showNews())
-        //     .subscribe()
-        // );
     }
 
     destroyHook() {

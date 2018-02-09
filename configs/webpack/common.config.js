@@ -10,7 +10,7 @@ module.exports = {
     entry: {
         polyfills: ["babel-polyfill"],
         libraries: ["jquery", "bootstrap", "rxjs"],
-        app: ["./index.js"],
+        app: ["./native-app/index.js"],
     },
     resolve: {
         extensions: ['.js']
@@ -32,7 +32,8 @@ module.exports = {
             minChunkSize: 1000
         }),
         new HtmlWebpackPlugin({
-            template: "index.html",
+            template: "./native-app/index.html",
+
         }),
         new ExtractTextPlugin("styles.bundle.css")
     ],
@@ -48,7 +49,8 @@ module.exports = {
                         "dynamic-import-webpack",
                         "transform-decorators-legacy",
                         "transform-class-properties",
-                        "transform-object-rest-spread"
+                        "transform-object-rest-spread",
+                        "react-html-attrs"
                     ]
                 }
             },

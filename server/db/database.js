@@ -34,7 +34,7 @@ class DatabaseBuilder {
     }
 
     connect(dbName = "") {
-        mongoose.connect(appConfig.dbRemoteConnection(dbName), (error) => {
+        mongoose.connect(appConfig.dbConnection(dbName), (error) => {
             Boolean(error)
                 ? console.log('connection error with db', dbName, error)
                 : console.log('connection successful with db');
