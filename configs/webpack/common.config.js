@@ -10,7 +10,7 @@ module.exports = {
     entry: {
         polyfills: ["babel-polyfill"],
         libraries: ["jquery", "bootstrap", "rxjs"],
-        app: ["./native-app/index.js"],
+        app: ["./native-app/index.js", "./react-app/index.js"],
     },
     resolve: {
         extensions: ['.js']
@@ -25,7 +25,9 @@ module.exports = {
             jQuery: "jquery",
             Popper: ["popper.js", "default"],
             popper: ["popper.js", "default"],
-            Rx: "rxjs/Rx"
+            Rx: "rxjs/Rx",
+            React: "react",
+            ReactDOM: "react-dom"
         }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 5,
@@ -44,7 +46,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader",
                 query: {
-                    presets: ["env"],
+                    presets: ["env", "react"],
                     plugins: [
                         "dynamic-import-webpack",
                         "transform-decorators-legacy",
