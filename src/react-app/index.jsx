@@ -1,7 +1,13 @@
 import "./index.scss";
 import { Layout } from "./components/layout/layout.component";
 import { HashRouter } from "react-router-dom"
-import { Redux } from "react-re"
+import { Redux, Provider } from "react-redux";
+import { PropTypes } from "prop-types";
+import { createStore, combineReducers } from "redux";
+
+let store = createStore(combineReducers({
+
+}));
 
 class Root extends React.Component {
     constructor() {
@@ -11,7 +17,9 @@ class Root extends React.Component {
     render() {
         return (
             <HashRouter>
-                <Layout store={createStore()}/>
+                <Provider store={store}>
+                    <Layout/>
+                </Provider>
             </HashRouter>
         );
     }
