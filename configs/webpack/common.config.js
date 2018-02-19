@@ -10,10 +10,10 @@ module.exports = {
     entry: {
         polyfills: ["babel-polyfill"],
         libraries: ["jquery", "bootstrap", "rxjs"],
-        app: ["./native-app/index.js", "./react-app/index.js"],
+        app: ["./react-app/index.jsx"],
     },
     resolve: {
-        extensions: ['.js']
+        extensions: [".js", ".jsx"]
     },
     plugins:[
         new webpack.optimize.CommonsChunkPlugin({
@@ -42,7 +42,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx$/,
                 exclude: /node_modules/,
                 loader: "babel-loader",
                 query: {
@@ -52,7 +52,22 @@ module.exports = {
                         "transform-decorators-legacy",
                         "transform-class-properties",
                         "transform-object-rest-spread",
-                        "react-html-attrs"
+                        "react-html-attrs",
+                        "react-hot-loader/babel"
+                    ]
+                }
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                query: {
+                    presets: ["env"],
+                    plugins: [
+                        "dynamic-import-webpack",
+                        "transform-decorators-legacy",
+                        "transform-class-properties",
+                        "transform-object-rest-spread",
                     ]
                 }
             },
