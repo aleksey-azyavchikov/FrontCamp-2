@@ -1,7 +1,7 @@
-
 import { Header } from "../header/header.component";
 import { PageLoader } from "../page-loader/page-loader.component";
-import { Navigation } from "../navigation/navigation.component";
+import { Login } from "../login/login.component";
+import { Router } from "react-router-dom";
 
 export class Layout extends React.Component {
     constructor() {
@@ -12,8 +12,8 @@ export class Layout extends React.Component {
         return (
             <div>
                 <Header/>
-                <Navigation/>
                 <PageLoader/>
+                <Router path="/login" component={Login} />
             </div>
         );
     }

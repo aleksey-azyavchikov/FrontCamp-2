@@ -1,5 +1,6 @@
 {
     "parser": "babel-eslint",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "env": {
         "browser": true,
         "commonjs": true,
@@ -10,9 +11,10 @@
     "globals": {
         "Rx": true
     },
+    "plugins": ["react"],
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": false
+            "jsx": true
         },
         "sourceType": "module"
     },
@@ -23,6 +25,10 @@
         "no-unreachable": "warn",
         "no-unused-vars": "warn",
         "constructor-super": "warn",
-        "valid-typeof": "warn"
+        "valid-typeof": "warn",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/react-in-jsx-scope": 0,
+        "quotes": "error"
     }
 }

@@ -8,7 +8,6 @@ export class PageLoader extends React.Component {
         return (
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/login" component={Login} />
                 <Route path="/news" component={News} />
             </Switch>
         );
