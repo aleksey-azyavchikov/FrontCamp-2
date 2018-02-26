@@ -1,20 +1,13 @@
-import { Header } from "../header/header.component";
-import { PageLoader } from "../page-loader/page-loader.component";
-import { Login } from "../login/login.component";
-import { Router } from "react-router-dom";
 
-export class Layout extends React.Component {
-    constructor() {
-        super();
-    }
+import { Route, Switch } from "react-router-dom";
+import { Login } from "./login/login.component";
+import { Main } from "./main/main.component";
 
-    render() {
-        return (
-            <div>
-                <Header/>
-                <PageLoader/>
-                <Router path="/login" component={Login} />
-            </div>
-        );
-    }
-}
+export const Layout = () => (
+    <div>
+        <Switch>
+            <Route path="/" component={Main} />
+            <Route exact path="/login" component={Login} />
+        </Switch>
+    </div>
+);      

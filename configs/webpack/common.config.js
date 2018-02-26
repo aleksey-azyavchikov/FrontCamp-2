@@ -1,16 +1,28 @@
 const webpack = require("webpack");
-const path = require("path");
+const { resolve } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const precss = require("precss");
 const autoprefixer = require("autoprefixer");
 
+const ROOT = resolve(__dirname);
+const SRC = resolve(ROOT, "../../src");
+
+const { NODE_ENV = "development" } = process.env;
+
+const onlyIn = env => plugin => NODE_ENV.trim() === env ? plugin : null 
+const onlyInDev = onlyIn("development");
+const onlyInProd = onlyIn("production");
+
 module.exports = {
-    context: path.resolve(__dirname, "../../src"),
+    context: SRC,
     entry: {
+        app: [
+            onlyInDev("react-hot-loader/patch"),
+            "./react-app/index.jsx"
+        ].filter(Boolean),
         polyfills: ["babel-polyfill"],
         libraries: ["jquery", "bootstrap", "rxjs"],
-        app: ["./react-app/index.jsx"],
     },
     resolve: {
         extensions: [".js", ".jsx"]
@@ -26,8 +38,7 @@ module.exports = {
             Popper: ["popper.js", "default"],
             popper: ["popper.js", "default"],
             Rx: "rxjs/Rx",
-            React: "react",
-            ReactDOM: "react-dom"
+            React: "react"
         }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 5,

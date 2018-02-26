@@ -1,30 +1,34 @@
 import "./index.scss";
+import ReactDOM from "react-dom";
 import { Layout } from "./components/layout/layout.component";
-import { HashRouter } from "react-router-dom"
-import { Redux, Provider } from "react-redux";
-import { PropTypes } from "prop-types";
+import { HashRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
+import { AppContainer } from "react-hot-loader";
 
-let store = createStore(combineReducers({
-
-}));
-
-class Root extends React.Component {
-    constructor() {
-        super();
-    }
-
-    render() {
-        return (
-            <HashRouter>
-                <Provider store={store}>
-                    <Layout/>
-                </Provider>
-            </HashRouter>
-        );
-    }
-}
+const store = createStore(
+    combineReducers({
+        app: () => ({})
+    })
+);
 
 const app = document.getElementById("react-app");
 
-ReactDOM.render(<Root />, app);
+const renderApp = () => {
+    ReactDOM.render(
+        <AppContainer>
+            <Provider store={store}>
+                <Router>
+                    <Layout/>
+                </Router>
+            </Provider>
+        </AppContainer>,
+        app
+    );
+}
+
+renderApp();
+
+if(module.hot) {
+    module.hot.accept("./components/layout/layout.component", renderApp);
+}

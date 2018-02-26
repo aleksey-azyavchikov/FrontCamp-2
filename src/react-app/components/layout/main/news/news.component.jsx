@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import React from "react";
 
 export class News extends React.Component {
     render() {

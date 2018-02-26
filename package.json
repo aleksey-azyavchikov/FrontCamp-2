@@ -6,7 +6,7 @@
     "ui:build:prod": "webpack --config configs/webpack/prod.config.js",
     "ui:watch:dev": "npm run ui:build:dev --watch",
     "ui:watch:prod": "npm run ui:build:prod --watch",
-    "ui:run:dev": "webpack-dev-server --config configs/webpack/dev.config.js",
+    "ui:run:dev": "SET NODE_ENV=development && webpack-dev-server --config configs/webpack/dev.config.js",
     "ui:run:prod": "webpack-dev-server --config configs/webpack/prod.config.js --open",
     "db:setup": "start .\\scripts\\setup-and-run.bat",
     "db:run:server": "start cmd /c .\\scripts\\run-db-server.cmd",
