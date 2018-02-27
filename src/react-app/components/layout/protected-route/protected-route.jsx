@@ -1,11 +1,13 @@
 
 import { Route, Redirect } from "react-router-dom";
-import { AuthenticationService } from "../../../../core/services/authentication.service";
+import { connect } from "react-redux";
 
-export const ProtectedRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={ props => AuthenticationService.i().isLogin 
+let ProtectedRouteInner = ({ component: Component, ...rest }) => {
+    return <Route {...rest} render={props => rest.isAuthorized
         ?  (<Component {...props}/>)
-        :  (<Redirect to={{ pathname: "/login", state: { from: props.location }}} />)
+        :  <Redirect to={{ pathname: "/login", state: { from: props.location }}} />
     }>
     </Route>
-);
+};
+
+export const ProtectedRoute = connect((state) => ({ isAuthorized: state.loginState.isAuthorized }), null)(ProtectedRouteInner);

@@ -2,13 +2,18 @@ import "./index.scss";
 import ReactDOM from "react-dom";
 import { Layout } from "./components/layout/layout.component";
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { AppContainer } from "react-hot-loader";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+import { loginStateReducer } from "./components/layout/login/login.reducer";
 
 const store = createStore(
     combineReducers({
-        app: () => ({})
-    })
+        loginState: loginStateReducer
+    }),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(thunk, logger)
 );
 
 const renderApp = (Component) => {
