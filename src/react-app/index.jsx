@@ -1,7 +1,6 @@
 import "./index.scss";
 import ReactDOM from "react-dom";
 import { Layout } from "./components/layout/layout.component";
-import { HashRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { AppContainer } from "react-hot-loader";
@@ -12,23 +11,21 @@ const store = createStore(
     })
 );
 
-const app = document.getElementById("react-app");
-
-const renderApp = () => {
+const renderApp = (Component) => {
     ReactDOM.render(
         <AppContainer>
             <Provider store={store}>
-                <Router>
-                    <Layout/>
-                </Router>
+                <Component/>
             </Provider>
         </AppContainer>,
-        app
+        document.getElementById("react-app")
     );
 }
 
-renderApp();
+renderApp(Layout);
 
 if(module.hot) {
-    module.hot.accept("./components/layout/layout.component", renderApp);
+    module.hot.accept("./components/layout/layout.component", (Layout) => { 
+        renderApp(Layout)
+    });
 }

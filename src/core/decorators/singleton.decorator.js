@@ -1,7 +1,7 @@
 
 export function Singleton() {
     return function (target) {
-        target.getInstance = function() {
+        target.i = function() {
             return this.instance = !Boolean(this.instance)
                 ? new target()
                 : this.instance;

@@ -17,11 +17,11 @@ const onlyInProd = onlyIn("production");
 module.exports = {
     context: SRC,
     entry: {
+        polyfills: ["babel-polyfill"],
         app: [
             onlyInDev("react-hot-loader/patch"),
             "./react-app/index.jsx"
         ].filter(Boolean),
-        polyfills: ["babel-polyfill"],
         libraries: ["jquery", "bootstrap", "rxjs"],
     },
     resolve: {
@@ -96,7 +96,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                use: ExtractTextPlugin.extract({
+                use: ["css-hot-loader"].concat(ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: [
                         {
@@ -118,7 +118,7 @@ module.exports = {
                             }
                         }
                     ]
-                })
+                }))
             },
             {
                 test: /\.(png|jpg|gif)$/,
