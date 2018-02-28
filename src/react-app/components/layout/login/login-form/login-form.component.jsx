@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom"
 const Presentor = class extends React.Component {
     constructor(props) {
         super(props);
+        console.log("re", this.props);
         this.defaultUser = { email: "a@a.com", password: "A" };
         this.state = {
             isCheckingCredentials: false,
