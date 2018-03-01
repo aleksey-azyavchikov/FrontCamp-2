@@ -5,10 +5,10 @@ import { Main } from "./main/main.component";
 import { HashRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 
-const LayoutInner = (propsI) => (
+const LayoutInner = (ownProps) => (
     <Router>
         <Switch>
-            <Route path="/login" render={ props => !propsI.isAuthorized ? <Login/> : <Redirect to={"/"}/> } />
+            <Route path="/login" render={ () => !ownProps.isAuthorized ? <Login/> : <Redirect to={"/"}/> } />
             <Route path="/" component={Main}/>
         </Switch>
     </Router>

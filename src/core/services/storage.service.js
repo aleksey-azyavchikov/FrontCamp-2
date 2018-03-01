@@ -1,3 +1,6 @@
+import { Singleton } from "../decorators/singleton.decorator";
+
+@Singleton()
 export class StorageService  {
     constructor(storage) {
         this.storage = storage || localStorage; 

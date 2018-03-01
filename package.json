@@ -72,6 +72,7 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
+    "lodash": "^4.17.5",
     "redux-loop": "^4.2.4"
   }
 }

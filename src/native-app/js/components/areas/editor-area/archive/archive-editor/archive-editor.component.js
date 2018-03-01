@@ -86,7 +86,6 @@ export default class ArchiveEditorComponent extends BaseComponent {
             urlToImage: this.domElements.urlImageInput.value,
             image: this.getImageDataForRequest(),
          });
-         console.log(article);
          return article;
     }
 

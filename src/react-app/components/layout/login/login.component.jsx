@@ -9,8 +9,9 @@ class LoginPresenter extends React.Component {
     }
     
     render() {
-        console.log("re", this.props);
-        const { from = this.props.history.location } = this.props.location.state;
+        const from = this.props.location && 
+            this.props.location.state && 
+            this.props.location.state.from || { pathname: "/" };
         return (
             <LoginForm from={from}/>
         );

@@ -32,7 +32,6 @@
         "quotes": "error",
         "react/no-unknown-property": 0,
         "react/prop-types": 0,
-        "react/display-name": 0,
-        "no-redeclare": 0
+        "react/display-name": 0
     }
 }
