@@ -24,11 +24,11 @@ export class TemplateHelpers {
         const carouselTemplate = `
         <ol class="carousel-indicators">
             ${data.articles.map((article, index) => `
-                <li data-target="#carouselExampleIndicators" data-slide-to="${index}" ${index === 0 ? 'class="active"' : ''}></li>`).join("")}
+                <li data-target="#carouselExampleIndicators" data-slide-to="${index}" ${index === 0 ? "class='active'" : ""}></li>`).join("")}
         </ol>
         <div class="carousel-inner">
             ${data.articles.map((article, index) => `
-                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                <div class="carousel-item ${index === 0 ? "active" : ""}">
                     <img class="d-block w-100" src="${article.urlToImage}">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>${article.title}</h5>
@@ -58,7 +58,7 @@ export class TemplateHelpers {
     }
 
     static getInstance() {
-        return this.instance = !Boolean(this.instance)
+        return this.instance = !this.instance
             ? new TemplateHelpers()
             : this.instance;
     }

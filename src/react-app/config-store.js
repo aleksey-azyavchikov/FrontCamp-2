@@ -1,6 +1,7 @@
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { loginStateReducer } from "./components/layout/login/login.reducer";
+import { archiveStateReducer } from "./components/layout/main/news/areas/editor-area/archive/archive.reducer"; 
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { StorageService } from "../core/services/storage.service";
 import { Constants } from "../core/constants";
@@ -34,7 +35,8 @@ const configureStore = () => {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const store = createStore(
         combineReducers({
-            loginState: loginStateReducer
+            loginState: loginStateReducer,
+            archiveState: archiveStateReducer
         }),
         loadState(),
         composeEnhancers(

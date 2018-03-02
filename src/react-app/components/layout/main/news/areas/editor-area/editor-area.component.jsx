@@ -1,4 +1,4 @@
-import Archive from "./archive/archive.component";
+import { Archive } from "./archive/archive.component";
 
 const EditorArea = () => (
     <Archive/>

@@ -1,8 +1,8 @@
 import React from "react";
 import Sign from "./sections/sign/sign.component";
 import { connect } from "react-redux";
-import { login, logout } from "../../login/login.actions";
-import { withRouter, NavLink } from "react-router-dom";
+import { logout } from "../../login/login.actions";
+import { withRouter } from "react-router-dom";
 import Brand from "./sections/brand/brand.component";
 import Greeting from "./sections/greeting/greeting.component";
 
@@ -48,7 +48,7 @@ class HeaderPresenter extends React.Component {
                 {
                     this.props.isAuthorized
                         ? <Sign title="Sign Off" onClick={this.props.onLogoutClick} />
-                        : <Sign title="Sign On" onClick={() => this.props.history.push("/login")} />
+                        : <Sign title="Sign On" onClick={() => this.props.history.replace("/login")} />
                 }
             </div>
         </nav>
