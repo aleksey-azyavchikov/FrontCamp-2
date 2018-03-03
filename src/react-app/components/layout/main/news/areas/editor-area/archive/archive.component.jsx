@@ -8,6 +8,7 @@ import { connect } from "react-redux"
 import { ArchiveFilter } from "./archive-filter/archive-filter.component";
 
 import "./archive.component.scss";
+import { RegexStoreService } from "../../../../../../../../core/services/regex-store.service";
 
 class ArchivePresentor extends React.Component {
     constructor(props) {
@@ -34,7 +35,7 @@ class ArchivePresentor extends React.Component {
                     <div class="card">
                         <div class="card-body">
                             <ArchiveFilter />
-                            <ArchiveTable articles={this.props.articles} />
+                            <ArchiveTable articles={this.props.articles} filter={this.props.filter} />
                         </div>
                     </div>
                 </div>
@@ -44,5 +45,8 @@ class ArchivePresentor extends React.Component {
 }
 
 export const Archive = connect(
-    (state) => ({ articles: state.archiveState.articles })
+    (state) => ({ 
+        articles: RegexStoreService.i().filterArticlesByTitle(state.archiveState.articles, state.archiveState.filter),
+        filter: state.archiveState.filter
+    })
 )(ArchivePresentor);

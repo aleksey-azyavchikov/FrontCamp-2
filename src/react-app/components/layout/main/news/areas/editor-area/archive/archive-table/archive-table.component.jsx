@@ -7,7 +7,7 @@ class ArchiveTable extends React.Component {
 
     render() {
         const headers = ["№", "Title", "Description", "Date", "Link"].map((name, index) => <th key={index} scope="col">{name}</th>)
-        const rows = this.props.articles.map((article, index) => <ArchiveTableRow key={Guid.create()} index={index + 1} article={article} />)
+        const rows = this.props.articles.map((article, index) => <ArchiveTableRow filter={this.props.filter} key={Guid.create()} index={index + 1} article={article} />)
 
         return (
             <table class="table table-bordered table-hover">
