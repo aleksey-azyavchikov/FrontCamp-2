@@ -6,7 +6,7 @@ import "./archive-rable-row.component.scss";
 class ArchiveTableRow extends React.Component {
     render() {
         return (
-            <tr>
+            <tr class="article">
                 <th scope="row">{this.props.index}</th>
                 <td>
                     <Highlighter 

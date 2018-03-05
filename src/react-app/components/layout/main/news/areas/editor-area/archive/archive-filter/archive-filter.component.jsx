@@ -12,14 +12,16 @@ class ArchiveFilterPresenter extends React.Component {
 
     layout = () => (
         <div class="archive-filter--padding">
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-info my-2 my-sm-0 cs-btn" type="button" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
-                    Filter
-                </button>
-                <div class="collapse" id="collapseSearch">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <button class="btn btn-outline-info my-2 my-sm-0 cs-btn" type="button" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
+                        Filter
+                    </button>
+                </li>
+                <li class="list-inline-item">
                     <input class="form-control mr-sm-2" onChange={this.props.OnFilterChange} type="filter" placeholder="Some text" aria-label="Filter" />
-                </div>
-            </form>
+                </li>
+            </ul>
         </div>
     );
 }

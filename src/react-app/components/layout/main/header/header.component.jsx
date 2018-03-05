@@ -40,11 +40,9 @@ class HeaderPresenter extends React.Component {
                     </li>
                 </ul>
 
-                {/* <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-info my-2 my-sm-0 cs-btn" type="submit">Search</button>
-            </form> */}
-                { this.props.isAuthorized ? <Greeting/> : null }
+                { 
+                    this.props.isAuthorized ? <Greeting/> : null 
+                }
                 {
                     this.props.isAuthorized
                         ? <Sign title="Sign Off" onClick={this.props.onLogoutClick} />

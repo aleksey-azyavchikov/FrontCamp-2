@@ -1,0 +1,8 @@
+
+.panel div, div.panel {
+    pointer-events: none
+}
+
+.panel span {
+    pointer-events: auto
+}

@@ -29,7 +29,7 @@ const LoginFormPresentor = class extends React.Component {
     onSubmit(event) {
         event.preventDefault();
         const { dispatch } = this.props;
-        this.setState({ ...this.setState, isCheckingCredentials: true })
+        this.setState({ ...this.state, isCheckingCredentials: true })
         let timeout = setTimeout(() => {
             if (this.defaultUser.email === this.state.userInfo.email) {
                 dispatch(saveUserInfo(this.state.userInfo));
@@ -39,7 +39,7 @@ const LoginFormPresentor = class extends React.Component {
                     this.props.location.state.from.pathname || "/"
                 );
             }
-            this.setState({ ...this.setState, isCheckingCredentials: false })
+            this.setState({ ...this.state, isCheckingCredentials: false })
             clearTimeout(timeout);
         }, 3000)
     }
