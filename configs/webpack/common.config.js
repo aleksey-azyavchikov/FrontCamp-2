@@ -53,7 +53,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: "babel-loader",
                 query: {
@@ -65,20 +65,6 @@ module.exports = {
                         "transform-object-rest-spread",
                         "react-html-attrs",
                         "react-hot-loader/babel"
-                    ]
-                }
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: "babel-loader",
-                query: {
-                    presets: ["env"],
-                    plugins: [
-                        "dynamic-import-webpack",
-                        "transform-decorators-legacy",
-                        "transform-class-properties",
-                        "transform-object-rest-spread",
                     ]
                 }
             },

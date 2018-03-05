@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Archive table row Display correctly 1`] = `
+<tr>
+  <th
+    scope="row"
+  >
+    5
+  </th>
+  <td>
+    <span
+      className={undefined}
+    >
+      <span
+        className=""
+        style={undefined}
+      >
+        Title
+      </span>
+    </span>
+  </td>
+  <td>
+    Description
+  </td>
+  <td>
+    3-2-2018
+  </td>
+  <td>
+    <a
+      href="http://test.com"
+    >
+      Link
+    </a>
+  </td>
+</tr>
+`;
+
+exports[`Archive table row Display correctly with highliting 1`] = `
+<tr>
+  <th
+    scope="row"
+  >
+    5
+  </th>
+  <td>
+    <span
+      className={undefined}
+    >
+      <mark
+        className=" "
+        style={
+          Object {
+            "fontWeight": "normal",
+          }
+        }
+      >
+        Ti
+      </mark>
+      <span
+        className=""
+        style={undefined}
+      >
+        tle
+      </span>
+    </span>
+  </td>
+  <td>
+    Description
+  </td>
+  <td>
+    3-2-2018
+  </td>
+  <td>
+    <a
+      href="http://test.com"
+    >
+      Link
+    </a>
+  </td>
+</tr>
+`;

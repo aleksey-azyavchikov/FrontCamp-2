@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import Highlighter from "react-highlight-words";
 import "./archive-rable-row.component.scss";
 class ArchiveTableRow extends React.Component {
     render() {
-        console.log(this.props.filter);
         return (
             <tr>
                 <th scope="row">{this.props.index}</th>
@@ -19,6 +20,17 @@ class ArchiveTableRow extends React.Component {
             </tr>
         );
     }
+}
+
+ArchiveTableRow.propsTypes = {
+    index: PropTypes.number.isRequired,
+    filter: PropTypes.string.isRequired,
+    article: PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string,
+        publishedAt: PropTypes.string,
+        url: PropTypes.string
+    })
 }
 
 export default ArchiveTableRow;

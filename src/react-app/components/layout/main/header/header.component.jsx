@@ -33,7 +33,7 @@ class HeaderPresenter extends React.Component {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class={this.isActive("/")}>
-                        <a class="nav-link" href="#/">Home </a>
+                        <a class="nav-link" href="#/">Home</a>
                     </li>
                     <li class={this.isActive("/news")}>
                         <a class={`nav-link ${this.props.isAuthorized ? "" : "disabled"}`} href="#/news">News</a>
