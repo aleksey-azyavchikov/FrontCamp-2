@@ -11,7 +11,8 @@ const MongoStore = require("connect-mongo")(session);
 const index = require("./routes/index.route");
 const news = require("./routes/news.route");
 var appConfig = require("./configs/app.config");
-appConfig.isDevelopment = process.env.NODE_ENV === "development";
+appConfig.isDevelopment = process.env.NODE_ENV.trim() === "development";
+
 
 const app = express();
 
@@ -39,7 +40,11 @@ app.use(session({
     secret: appConfig.session.secret,
     key: appConfig.session.key,
     cookie: appConfig.session.cookie,
-    store: new MongoStore(database.connection)
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+        mongooseConnection: database.connection
+    })
 }))
 // app.use(express.static(path.join(__dirname, "public")));
 
@@ -50,10 +55,10 @@ app.use((request, response, next) => {
     next();
 })
 
-app.use((request, response) => {
-    request.session.number = request.session.number + 1 || 1;
-    response.send("Visitors: " + request.session.number); 
-})
+// app.use((request, response) => {
+//     request.session.number = request.session.number + 1 || 1;
+//     response.send("Visitors: " + request.session.number); 
+// })
 
 app.use("/", index);
 app.use("/news", news);

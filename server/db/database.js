@@ -17,7 +17,7 @@ class DatabaseBuilder {
     }
 
     get connection() {
-        return mongoose.Connection;
+        return mongoose.connection;
     }
 
     clearSchemes() {
@@ -38,10 +38,12 @@ class DatabaseBuilder {
     }
 
     connect(dbName = "") {
+        const connection = appConfig.isDevelopment 
+            ? appConfig.dbConnection(dbName) 
+            : appConfig.dbRemoteConnection(dbName);
+
         mongoose.connect(
-            appConfig.isDevelopment 
-                ? appConfig.dbConnection(dbName) 
-                : appConfig.dbRemoteConnection(dbName), 
+            connection,
             (error) => {
             error
                 ? console.log("connection error with db", dbName, error)
