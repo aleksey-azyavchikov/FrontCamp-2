@@ -1,18 +1,21 @@
 
-var express = require("express");
-var path = require("path");
-var favicon = require("serve-favicon");
-var logger = require("morgan");
-var cookieParser = require("cookie-parser");
-var bodyParser = require("body-parser");
+const express = require("express");
+const path = require("path");
+const favicon = require("serve-favicon");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
-var index = require("./routes/index.route");
-var news = require("./routes/news.route");
-var appConfig = require("./configs/app.config")
+const index = require("./routes/index.route");
+const news = require("./routes/news.route");
+var appConfig = require("./configs/app.config");
+appConfig.isDevelopment = process.env.NODE_ENV === "development";
 
-var app = express();
+const app = express();
 
-var database = require("./db/database");
+const database = require("./db/database");
 database
     .clearSchemes()
     .configureSchemes()
@@ -30,8 +33,15 @@ app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(logger("dev"));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(session({
+    secret: appConfig.session.secret,
+    key: appConfig.session.key,
+    cookie: appConfig.session.cookie,
+    store: new MongoStore(database.connection)
+}))
+// app.use(express.static(path.join(__dirname, "public")));
 
 app.use((request, response, next) => {
     response.header("Access-Control-Allow-Origin", "*");
@@ -40,6 +50,10 @@ app.use((request, response, next) => {
     next();
 })
 
+app.use((request, response) => {
+    request.session.number = request.session.number + 1 || 1;
+    response.send("Visitors: " + request.session.number); 
+})
 
 app.use("/", index);
 app.use("/news", news);
