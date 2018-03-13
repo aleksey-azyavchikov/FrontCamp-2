@@ -2,4 +2,6 @@
 /dist
 /db/mongodb
 /db/exports
+/server/bundles
+/server/public/bundles
 /.vscode

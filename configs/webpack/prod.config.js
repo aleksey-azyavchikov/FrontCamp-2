@@ -6,7 +6,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = merge(common, {
     output: {
-        path: path.resolve(__dirname, "../../dist/dev"),
+        path: path.resolve(__dirname, "../../server/public/bundles"),
         filename: "[name].bundle.js",
         sourceMapFilename: "[name].map",
         chunkFilename: "[name].chunk.js"
@@ -23,12 +23,12 @@ module.exports = merge(common, {
             }
         }),
         new webpack.NoEmitOnErrorsPlugin(),
-        
+
     ],
-    devServer: {
-        contentBase: "../../dist/prod",
-        port: 3001
-    },
+    // devServer: {
+    //     contentBase: "../../dist/prod",
+    //     port: 3001
+    // },
+    // watch: true
     devtool: "source-map",
-    watch: true
 });

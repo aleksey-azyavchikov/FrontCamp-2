@@ -15,7 +15,9 @@
         "db:export": "start cmd /c .\\scripts\\export-collections.cmd",
         "db:import": "start .\\scripts\\import-db.bat",
         "server:run:dev": "SET NODE_ENV=development && nodemon ./server/bin/www",
+        "server:run:dev:build": "SET NODE_ENV=development && npm run ui:build:dev && nodemon ./server/bin/www",
         "server:run:prod": "SET NODE_ENV=production && nodemon ./server/bin/www",
+        "server:run:prod:build": "SET NODE_ENV=production && npm run ui:build:prod && node ./server/bin/www",
         "server:run:debug": "nodemon --debug ./server/bin/www",
         "test": "jest",
         "test:watch": "jest --watch"
@@ -82,6 +84,7 @@
     },
     "dependencies": {
         "connect-mongo": "^2.0.1",
+        "express-session": "^1.15.6",
         "lodash": "^4.17.5",
         "react-highlight-words": "^0.11.0",
         "redux-loop": "^4.2.4"

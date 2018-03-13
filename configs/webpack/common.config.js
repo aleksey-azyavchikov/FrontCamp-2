@@ -46,7 +46,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: "./native-app/index.html",
-
+            filename: "bundles/[name]"
         }),
         new ExtractTextPlugin("styles.bundle.css")
     ],

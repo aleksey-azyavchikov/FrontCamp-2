@@ -46,7 +46,7 @@ app.use(session({
         mongooseConnection: database.connection
     })
 }))
-// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use((request, response, next) => {
     response.header("Access-Control-Allow-Origin", "*");
@@ -59,14 +59,20 @@ app.use((request, response, next) => {
 //     request.session.number = request.session.number + 1 || 1;
 //     response.send("Visitors: " + request.session.number); 
 // })
-
-app.use("/", index);
-app.use("/news", news);
+// app.use("/", index);
+app.get("/", (request, response) => {
+    response.sendFile(path.join(__dirname, "public" ,"bundles", appConfig.isDevelopment 
+        ? "dev"
+        : "prod",
+        "index.html"
+    ));
+})
+app.use("/api/news", news);
 
 // Go to Welcome page.
-app.get("*", function(req, res) {
-    res.redirect("/");
-});
+// app.get("*", function(req, res) {
+//     res.redirect("/");
+// });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

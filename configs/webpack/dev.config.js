@@ -5,7 +5,7 @@ const path = require("path");
 
 module.exports = merge(common, {
     output: {
-        path: path.resolve(__dirname, "../../dist/dev"),
+        path: path.resolve(__dirname, "../../server/public/bundles"),
         filename: "[name].bundle.js",
         sourceMapFilename: "[file].map",
         chunkFilename: "[name].chunk.js"
