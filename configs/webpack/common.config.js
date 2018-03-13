@@ -46,7 +46,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: "./native-app/index.html",
-            filename: "bundles/[name]"
+            filename: "index.html"
         }),
         new ExtractTextPlugin("styles.bundle.css")
     ],
@@ -118,9 +118,14 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-                use: [
-                    "file-loader"
-                ]
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        name: "[name].[ext]",
+                        outputPath: "",
+                        publicPath: ""
+                    }
+                }]
             }
         ]
     }

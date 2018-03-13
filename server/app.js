@@ -13,7 +13,6 @@ const news = require("./routes/news.route");
 var appConfig = require("./configs/app.config");
 appConfig.isDevelopment = process.env.NODE_ENV.trim() === "development";
 
-
 const app = express();
 
 const database = require("./db/database");
@@ -61,11 +60,7 @@ app.use((request, response, next) => {
 // })
 // app.use("/", index);
 app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, "public" ,"bundles", appConfig.isDevelopment 
-        ? "dev"
-        : "prod",
-        "index.html"
-    ));
+    response.sendFile(path.join(__dirname, "public", "build", "index.html"))
 })
 app.use("/api/news", news);
 
