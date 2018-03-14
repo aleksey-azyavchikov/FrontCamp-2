@@ -16,5 +16,11 @@ module.exports = merge(common, {
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
+    devServer: {
+        hot: true,
+        contentBase: "../../dist/dev",
+        port: 3000,
+        publicPath: "/",
+    },
     devtool: "source-map"
 });
