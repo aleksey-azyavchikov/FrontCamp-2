@@ -10,7 +10,8 @@ const MongoStore = require("connect-mongo")(session);
 
 const index = require("./routes/index.route");
 const news = require("./routes/news.route");
-var appConfig = require("./configs/app.config");
+const users = require("./routes/users.route");
+let appConfig = require("./configs/app.config");
 appConfig.isDevelopment = process.env.NODE_ENV.trim() === "development";
 
 const app = express();
@@ -63,6 +64,7 @@ app.get("/", (request, response) => {
     response.sendFile(path.join(__dirname, "public", "build", "index.html"))
 })
 app.use("/api/news", news);
+app.use("/api/users", users);
 
 // Go to Welcome page.
 // app.get("*", function(req, res) {

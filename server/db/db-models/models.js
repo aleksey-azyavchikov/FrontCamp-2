@@ -1,4 +1,6 @@
-var article = require("./article.model");
+const article = require("./article.model");
+const user = require("./user.model");
 module.exports = {
-    Article: article
+    Article: article,
+    User: user
 }
