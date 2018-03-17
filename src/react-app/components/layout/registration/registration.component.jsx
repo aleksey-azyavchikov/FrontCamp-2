@@ -47,6 +47,17 @@ class RegistrationPagePresentor extends React.Component {
         }, 3000)
     }
 
+    get isValidEnteredPassword() {
+        const result = this.state.userInfo.enterPassword.length >= 8
+        return result;
+    }
+
+    get isValidConfirmedPassword() {
+        const result = this.state.userInfo.enterPassword === this.state.userInfo.confirmPassword
+            && this.isValidEnteredPassword;
+        return result;
+    }
+
     render() {
         return (
             <div class="container">
@@ -58,11 +69,25 @@ class RegistrationPagePresentor extends React.Component {
                                 <input type="email" value={this.state.userInfo.email} onChange={this.onEmailChange.bind(this)} class="form-control" id="registration" aria-describedby="emailHelp" placeholder="Enter email" />
                             </div>
                             <div class="form-group">
-                                <label for="registration-password">Enter password</label>
+                                <div class="row justify-content-between">
+                                    <div class="col">
+                                        <label for="registration-password">Enter password</label>
+                                    </div>
+                                    <div class="col-2">
+                                        {this.isValidEnteredPassword ? <span class="oi oi-circle-check icon success-mark"></span> : null}
+                                    </div>
+                                </div>
                                 <input type="password" value={this.state.userInfo.password} onChange={this.onEnterPasswordChange.bind(this)} class="form-control" id="exampleInputPassword1" placeholder="Password" />
                             </div>
                             <div class="form-group">
-                                <label for="registration-confirm-password">Confirm password</label>
+                                <div class="row justify-content-between">
+                                    <div class="col">
+                                        <label for="registration-confirm-password">Confirm password</label>
+                                    </div>
+                                    <div class="col-2">
+                                        {this.isValidConfirmedPassword ? <span class="oi oi-circle-check icon success-mark"></span> : null}
+                                    </div>
+                                </div>
                                 <input type="password" value={this.state.userInfo.password} onChange={this.onConfirmPasswordChange.bind(this)} class="form-control" id="exampleInputPassword1" placeholder="Password" />
                             </div>
                             <input type="submit" class="btn btn-primary" value="Submit" />

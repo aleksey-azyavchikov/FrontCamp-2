@@ -7,7 +7,7 @@ import "./option-panel.component.scss";
 export class OptionPanel extends React.Component {
 
     getIconClasses(icon, currentMode, mode) {
-        const defaultClasses = `oi ${icon} icon`;
+        const defaultClasses = `panel-option oi ${icon} icon`;
         const selectedClass = currentMode === mode ? "selected-mode" : "";
         return `${defaultClasses} ${selectedClass}`
 
