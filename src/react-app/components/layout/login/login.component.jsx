@@ -2,6 +2,7 @@
 import React from "react";
 import { LoginForm } from "./login-form/login-form.component";
 import { withRouter } from "react-router-dom";
+import { BackLink } from "../../common/back/back.component";
 
 class LoginPresenter extends React.Component {
     constructor(props) {
@@ -13,7 +14,9 @@ class LoginPresenter extends React.Component {
             this.props.location.state && 
             this.props.location.state.from || { pathname: "/" };
         return (
-            <LoginForm from={from}/>
+            <div>
+                <LoginForm from={from}/>
+            </div>
         );
     }
 }

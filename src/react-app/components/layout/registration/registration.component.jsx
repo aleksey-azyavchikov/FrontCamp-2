@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 
 import "./registration.component.scss";
+import { BackLink } from "../../common/back/back.component";
 class RegistrationPagePresentor extends React.Component {
     constructor(props) {
         super(props);
@@ -71,6 +72,19 @@ class RegistrationPagePresentor extends React.Component {
                 <div class="row justify-content-center">
                     <div class="col-4">
                         <span>{this.state.isCheckingCredentials ? "Loading..." : null}</span>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                    <div class="container">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <BackLink />
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

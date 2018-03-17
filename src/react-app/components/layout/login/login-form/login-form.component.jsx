@@ -3,6 +3,7 @@ import "./login-form.component.scss";
 import { login, saveUserInfo } from "../login.actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
+import { BackLink } from "../../../common/back/back.component";
 
 
 const LoginFormPresentor = class extends React.Component {
@@ -68,11 +69,18 @@ const LoginFormPresentor = class extends React.Component {
                         <span>{this.state.isCheckingCredentials ? "Loading..." : null}</span>
                     </div>
                 </div>
-                <div class="row justify-content-around">
-                    <div class="col-3">
-                    </div>
+                <div class="row justify-content-center">
                     <div class="col-4">
-                        <a href="#/registration">Registration</a>
+                    <div class="container">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <BackLink />
+                            </div>
+                            <div class="col">
+                                <a class="nav-link" href="/#/registration">Registration</a>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
