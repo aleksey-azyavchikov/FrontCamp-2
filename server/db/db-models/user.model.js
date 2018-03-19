@@ -1,14 +1,14 @@
 
 class User {
     constructor() {
-        this.name = "";
+        this.nickName = "";
         this.password = "";
         this.email = "";
     }
 
     static configMongoose() {
         let mongoseConfig =  {
-            name: String,
+            nickName: String,
             password: String,
             email: String,
         };

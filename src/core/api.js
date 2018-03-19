@@ -1,7 +1,7 @@
 import { Singleton } from "./decorators/singleton.decorator";
 
 @Singleton()
-export class ApiInvoker
+class ApiInvoker
 {
     constructor(apiKey) {
         this.apiKey = apiKey;
@@ -42,7 +42,7 @@ export class ApiInvoker
     }
 
     invoke(endpointUrl, requestInit = {}, init = {}) {
-        Object.assign(init, requestInit);
+        Object.assign(init,{body: JSON.stringify(requestInit)});
         let request = new Request(endpointUrl);
         return new Promise((resolve, reject) => { 
             fetch(request, init)
@@ -52,3 +52,5 @@ export class ApiInvoker
         });
     }
 }
+
+export const ApiInvokerService = ApiInvoker.i()

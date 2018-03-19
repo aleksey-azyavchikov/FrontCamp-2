@@ -25,7 +25,8 @@
         "node:server": "node ./server/bin/www",
         "test": "jest",
         "test:watch": "jest --watch",
-        "server:run:debug": "nodemon --debug ./server/bin/www"
+        "server:run:debug": "SET NODE_ENV=production && nodemon --debug ./server/bin/www",
+        "server:run:inspect": "SET NODE_ENV=production && nodemon --inspect ./server/bin/www"
     },
     "devDependencies": {
         "babel-cli": "^6.18.0",

@@ -1,6 +1,6 @@
 import ArchiveTable from "./archive-table/archive-table.component";
 import React from "react";
-import { ApiInvoker } from "../../../../../../../../core/api";
+import { ApiInvokerService } from "../../../../../../../../core/api";
 import { Endpoints } from "../../../../../../../../core/endpoints";
 import { TemplateHelpers } from "../../../../../../../../core/helpers/templates/template.helper";
 import * as actions from "./archive.actions";
@@ -23,9 +23,8 @@ class ArchivePresentor extends React.Component {
     }
 
     getArticlesHttp(dispatch) {
-        let apiInvoker = ApiInvoker.i();
         dispatch(actions.articlesFetchStarted());
-        apiInvoker.invokeGet(Endpoints.Articles())
+        ApiInvokerService.invokeGet(Endpoints.Articles())
             .then(data => dispatch(actions.aticlesFetchFinished(TemplateHelpers.getInstance().formatArticles(data.articles))))
             .catch(error => dispatch((actions.articlesFetchRejected(error))));
     }
