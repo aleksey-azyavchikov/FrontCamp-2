@@ -13,6 +13,7 @@ const news = require("./routes/news.route");
 const users = require("./routes/users.route");
 let appConfig = require("./configs/app.config");
 appConfig.isDevelopment = process.env.NODE_ENV.trim() === "development";
+appConfig.applicationType = process.env.APP_TYPE.trim();
 
 const app = express();
 
@@ -61,7 +62,7 @@ app.use((request, response, next) => {
 // })
 // app.use("/", index);
 app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, "public", "build", "index.html"))
+    response.sendFile(path.join(__dirname, "public", "build", `index.${appConfig.applicationType}.html`))
 })
 app.use("/api/news", news);
 app.use("/api/users", users);

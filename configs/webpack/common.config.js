@@ -9,18 +9,21 @@ const ROOT = resolve(__dirname);
 const SRC = resolve(ROOT, "../../src");
 
 const { NODE_ENV = "development" } = process.env;
+const { APP_TYPE = "react" } = process.env
 
-const onlyIn = env => plugin => NODE_ENV.trim() === env ? plugin : null 
+const onlyIn = env => (plugin, appType) => NODE_ENV.trim() === env && APP_TYPE.trim() == appType ? plugin : null 
 const onlyInDev = onlyIn("development");
 const onlyInProd = onlyIn("production");
+const loadEntry = (entryModule, appType) => APP_TYPE.trim() == appType ? entryModule : null;
 
 module.exports = {
     context: SRC,
     entry: {
         polyfills: ["babel-polyfill"],
         app: [
-            onlyInDev("react-hot-loader/patch"),
-            "./react-app/index.jsx"
+            onlyInDev("react-hot-loader/patch", "react"),
+            loadEntry("./react-app/index.jsx", "react"),
+            loadEntry("./angular-app/index.js", "angular")
         ].filter(Boolean),
         libraries: ["jquery", "bootstrap", "rxjs"],
     },
@@ -46,7 +49,15 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: "./native-app/index.html",
-            filename: "index.html"
+            filename: "index.native.html"
+        }),
+        new HtmlWebpackPlugin({
+            template: "./angular-app/index.html",
+            filename: "index.angular.html"
+        }),
+        new HtmlWebpackPlugin({
+            template: "./react-app/index.html",
+            filename: "index.react.html"
         }),
         new ExtractTextPlugin("styles.bundle.css")
     ],

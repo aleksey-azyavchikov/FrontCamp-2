@@ -1,8 +1,7 @@
 import { Singleton } from "./decorators/singleton.decorator";
 
 @Singleton()
-class ApiInvoker
-{
+class ApiInvoker {
     constructor(apiKey) {
         this.apiKey = apiKey;
     }
@@ -20,8 +19,8 @@ class ApiInvoker
     }
 
     invokePost(endpointUrl, requestInit = {}) {
-        let init = { 
-            method: "POST", 
+        let init = {
+            method: "POST",
             mode: "cors",
             headers: { "Content-Type": "application/json" }
         };
@@ -29,8 +28,8 @@ class ApiInvoker
     }
 
     invokePut(endpointUrl, requestInit = {}) {
-        let init = { 
-            method: "PUT", 
+        let init = {
+            method: "PUT",
             mode: "cors",
             headers: { "Content-Type": "application/json" }
         };
@@ -42,9 +41,14 @@ class ApiInvoker
     }
 
     invoke(endpointUrl, requestInit = {}, init = {}) {
-        Object.assign(init,{body: JSON.stringify(requestInit)});
+        const hasBody = Object.keys(requestInit).length > 0 && requestInit.constructor === Object;
+
+        if (hasBody) {
+            Object.assign(init, {body: JSON.stringify(requestInit) });
+        }
+
         let request = new Request(endpointUrl);
-        return new Promise((resolve, reject) => { 
+        return new Promise((resolve, reject) => {
             fetch(request, init)
                 .then(response => response.json())
                 .then(response => resolve(response))

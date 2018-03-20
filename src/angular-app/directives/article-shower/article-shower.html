@@ -1,0 +1,42 @@
+<brand-bar></brand-bar>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Articles</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Article id</th>
+                    <th>Action
+                        <span>:</span>
+                        <a href="#!/article/add">
+                            <span>Add<span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="article in ctrl.articles">
+                    <td>{{article.title}}</td>
+                    <td><a href="#!/article/{{article._id}}/edit">{{article._id}}</a></td>
+                    <td>    
+                            <a href="#!/article/{{article._id}}/edit">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <span role="separator" class="divider">/</span>
+                            <a href="#" ng-click="$event.preventDefault(); ctrl.deleteArticle(article._id)">
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <th>{{ctrl.articles.length}}</th>
+                    <th></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer></footer>
