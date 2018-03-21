@@ -1,63 +1,38 @@
 import { ApiInvokerService } from "../../core/api";
+import { Endpoints } from "../../core/endpoints";  
 
 
 module.exports = function (ngModule) {
     ngModule.factory("httpService", function () {
-        let apiInvoker = ApiInvokerService;
+        const apiInvoker = ApiInvokerService;
         return {
             apiInvoker: apiInvoker,
             getArticles: function (success) {
-                // this.apiInvoker.invoke(
-                //     ApiInvoker.buildUrl(Constants.apiServer, Constants.apiEndPoints.news.article.getArticles()),
-                //     { method: "GET", mode: "cors" },
-                //     (data) => {
-                //         success(data);
-                //     },
-                //     (error) => console.error(error)
-                // );
+                this.apiInvoker.invokeGet(Endpoints.Articles())
+                    .then(data => success(data))
+                    .catch(error => console.error(error));
             },
             deleteArticle: function (id, success) {
-                // if (!confirm("Are you sure?")) return;
-                // apiInvoker.invoke(
-                //     ApiInvoker.buildUrl(Constants.apiServer, Constants.apiEndPoints.news.article.deleteArticle(id)),
-                //     { method: "DELETE", headers: { "Content-Type": "application/json" }, mode: "cors", body: JSON.stringify({ id: id }) },
-                //     (data) => {
-                //         success(data);
-                //     },
-                //     (error) => console.error(error)
-                // );
+                if (!confirm("Are you sure?")) return;
+                this.apiInvoker.invokeDelete(Endpoints.Articles({ id }))
+                    .then(data => success(data))
+                    .catch(error => console.error(error));
             },
             getArticleById: function (id, success) {
-                // apiInvoker.invoke(
-                //     ApiInvoker.buildUrl(Constants.apiServer, Constants.apiEndPoints.news.article.getArticle(id)),
-                //     { method: "GET", mode: "cors" },
-                //     (data) => {
-                //         success(data);
-                //     },
-                //     (error) => console.error(error)
-                // )
+                this.apiInvoker.invokeGet(Endpoints.Articles({ id }))
+                    .then(data => success(data))
+                    .catch(error => console.error(error));
             },
             updateArticle: function (id, article, success) {
-                // apiInvoker.invoke(
-                //     ApiInvoker.buildUrl(Constants.apiServer, Constants.apiEndPoints.news.article.putArticle(id)),
-                //     { method: "PUT", headers: { "Content-Type": "application/json" }, mode: "cors", body: JSON.stringify({ article: article }) },
-                //     (data) => {
-                //         success(data);
-                //     },
-                //     (error) => console.error(error)
-                // );
+                this.apiInvoker.invokePut(Endpoints.Articles({ id }), { article })
+                    .then(data => success(data))
+                    .catch(error => console.error(error));
             },
             addArticle: function (article, success) {
-                // apiInvoker.invoke(
-                //     ApiInvoker.buildUrl(Constants.apiServer, Constants.apiEndPoints.news.article.postArticle()),
-                //     { method: "POST", headers: { "Content-Type": "application/json" }, mode: "cors", body: JSON.stringify({ article: article }) },
-                //     (data) => {
-                //         success(data);
-                //     },
-                //     (error) => console.error(error)
-                // );
+                this.apiInvoker.invokePost(Endpoints.Articles(), { article })
+                    .then(data => success(data))
+                    .catch(error => console.error(error));
             }
-
         }
     });
 }

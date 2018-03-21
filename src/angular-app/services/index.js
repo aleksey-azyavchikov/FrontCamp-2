@@ -1,3 +1,3 @@
 module.exports = function(ngModule) {
-    require('./http.service.js')(ngModule);
+    require("./http.service.js")(ngModule);
 }

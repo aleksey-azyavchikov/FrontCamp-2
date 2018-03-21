@@ -1,13 +1,15 @@
 import { Mapper } from "./../../core/mapper";
 import { Article } from "../models/article.model";
 
+import image from "../../content/images/default-thumbnail.jpg";
+
 module.exports = function(ngModule) {
     ngModule.controller("articleEditorCtrl", ["$scope", "httpService", "$routeParams", "$location", function($scope, httpService, $routeParams, $location) {
         let ctrl = this;
 
         ctrl.id = $routeParams.articleId;
         ctrl.article = new Article();
-        ctrl.article.urlToImage = "../../resources/images/default-thumbnail.jpg";
+        ctrl.article.urlToImage = image;
         ctrl.filePath;
         ctrl.file;
         ctrl.loadImage = (event) => {

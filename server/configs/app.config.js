@@ -12,5 +12,5 @@ module.exports = {
         }
     },
     isDevelopment: true,
-    applicationType: "react"
+    applicationType: "react" 
 }
