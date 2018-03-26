@@ -1,10 +1,10 @@
 import React from "react";
-import Sign from "./sections/sign/sign.component";
 import { connect } from "react-redux";
-import { logout } from "../../login/login.actions";
 import { withRouter } from "react-router-dom";
 import Brand from "./sections/brand/brand.component";
 import Greeting from "./sections/greeting/greeting.component";
+import Sign from "./sections/sign/sign.component";
+import { logout } from "../../../../redux/modules/login";
 
 class HeaderPresenter extends React.Component {
     constructor(props) {

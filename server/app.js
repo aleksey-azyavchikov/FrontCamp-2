@@ -8,12 +8,9 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
-const index = require("./routes/index.route");
-const news = require("./routes/news.route");
-const users = require("./routes/users.route");
 let appConfig = require("./configs/app.config");
 appConfig.isDevelopment = process.env.NODE_ENV.trim() === "development";
-appConfig.applicationType = process.env.APP_TYPE.trim();
+appConfig.applicationType = process.env.APP_TYPE && process.env.APP_TYPE.trim() || "react";
 
 const app = express();
 
@@ -22,6 +19,10 @@ database
     .clearSchemes()
     .configureSchemes()
     .connect(appConfig.dbName);
+
+const index = require("./routes/index.route");
+const news = require("./routes/news.route");
+const users = require("./routes/users.route");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -62,7 +63,7 @@ app.use((request, response, next) => {
 // })
 // app.use("/", index);
 app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, "public", "build", `index.${appConfig.applicationType}.html`))
+    response.sendFile(path.join(__dirname, "public", "build", `${appConfig.applicationType}`, "index.html"))
 })
 app.use("/api/news", news);
 app.use("/api/users", users);

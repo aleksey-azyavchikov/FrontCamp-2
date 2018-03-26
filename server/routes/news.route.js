@@ -29,7 +29,7 @@ router.post("/", (request, response) => {
     });
 
     let ArticleSchema = database.schemes.articleSchema;
-    new ArticleSchema(article).save((error, document) => {
+    new ArticleSchema(article).save((error) => {
         error ? response.json("Error") : response.json("ok");
     });
 });

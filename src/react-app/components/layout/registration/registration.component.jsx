@@ -26,22 +26,14 @@ class RegistrationPagePresentor extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        const { dispatch } = this.props;
         this.setState({ ...this.state, isCheckingCredentials: true });
-        const a = Endpoints.Users();
         ApiInvokerService.invokePost(Endpoints.Users(), { 
             nickName: this.state.userInfo.nickName,
             email: this.state.userInfo.email,
             password: this.state.userInfo.confirmPassword
-        }).then(data => console.log(data))
-        // let timeout = setTimeout(() => {
-        //     if (this.defaultUser.email === this.state.userInfo.email) {
-        //         dispatch(saveUserInfo(this.state.userInfo));
-        //         dispatch(login());
-        //     }
-        //     this.setState({ ...this.state, isCheckingCredentials: false })
-        //     clearTimeout(timeout);
-        // }, 3000)
+        })
+        .then(data => data && data.error ? console.log(data) : this.props.history.goBack())
+        .then(() => this.setState({ ...this.state, isCheckingCredentials: false }));
     }
 
     get isValidEnteredPassword() {
@@ -63,11 +55,11 @@ class RegistrationPagePresentor extends React.Component {
                         <form onSubmit={this.onSubmit.bind(this)} class="border border-dark rounded cs-form">
                             <div class="form-group">
                                 <label for="registration-email">Nick Name</label>
-                                <input type="text" value={this.state.userInfo.nickName} onChange={this.onFieldChange.bind(this, "nickName")} class="form-control" id="registration" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <input type="text" value={this.state.userInfo.nickName} onChange={this.onFieldChange.bind(this, "nickName")} class="form-control" id="nick" aria-describedby="emailHelp" placeholder="Enter email" />
                             </div>
                             <div class="form-group">
                                 <label for="registration-email">Email address</label>
-                                <input type="email" value={this.state.userInfo.email} onChange={this.onFieldChange.bind(this, "email")} class="form-control" id="registration" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <input type="email" value={this.state.userInfo.email} onChange={this.onFieldChange.bind(this, "email")} class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
                             </div>
                             <div class="form-group">
                                 <div class="row justify-content-between">
@@ -78,7 +70,7 @@ class RegistrationPagePresentor extends React.Component {
                                         {this.isValidEnteredPassword ? <span class="oi oi-circle-check icon success-mark"></span> : null}
                                     </div>
                                 </div>
-                                <input type="password" value={this.state.userInfo.enteredPassword} onChange={this.onFieldChange.bind(this, "enteredPassword")} class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                <input type="password" value={this.state.userInfo.enteredPassword} onChange={this.onFieldChange.bind(this, "enteredPassword")} class="form-control" id="confirmedPassword" placeholder="Password" />
                             </div>
                             <div class="form-group">
                                 <div class="row justify-content-between">
@@ -89,7 +81,7 @@ class RegistrationPagePresentor extends React.Component {
                                         {this.isValidConfirmedPassword ? <span class="oi oi-circle-check icon success-mark"></span> : null}
                                     </div>
                                 </div>
-                                <input type="password" value={this.state.userInfo.confirmPassword} onChange={this.onFieldChange.bind(this, "confirmPassword")} class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                <input type="password" value={this.state.userInfo.confirmPassword} onChange={this.onFieldChange.bind(this, "confirmPassword")} class="form-control" id="enteredPassword" placeholder="Password" />
                             </div>
                             <input disabled={!(this.isValidConfirmedPassword && this.isValidEnteredPassword)} type="submit" class="btn btn-primary" value="Submit" />
                         </form>

@@ -1,11 +1,11 @@
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-import { loginStateReducer } from "./components/layout/login/login.reducer";
-import { archiveStateReducer } from "./components/layout/main/news/areas/editor-area/archive/archive.reducer"; 
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import { StorageService } from "../core/services/storage.service";
-import { Constants } from "../core/constants";
+import { StorageService } from "../../core/services/storage.service";
+import { Constants } from "../../core/constants";
 import throttle from "lodash/throttle"
+import loginStateReducer from "./modules/login";
+import archiveStateReducer from "./modules/archive";
 
 const loadState = () => {
     try {

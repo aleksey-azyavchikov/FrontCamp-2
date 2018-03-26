@@ -3,7 +3,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { EditorMode } from "../../../../../../../../../core/enums/editor-mode.enum";
-import { setEditorMode } from "../archive.actions";
+import { setEditorMode } from "../../../../../../../../redux/modules/archive";
 import { OptionPanel } from "./option-panel/option-panel.component";
 import "./archive-panel.component.scss";
 

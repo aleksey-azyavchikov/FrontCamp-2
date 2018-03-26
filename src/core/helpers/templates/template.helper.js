@@ -66,3 +66,4 @@ export class TemplateHelpers {
 
 export const getArticleTemplate = async (data) => TemplateHelpers.getArticleTemplate(data)
 export const getCarouselTemplate = async (data) => TemplateHelpers.getCarouselTemplate(data)
+export const TemplateHelperService = TemplateHelpers.getInstance();

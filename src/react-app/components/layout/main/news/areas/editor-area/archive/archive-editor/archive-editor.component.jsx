@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setEditorMode } from "../archive.actions";
+import { setEditorMode } from "../../../../../../../../redux/modules/archive";
 import { EditorMode } from "../../../../../../../../../core/enums/editor-mode.enum";
 import defaultImage from "../../../../../../../../../content/images/default-thumbnail.jpg";
 import "./archive-editor.component.scss";

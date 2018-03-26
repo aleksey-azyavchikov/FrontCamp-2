@@ -1,7 +1,7 @@
 
 import React from "react";
 import { connect } from "react-redux";
-import { setFilter } from "../archive.actions";
+import { setFilter } from "../../../../../../../../redux/modules/archive";
 import "./archive-filter.component.scss";
 
 class ArchiveFilterPresenter extends React.Component {

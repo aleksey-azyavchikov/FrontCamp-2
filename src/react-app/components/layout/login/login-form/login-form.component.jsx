@@ -1,9 +1,11 @@
 import React from "react";
 import "./login-form.component.scss";
-import { login, saveUserInfo } from "../login.actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import { BackLink } from "../../../common/back/back.component";
+import { login, saveUserInfo } from "../../../../redux/modules/login";
+import { ApiInvokerService } from "../../../../../core/api";
+import { Endpoints } from "../../../../../core/endpoints";
 
 
 const LoginFormPresentor = class extends React.Component {
@@ -29,20 +31,22 @@ const LoginFormPresentor = class extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        const { dispatch } = this.props;
         this.setState({ ...this.state, isCheckingCredentials: true })
-        let timeout = setTimeout(() => {
-            if (this.defaultUser.email === this.state.userInfo.email) {
-                dispatch(saveUserInfo(this.state.userInfo));
-                dispatch(login());
-                this.props.history.replace(
-                    this.props.location.state &&
-                    this.props.location.state.from.pathname || "/"
-                );
-            }
-            this.setState({ ...this.state, isCheckingCredentials: false })
-            clearTimeout(timeout);
-        }, 3000)
+        ApiInvokerService.invokePost(Endpoints.Auth(), { 
+            email: this.state.userInfo.email,
+            password: this.state.userInfo.password
+        })
+        .then(data => this.isAuth(data, this.props))
+        .then(() => this.setState({ ...this.state, isCheckingCredentials: false }));
+    }
+
+    isAuth(data, { dispatch }) {
+        if(data.isAuth) {
+           dispatch(login());
+           dispatch(saveUserInfo(this.state.userInfo));
+        } else {
+            console.log(data)
+        }
     }
 
     render() {

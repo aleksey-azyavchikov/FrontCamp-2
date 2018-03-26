@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const path = require("path");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-module.exports = merge(common, {
+module.exports = merge(common.config, {
     output: {
         path: path.resolve(__dirname, "../../server/public/build"),
         publicPath: "build/",

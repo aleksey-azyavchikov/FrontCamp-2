@@ -3,7 +3,7 @@ import React from "react";
 import { ApiInvokerService } from "../../../../../../../../core/api";
 import { Endpoints } from "../../../../../../../../core/endpoints";
 import { TemplateHelpers } from "../../../../../../../../core/helpers/templates/template.helper";
-import * as actions from "./archive.actions";
+import { articlesFetching } from "../../../../../../../redux/modules/archive";
 import { connect } from "react-redux"
 import { ArchiveFilter } from "./archive-filter/archive-filter.component";
 
@@ -19,14 +19,11 @@ class ArchivePresentor extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(this.getArticlesHttp)
-    }
-
-    getArticlesHttp(dispatch) {
-        dispatch(actions.articlesFetchStarted());
-        ApiInvokerService.invokeGet(Endpoints.Articles())
-            .then(data => dispatch(actions.aticlesFetchFinished(TemplateHelpers.getInstance().formatArticles(data.articles))))
-            .catch(error => dispatch((actions.articlesFetchRejected(error))));
+        this.props.dispatch(articlesFetching(
+            ApiInvokerService
+                .invokeGet(Endpoints.Articles())
+                .then(data => TemplateHelpers.getInstance().formatArticles(data.articles))
+        ));
     }
 
     display() {
