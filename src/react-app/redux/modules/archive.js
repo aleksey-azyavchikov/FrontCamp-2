@@ -9,7 +9,8 @@ const defaultState = {
     error: null,
     articles: [],
     filter: "",
-    editorMode: EditorMode.None
+    editorMode: EditorMode.None,
+    selected: null
 };
 
 export const articlesFetchStarted = createAction("Fetch articles started");
@@ -25,6 +26,7 @@ export const articlesFetching = (promise) => (dispatch) => httpCallAction(
 
 export const setFilter = createAction("Set filter");
 export const setEditorMode = createAction("Set editor mode");
+export const setSelectedArticle = createAction("Set selected article");
 
 export default createReducer({
     [articlesFetching]: (state, payload) => httpCallAction(
@@ -40,6 +42,7 @@ export default createReducer({
 
     [setFilter]: (state, payload) => ({...state, filter: payload}),
     [setEditorMode]: (state, payload) => ({...state, editorMode: payload}),
+    [setSelectedArticle]: (state, payload) => ({...state, selected: payload})
 }, defaultState)
 
 

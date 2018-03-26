@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import { BackLink } from "../../../common/back/back.component";
 import { login, saveUserInfo } from "../../../../redux/modules/login";
+import { deferredHide } from "../../../../redux/modules/popup";
 import { ApiInvokerService } from "../../../../../core/api";
 import { Endpoints } from "../../../../../core/endpoints";
+import { InfoPopup } from "../../../common/popups/info-popup.component";
 
 
 const LoginFormPresentor = class extends React.Component {
@@ -42,10 +44,10 @@ const LoginFormPresentor = class extends React.Component {
 
     isAuth(data, { dispatch }) {
         if(data.isAuth) {
-           dispatch(login());
-           dispatch(saveUserInfo(this.state.userInfo));
+            dispatch(login());
+            dispatch(saveUserInfo({nickName: data.nickName, email: this.state.userInfo.email}));
         } else {
-            console.log(data)
+            dispatch(deferredHide("login-form", data.error, 2000))
         }
     }
 
@@ -56,13 +58,16 @@ const LoginFormPresentor = class extends React.Component {
                     <div class="col-4">
                         <form onSubmit={this.onSubmit.bind(this)} class="border border-dark rounded cs-form">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address {this.state.userInfo.email}</label>
-                                <input type="email" value={this.state.userInfo.email} onChange={this.onEmailChange.bind(this)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <label for="emailAddressLogin">Email address</label>
+                                <input type="email" value={this.state.userInfo.email} onChange={this.onEmailChange.bind(this)} class="form-control" id="emailAddressLogin" aria-describedby="emailHelp" placeholder="Enter email" />
                                 <small id="emailHelp" class="form-text text-muted">We will never share your email with anyone else.</small>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password {this.state.userInfo.password}</label>
-                                <input type="password" value={this.state.userInfo.password} onChange={this.onPasswordChange.bind(this)} class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                <label for="passwordLogin">Password</label>
+                                <input type="password" value={this.state.userInfo.password} onChange={this.onPasswordChange.bind(this)} class="form-control" id="passwordLogin" placeholder="Password" />
+                            </div>
+                            <div>
+                                <InfoPopup id="login-form"/>
                             </div>
                             <input type="submit" class="btn btn-primary" value="Submit" />
                         </form>

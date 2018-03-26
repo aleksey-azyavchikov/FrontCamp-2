@@ -1,13 +1,14 @@
 import { Guid } from "../../../../../../../../../core/guid";
-import ArchiveTableRow from "./archive-table-row/archive-table-row.component";
+import { ArchiveTableRow } from "./archive-table-row/archive-table-row.component";
+import { connect } from "react-redux";
 import React from "react";
 import "./archive-table.component.scss";
 
-class ArchiveTable extends React.Component {
+class ArchiveTablePresenter extends React.Component {
 
     render() {
         const headers = ["№", "Title", "Description", "Date", "Link"].map((name, index) => <th key={index} scope="col">{name}</th>)
-        const rows = this.props.articles.map((article, index) => <ArchiveTableRow filter={this.props.filter} key={Guid.create()} index={index + 1} article={article} />)
+        const rows = this.props.articles.map((article, index) => <ArchiveTableRow isSelected={this.props.selected === article} filter={this.props.filter} key={Guid.create()} index={index + 1} article={article} />)
 
         return (
             <table class="table table-bordered table-hover">
@@ -24,4 +25,6 @@ class ArchiveTable extends React.Component {
     }
 }
 
-export default ArchiveTable;
+export const ArchiveTable = connect(
+    (state) => ({selected: state.archiveState.selected})
+)(ArchiveTablePresenter)

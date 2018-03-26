@@ -6,11 +6,13 @@ import "./registration.component.scss";
 import { BackLink } from "../../common/back/back.component";
 import { ApiInvokerService } from "../../../../core/api";
 import { Endpoints } from "../../../../core/endpoints";
+import { InfoPopup } from "../../common/popups/info-popup.component";
+import { deferredHide } from "../../../redux/modules/popup";
 class RegistrationPagePresentor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isCheckingCredentials: false,
+            isSavingRegistration: false,
             userInfo: {
                 nickName: "",
                 email: "",
@@ -26,14 +28,15 @@ class RegistrationPagePresentor extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        this.setState({ ...this.state, isCheckingCredentials: true });
+        const { dispatch } = this.props;
+        this.setState({ ...this.state, isSavingRegistration: true });
         ApiInvokerService.invokePost(Endpoints.Users(), { 
             nickName: this.state.userInfo.nickName,
             email: this.state.userInfo.email,
             password: this.state.userInfo.confirmPassword
         })
-        .then(data => data && data.error ? console.log(data) : this.props.history.goBack())
-        .then(() => this.setState({ ...this.state, isCheckingCredentials: false }));
+        .then(data => data && data.error ? dispatch(deferredHide("registration", data.error, 2000)) : this.props.history.goBack())
+        .then(() => this.setState({ ...this.state, isSavingRegistration: false }));
     }
 
     get isValidEnteredPassword() {
@@ -54,34 +57,37 @@ class RegistrationPagePresentor extends React.Component {
                     <div class="col-4">
                         <form onSubmit={this.onSubmit.bind(this)} class="border border-dark rounded cs-form">
                             <div class="form-group">
-                                <label for="registration-email">Nick Name</label>
-                                <input type="text" value={this.state.userInfo.nickName} onChange={this.onFieldChange.bind(this, "nickName")} class="form-control" id="nick" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <label for="nickName">Nick name</label>
+                                <input type="text" value={this.state.userInfo.nickName} onChange={this.onFieldChange.bind(this, "nickName")} class="form-control" id="nickName" aria-describedby="nickNameHelp" placeholder="Enter nickname" />
                             </div>
                             <div class="form-group">
-                                <label for="registration-email">Email address</label>
-                                <input type="email" value={this.state.userInfo.email} onChange={this.onFieldChange.bind(this, "email")} class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <label for="emailAddress">Email address</label>
+                                <input type="email" value={this.state.userInfo.email} onChange={this.onFieldChange.bind(this, "email")} class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" />
                             </div>
                             <div class="form-group">
                                 <div class="row justify-content-between">
                                     <div class="col">
-                                        <label for="registration-password">Enter password</label>
+                                        <label for="passwordEntered">Enter password</label>
                                     </div>
                                     <div class="col-2">
                                         {this.isValidEnteredPassword ? <span class="oi oi-circle-check icon success-mark"></span> : null}
                                     </div>
                                 </div>
-                                <input type="password" value={this.state.userInfo.enteredPassword} onChange={this.onFieldChange.bind(this, "enteredPassword")} class="form-control" id="confirmedPassword" placeholder="Password" />
+                                <input type="password" value={this.state.userInfo.enteredPassword} onChange={this.onFieldChange.bind(this, "enteredPassword")} class="form-control" id="passwordEntered" placeholder="Enter password" />
                             </div>
                             <div class="form-group">
                                 <div class="row justify-content-between">
                                     <div class="col">
-                                        <label for="registration-confirm-password">Confirm password</label>
+                                        <label for="passwordConfirmed">Confirm password</label>
                                     </div>
                                     <div class="col-2">
                                         {this.isValidConfirmedPassword ? <span class="oi oi-circle-check icon success-mark"></span> : null}
                                     </div>
                                 </div>
-                                <input type="password" value={this.state.userInfo.confirmPassword} onChange={this.onFieldChange.bind(this, "confirmPassword")} class="form-control" id="enteredPassword" placeholder="Password" />
+                                <input type="password" value={this.state.userInfo.confirmPassword} onChange={this.onFieldChange.bind(this, "confirmPassword")} class="form-control" id="passwordConfirmed" placeholder="Confirm password" />
+                            </div>
+                            <div>
+                                <InfoPopup id="registration"/>
                             </div>
                             <input disabled={!(this.isValidConfirmedPassword && this.isValidEnteredPassword)} type="submit" class="btn btn-primary" value="Submit" />
                         </form>
@@ -89,7 +95,7 @@ class RegistrationPagePresentor extends React.Component {
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4">
-                        <span>{this.state.isCheckingCredentials ? "Loading..." : null}</span>
+                        <span>{this.state.isSavingRegistration ? "Loading..." : null}</span>
                     </div>
                 </div>
                 <div class="row justify-content-center">

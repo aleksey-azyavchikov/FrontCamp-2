@@ -1,4 +1,3 @@
-import ArchiveTable from "./archive-table/archive-table.component";
 import React from "react";
 import { ApiInvokerService } from "../../../../../../../../core/api";
 import { Endpoints } from "../../../../../../../../core/endpoints";
@@ -11,6 +10,7 @@ import { RegexStoreService } from "../../../../../../../../core/services/regex-s
 import { ArchivePanel } from "./archive-panel/archive-panel.component";
 import { EditorMode } from "../../../../../../../../core/enums/editor-mode.enum";
 import { ArchiveEditor } from "./archive-editor/archive-editor.component";
+import  { ArchiveTable } from "./archive-table/archive-table.component";
 
 import "./archive.component.scss";
 class ArchivePresentor extends React.Component {
@@ -36,6 +36,7 @@ class ArchivePresentor extends React.Component {
         );
         const editor = (
             <div>
+                <ArchivePanel />
                 <ArchiveEditor />
             </div>
         );
@@ -57,7 +58,7 @@ class ArchivePresentor extends React.Component {
                 <div class="container">
                     <div class="row justify-content-between">
                         <div class="col-4">
-                            <ArchiveFilter />
+                            {this.isMode(EditorMode.None) ? <ArchiveFilter/> : null}
                         </div>
                         <div class="col-1">
                             <ArchivePanel />
@@ -68,9 +69,9 @@ class ArchivePresentor extends React.Component {
                             <div class="card">
                                 <div class="card-body">
                                     {
-                                        this.isMode(EditorMode.Add) 
-                                        ? <ArchiveEditor /> 
-                                        : <ArchiveTable articles={this.props.articles} filter={this.props.filter} />
+                                        this.isMode(EditorMode.None) 
+                                        ? <ArchiveTable articles={this.props.articles} filter={this.props.filter} />
+                                        : <ArchiveEditor article={this.isMode(EditorMode.Edit) ? this.props.selected : null} /> 
                                     }
                                 </div>
                             </div>
@@ -86,6 +87,7 @@ export const Archive = connect(
     (state) => ({
         mode: state.archiveState.editorMode,
         articles: RegexStoreService.i().filterArticlesByTitle(state.archiveState.articles, state.archiveState.filter),
-        filter: state.archiveState.filter
+        filter: state.archiveState.filter,
+        selected: state.archiveState.selected
     })
 )(ArchivePresentor);

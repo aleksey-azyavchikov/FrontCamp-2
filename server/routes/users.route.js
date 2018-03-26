@@ -46,10 +46,10 @@ router.post("/auth", (request, response, next) => {
     mapper.mapProperties(request.body, user);
     UserSchema.findOne({ email: user.email }, (error, data) => {
         const isAuth = false;
-        if(!data) return response.json({isAuth: isAuth});
+        if(!data) return response.json({isAuth: isAuth, error: "User is not found"});
         encryptor.check(user.password, data.password, (result, error) => {
-            if(error) return response.json({isAuth: isAuth});
-            response.json({isAuth: result});
+            if(error) return response.json({isAuth: isAuth, error: "Server error"});
+            response.json({isAuth: result,  nickName: data.nickName, error: !result ? "Wrong email or password" : ""});
         }); 
     });
 });

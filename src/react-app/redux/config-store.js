@@ -6,6 +6,7 @@ import { Constants } from "../../core/constants";
 import throttle from "lodash/throttle"
 import loginStateReducer from "./modules/login";
 import archiveStateReducer from "./modules/archive";
+import popupStateReducer from "./modules/popup";
 
 const loadState = () => {
     try {
@@ -36,7 +37,8 @@ const configureStore = () => {
     const store = createStore(
         combineReducers({
             loginState: loginStateReducer,
-            archiveState: archiveStateReducer
+            archiveState: archiveStateReducer,
+            popupState: popupStateReducer
         }),
         loadState(),
         composeEnhancers(

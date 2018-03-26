@@ -5,9 +5,9 @@ import "./greeting.component.scss";
 
 const Greeting = (props) => (
     <span class="navbar-text greeting-position">
-        {props.email}
+        Hello, {props.nickName}
     </span>
 )
 
-export default connect((state) => ({ email: state.loginState.userInfo.email }))(Greeting)
+export default connect((state) => ({ nickName: state.loginState.userInfo.nickName }))(Greeting)
 

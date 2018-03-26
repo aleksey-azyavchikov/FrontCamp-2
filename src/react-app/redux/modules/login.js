@@ -4,8 +4,8 @@ import { createAction } from "redux-act";
 const defaultState = {
     isAuthorized: false,
     userInfo: {
-        email: null,
-        password: null
+        nickName: null,
+        email: null
     },
 };
 

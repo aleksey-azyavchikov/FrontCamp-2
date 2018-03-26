@@ -39,7 +39,8 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "server:run:debug": "SET NODE_ENV=production && nodemon --debug ./server/bin/www",
-        "server:run:inspect": "SET NODE_ENV=production && nodemon --inspect ./server/bin/www",
+        "server:run:inspect:prod": "SET NODE_ENV=production && nodemon --inspect ./server/bin/www",
+        "server:run:inspect:dev": "SET NODE_ENV=development && nodemon --inspect ./server/bin/www",
         "react:dev": "SET NODE_ENV=development && SET APP_TYPE=react"
     },
     "devDependencies": {

@@ -1,12 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 
 import Highlighter from "react-highlight-words";
 import "./archive-rable-row.component.scss";
-class ArchiveTableRow extends React.Component {
+import { setSelectedArticle } from "../../../../../../../../../redux/modules/archive";
+class ArchiveTableRowPresenter extends React.Component {
+    onClick() {
+        this.props.dispatch(setSelectedArticle(this.props.article));
+    }
+
     render() {
         return (
-            <tr class="article">
+            <tr class={this.props.isSelected ? "article selected-row" : "aricle"} onClick={this.onClick.bind(this)}>
                 <th scope="row">{this.props.index}</th>
                 <td>
                     <Highlighter 
@@ -22,7 +29,7 @@ class ArchiveTableRow extends React.Component {
     }
 }
 
-ArchiveTableRow.propsTypes = {
+ArchiveTableRowPresenter.propsTypes = {
     index: PropTypes.number.isRequired,
     filter: PropTypes.string.isRequired,
     article: PropTypes.shape({
@@ -33,4 +40,4 @@ ArchiveTableRow.propsTypes = {
     })
 }
 
-export default ArchiveTableRow;
+export const ArchiveTableRow = connect()(ArchiveTableRowPresenter);

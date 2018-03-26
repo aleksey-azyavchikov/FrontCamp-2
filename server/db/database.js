@@ -57,7 +57,7 @@ class DatabaseBuilder {
     }
 
     configureTodo() {
-        const name = "TodoSchema";
+        const name = "todoSchema";
         return this.configureScheme(name, this._models.Todo.configMongoose());
     }
 
