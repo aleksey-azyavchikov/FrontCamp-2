@@ -14,11 +14,14 @@ ngModule.config(["$locationProvider", "$routeProvider",
             template : "<article-editor></article-editor>"})
         .when("/article/:articleId/edit", {
             template : "<article-editor></article-editor>"})
+        .when("/todos", {
+            template : "<todo-page></todo-page>"})
         .otherwise({ redirectTo: "/articles" });
 }]);
 
 require("./services")(ngModule);
 require("./controllers")(ngModule);
 require("./directives")(ngModule);
+require("./filters")(ngModule);
 
 

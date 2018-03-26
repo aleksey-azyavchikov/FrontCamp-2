@@ -1,0 +1,21 @@
+<brand-bar></brand-bar>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <input type="text" ng-model="ctrl.filterByDay" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <todo-list title="'Done todos'" todos="ctrl.todos | predicate: ctrl.todoFilters.completed | filterByDay : ctrl.filterByDay "></todo-list>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <todo-list title="'New todos'" todos="ctrl.todos | predicate: ctrl.todoFilters.uncompleted | filterByDay : ctrl.filterByDay"></todo-list>
+
+        </div>
+    </div>
+</div>
+<footer></footer>

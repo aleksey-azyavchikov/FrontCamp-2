@@ -29,6 +29,7 @@ class DatabaseBuilder {
         return this
             .configureArticle()
             .configureUser()
+            .configureTodo();
     }
 
     configureScheme(name, config) {
@@ -44,6 +45,10 @@ class DatabaseBuilder {
 
     configureUser() {
         return this.configureScheme("userSchema", this._models.User.configMongoose());
+    }
+
+    configureTodo() {
+        return this.configureScheme("todoSchema", this._models.Todo.configMongoose());
     }
 
     connect(dbName = "") {

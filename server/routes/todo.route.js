@@ -4,31 +4,29 @@ var mapper = require("../helpers/mapper");
 var database = require("../db/database");
 
 router.get("/", (request, response) => {
-    const UserSchema = database.schemes.userSchema;
-    UserSchema.find({}, (error, data) => {
-        // let user = new database.models.User();
-        // data = mapper.mapProperties(data, user);
+    const TodoSchema = database.schemes.todoSchema;
+    TodoSchema.find({}, (error, data) => {
         let result = error ? error : { users: data }
         response.json(result);
     })
 });
 
 router.get("/:id", (request, response) => {
-    const UserSchema = database.schemes.userSchema;
-    UserSchema.findById(request.params.id, (error, data) => {
+    const TodoSchema = database.schemes.todoSchema;
+    TodoSchema.findById(request.params.id, (error, data) => {
         let result = error ? error : data 
         response.json(result);
     });
 });
 
 router.post("/", (request, response) => {
-    const UserModel = database.models.User;
-    let user = new UserModel();
+    const TodoModel = database.models.Todo;
+    let todo = new TodoModel();
     
-    mapper.mapProperties(request.body, user);
+    mapper.mapProperties(request.body, todo);
     
-    const UserSchema = database.schemes.userSchema;
-    new UserSchema(user).save((error) => {
+    const TodoSchema = database.schemes.todoSchema;
+    new TodoSchema(todo).save((error) => {
         error ? response.json("Error") : response.json("ok");
     });
 });

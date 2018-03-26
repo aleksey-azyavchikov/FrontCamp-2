@@ -1,7 +1,7 @@
-import { Mapper } from "./../../core/mapper";
-import { Article } from "../models/article.model";
+import { Mapper } from "./../../../core/mapper";
+import { Article } from "../../models/article.model";
 
-import image from "../../content/images/default-thumbnail.jpg";
+import image from "../../../content/images/default-thumbnail.jpg";
 
 module.exports = function(ngModule) {
     ngModule.controller("articleEditorCtrl", ["$scope", "httpService", "$routeParams", "$location", function($scope, httpService, $routeParams, $location) {

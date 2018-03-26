@@ -25,7 +25,7 @@ module.exports = {
             loadEntry("./react-app/index.jsx", "react"),
             loadEntry("./angular-app/index.js", "angular")
         ].filter(Boolean),
-        libraries: ["jquery", "bootstrap", "rxjs"],
+        libraries: ["jquery", "bootstrap", "rxjs", "lodash"],
     },
     resolve: {
         extensions: [".js", ".jsx"]
@@ -41,7 +41,8 @@ module.exports = {
             Popper: ["popper.js", "default"],
             popper: ["popper.js", "default"],
             Rx: "rxjs/Rx",
-            React: "react"
+            React: "react",
+            _: "lodash"
         }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 5,
