@@ -13,13 +13,13 @@ class ArchiveTableRowPresenter extends React.Component {
 
     render() {
         return (
-            <tr class={this.props.isSelected ? "article selected-row" : "aricle"} onClick={this.onClick.bind(this)}>
+            <tr class={this.props.isSelected ? "article selected-row" : "article"} onClick={this.onClick.bind(this)}>
                 <th scope="row">{this.props.index}</th>
                 <td>
-                    <Highlighter 
-                        searchWords={[this.props.filter]} 
-                        textToHighlight={this.props.article.title} 
-                        highlightStyle={{ fontWeight: "normal" }}/>
+                    <Highlighter
+                        searchWords={[this.props.filter]}
+                        textToHighlight={this.props.article.title}
+                        highlightStyle={{ fontWeight: "normal" }} />
                 </td>
                 <td>{this.props.article.description}</td>
                 <td>{this.props.article.publishedAt}</td>
@@ -40,4 +40,6 @@ ArchiveTableRowPresenter.propsTypes = {
     })
 }
 
-export const ArchiveTableRow = connect()(ArchiveTableRowPresenter);
+export const ArchiveTableRow = connect(
+    (state, own) => ({ isSelected: own.article === state.archiveState.selected })
+)(ArchiveTableRowPresenter);

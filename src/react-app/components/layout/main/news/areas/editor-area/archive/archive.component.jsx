@@ -26,27 +26,6 @@ class ArchivePresentor extends React.Component {
         ));
     }
 
-    display() {
-        const table = (
-            <div>
-                <ArchivePanel />
-                <ArchiveFilter />
-                <ArchiveTable articles={this.props.articles} filter={this.props.filter} />
-            </div>
-        );
-        const editor = (
-            <div>
-                <ArchivePanel />
-                <ArchiveEditor />
-            </div>
-        );
-
-        const result = this.props.mode === EditorMode.Add
-            ? editor
-            : table
-        return result;
-    }
-
     isMode(mode) {
         return this.props.mode === mode;
     }

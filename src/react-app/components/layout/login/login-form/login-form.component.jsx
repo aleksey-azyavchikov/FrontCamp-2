@@ -1,4 +1,4 @@
-import React from "react";
+import React,  { PureComponent }  from "react";
 import "./login-form.component.scss";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
@@ -10,7 +10,7 @@ import { Endpoints } from "../../../../../core/endpoints";
 import { InfoPopup } from "../../../common/popups/info-popup.component";
 
 
-const LoginFormPresentor = class extends React.Component {
+const LoginFormPresentor = class extends PureComponent {
     constructor(props) {
         super(props);
         this.defaultUser = { email: "a@a.com", password: "A" };

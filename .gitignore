@@ -4,3 +4,4 @@
 /db/exports
 /server/public/build
 /.vscode
+/coverage

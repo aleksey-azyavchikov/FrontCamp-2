@@ -1,10 +1,10 @@
 
-import React from "react";
+import { PureComponent } from "react";
 import { LoginForm } from "./login-form/login-form.component";
 import { withRouter } from "react-router-dom";
 import { BackLink } from "../../common/back/back.component";
 
-class LoginPresenter extends React.Component {
+class LoginPresenter extends PureComponent {
     constructor(props) {
         super(props);
     }

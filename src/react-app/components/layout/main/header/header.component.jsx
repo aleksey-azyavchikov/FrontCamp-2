@@ -1,4 +1,4 @@
-import React from "react";
+import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Brand from "./sections/brand/brand.component";
@@ -6,7 +6,7 @@ import Greeting from "./sections/greeting/greeting.component";
 import Sign from "./sections/sign/sign.component";
 import { logout } from "../../../../redux/modules/login";
 
-class HeaderPresenter extends React.Component {
+class HeaderPresenter extends PureComponent {
     constructor(props) {
         super(props)
     }

@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Archive table row Display correctly 1`] = `
-<tr>
+<tr
+  className="article"
+  onClick={[Function]}
+>
   <th
     scope="row"
   >
@@ -36,7 +39,10 @@ exports[`Archive table row Display correctly 1`] = `
 `;
 
 exports[`Archive table row Display correctly with highliting 1`] = `
-<tr>
+<tr
+  className="article"
+  onClick={[Function]}
+>
   <th
     scope="row"
   >

@@ -1,10 +1,10 @@
 
 
-import React from "react";
+import { PureComponent } from "react";
 
 import "./option-panel.component.scss";
 
-export class OptionPanel extends React.Component {
+export class OptionPanel extends PureComponent {
 
     getIconClasses(icon, currentMode, mode) {
         const defaultClasses = `panel-option oi ${icon} icon`;

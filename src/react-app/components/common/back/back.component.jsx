@@ -6,5 +6,4 @@ let BackLinkPresenter = (props) => (
     </span>
 )
 
-
 export const BackLink = withRouter(BackLinkPresenter)
