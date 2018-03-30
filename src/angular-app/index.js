@@ -6,7 +6,7 @@ var ngModule = angular.module("app", [require("angular-route")]);
 
 ngModule.config(["$locationProvider", "$routeProvider", 
     ($locationProvider, $routeProvider) => {
-    $locationProvider.hashPrefix("!");
+    $locationProvider.hashPrefix("");
     $routeProvider
         .when("/articles", {
             template : "<article-shower></article-shower>"})

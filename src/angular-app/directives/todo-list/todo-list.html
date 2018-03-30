@@ -1,10 +1,11 @@
-
 <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
     <div class="card-header">{{ ctrl.title }}</div>
     <div class="card-body">
         <!-- <h6 cmIf="this.card && this.card.title" class="card-title">{{ this.card.title }}</h5> -->
-        <ul class="list-group" ng-repeat="todo in ctrl.todos">
-            <li class="list-group-item cs-card-text">{{todo.text}}</li>
+        <ul class="list-group" ng-repeat="todo in ctrl.todos | predicate: ctrl.filterFn | filterByDay : ctrl.filterDayValue">
+            <li class="list-group-item cs-card-text">
+                <todo-item title="todo.text"></todo-item>
+            </li>
         </ul>
     </div>
 </div>

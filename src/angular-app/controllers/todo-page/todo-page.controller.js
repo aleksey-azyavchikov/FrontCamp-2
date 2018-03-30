@@ -14,5 +14,6 @@ module.exports = function(ngModule) {
             { text: "b", completed: false, createdDate: new Date() }
         ]
         ctrl.todoFilters = todoService.todoFilters;
+        ctrl.filterByDay = "";
     }]);
 }

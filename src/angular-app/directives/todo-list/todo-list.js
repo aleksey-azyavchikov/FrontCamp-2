@@ -8,7 +8,9 @@ module.exports = function(ngModule) {
         controllerAs: "ctrl",
         bindings: {
             todos: "<",
-            title: "<"
+            title: "<",
+            filterDayValue: "<",
+            filterFn: "<"
         }
     });
 }

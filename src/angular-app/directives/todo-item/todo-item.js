@@ -5,6 +5,9 @@ module.exports = function(ngModule) {
     ngModule.component("todoItem", {
         template: require("./todo-item.html"),
         controller: "todoItemCtrl",
-        controllerAs: "vm"    
+        controllerAs: "vm",
+        bindings: {
+            title: "<"
+        }
     });
 }
