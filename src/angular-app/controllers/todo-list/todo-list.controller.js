@@ -1,7 +1,6 @@
 
 module.exports = function(ngModule) { 
-    ngModule.controller("todoListCtrl", ["$scope", function ($scope) {
+    ngModule.controller("todoListCtrl", [ function () {
         const ctrl = this;
-        console.log(ctrl);
     }]);
 }

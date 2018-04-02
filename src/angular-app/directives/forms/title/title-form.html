@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row justify-content-center cs-position-row">
+        <div class="col-4">
+            <form name="form" class="border border-dark rounded cs-form">
+                <div class="form-group">
+                    <!-- <label for="titleText" ng-if="form.title.$error.required">The value is not a valid !</label>
+                    <label for="titleText" ng-if="form.title.$error.maxlengthcustom">OLOO</label> -->
+                    <label for="titleText">Title</label>
+                    <alert ng-if="form.title.$error.required" message="'This is required field'"></alert>
+                    <alert ng-if="form.title.$error.maxlengthcustom" message="'This field should be more 20 symbols'"></alert>
+                    <input 
+                        ng-model="ctrl.title"
+                        name="title"
+                        type="text" 
+                        class="form-control" 
+                        id="titleText" 
+                        aria-describedby="titleText" 
+                        placeholder="Enter title"
+                        required
+                        maxlengthcustom/>
+                </div>
+                <button type="submit" ng-click="ctrl.submit($event)" class="btn btn-primary" >Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -14,7 +14,7 @@ router.get("/", (request, response) => {
 router.get("/:id", (request, response) => {
     let ArticleSchema = database.schemes.articleSchema;
     ArticleSchema.findById(request.params.id, (error, data) => {
-        let result = error ? error : data 
+        let result = error ? error : {article: data} 
         response.json(result);
     });
 });

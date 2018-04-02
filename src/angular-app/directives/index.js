@@ -6,4 +6,7 @@ module.exports = function(ngModule) {
     require("./todo-list/todo-list.js")(ngModule);
     require("./todo-item/todo-item.js")(ngModule);
     require("./pages/todos/todo-page.js")(ngModule);
+    require("./pages/todos/edit-todo-page/edit-todo-page.js")(ngModule);
+    require("./forms/title/title-form.js")(ngModule);
+    require("./common/alert/alert.js")(ngModule);
 }

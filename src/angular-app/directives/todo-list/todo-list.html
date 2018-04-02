@@ -1,10 +1,24 @@
-<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-    <div class="card-header">{{ ctrl.title }}</div>
+<div class="card text-white bg-dark mb-3">
+    <div class="card-header">
+        {{ ctrl.title }}
+        <a class="badge badge-dark" ng-if="ctrl.creationLink" href="/#/todos/add">
+            <span class="oi oi-plus icon icon-hover">
+            </span>
+        </a>
+    </div>
+    <div ng-if="ctrl.filteredTodos && ctrl.filteredTodos.length > 0" class="card-header">
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text" ng-model="ctrl.filterByFirstLetter" class="form-control mx-sm-3" maxlength="1" placeholder="Filter by first letter"/>
+                <input type="text" ng-model="ctrl.filterByDate" class="form-control" placeholder="Filter by date"/>
+            </div>
+        </form>
+    </div>
     <div class="card-body">
         <!-- <h6 cmIf="this.card && this.card.title" class="card-title">{{ this.card.title }}</h5> -->
-        <ul class="list-group" ng-repeat="todo in ctrl.todos | predicate: ctrl.filterFn | filterByDay : ctrl.filterDayValue">
-            <li class="list-group-item cs-card-text">
-                <todo-item title="todo.text"></todo-item>
+        <ul class="list-group">
+            <li class="list-group-item cs-card-text" ng-repeat="todo in (ctrl.filteredTodos = (ctrl.todos | predicate: ctrl.filterFn | filterByDay : ctrl.filterDayValue | filterByFirstLetter: ctrl.filterByFirstLetter | filterByDate: ctrl.filterByDate))">
+                <todo-item todo="todo"></todo-item>
             </li>
         </ul>
     </div>

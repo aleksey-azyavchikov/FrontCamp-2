@@ -23,6 +23,7 @@ database
 const index = require("./routes/index.route");
 const news = require("./routes/news.route");
 const users = require("./routes/users.route");
+const todos = require("./routes/todos.route");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -67,6 +68,7 @@ app.get("/", (request, response) => {
 })
 app.use("/api/news", news);
 app.use("/api/users", users);
+app.use("/api/todos", todos);
 
 // Go to Welcome page.
 // app.get("*", function(req, res) {

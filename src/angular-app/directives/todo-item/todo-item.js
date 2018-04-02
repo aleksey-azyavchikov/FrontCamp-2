@@ -7,7 +7,7 @@ module.exports = function(ngModule) {
         controller: "todoItemCtrl",
         controllerAs: "vm",
         bindings: {
-            title: "<"
+            todo: "=",
         }
     });
 }

@@ -1,41 +1,47 @@
 <brand-bar></brand-bar>
-<div class="container table-padding">
-    <div class="panel panel-default">
-        <h5>Articles</h5>
-        <table class="table table-bordered table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Title</th>
-                    <th>Article id</th>
-                    <th>Action
-                        <span>:</span>
-                        <a href="#!/article/add">
-                            <span class="oi oi-plus icon"></span>
-                        </a>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="article in ctrl.articles">
-                    <td>{{article.title}}</td>
-                    <td><a href="#!/article/{{article._id}}/edit">{{article._id}}</a></td>
-                    <td>    
-                            <a href="#!/article/{{article._id}}/edit">
+<div class="padding">
+    <div class="container table-padding">
+        <div class="panel panel-default">
+            <h5>Articles</h5>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Article id</th>
+                        <th>Action
+                            <span>:</span>
+                            <a href="/#/article/add">
+                                <span class="oi oi-plus icon"></span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="article in ctrl.articles">
+                        <td class="title" ng-click="ctrl.select(article)">{{article.title}}</td>
+                        <td><a href="/#/article/{{article._id}}/edit">{{article._id}}</a></td>
+                        <td>    
+                            <a href="/#/article/{{article._id}}/edit">
                                 <span class="oi oi-pencil icon"></span>
                             </a>
                             <span role="separator" class="divider">/</span>
                             <a href="#" ng-click="$event.preventDefault(); ctrl.deleteArticle(article._id)">
                                 <span class="oi oi-minus icon"></span>
                             </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <th>{{ctrl.articles.length}}</th>
-                    <th></th>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>{{ctrl.articles.length}}</th>
+                        <th></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-if="ctrl.selected">
+        <title-form title="ctrl.selected.title" on-submit="ctrl.onSubmit(title)">
+        </title-form>
     </div>
 </div>
 <footer></footer>

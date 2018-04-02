@@ -10,7 +10,8 @@ module.exports = function(ngModule) {
             todos: "<",
             title: "<",
             filterDayValue: "<",
-            filterFn: "<"
+            filterFn: "<",
+            creationLink: "<"
         }
     });
 }

@@ -16,6 +16,10 @@ ngModule.config(["$locationProvider", "$routeProvider",
             template : "<article-editor></article-editor>"})
         .when("/todos", {
             template : "<todo-page></todo-page>"})
+        .when("/todos/edit/:id", {
+            template : "<edit-todo-page></edit-todo-page>"})
+        .when("/todos/add", {
+            template : "<edit-todo-page></edit-todo-page>"})
         .otherwise({ redirectTo: "/articles" });
 }]);
 
@@ -23,5 +27,6 @@ require("./services")(ngModule);
 require("./controllers")(ngModule);
 require("./directives")(ngModule);
 require("./filters")(ngModule);
+require("./validators")(ngModule);
 
 

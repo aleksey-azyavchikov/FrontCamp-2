@@ -3,7 +3,7 @@ import { Endpoints } from "../../core/endpoints";
 
 
 module.exports = function (ngModule) {
-    ngModule.factory("httpService", function () {
+    ngModule.factory("articleHttpService", function () {
         const apiInvoker = ApiInvokerService;
         return {
             apiInvoker: apiInvoker,
@@ -24,12 +24,12 @@ module.exports = function (ngModule) {
                     .catch(error => console.error(error));
             },
             updateArticle: function (id, article, success) {
-                this.apiInvoker.invokePut(Endpoints.Articles({ id }), { article })
+                this.apiInvoker.invokePut(Endpoints.Articles({ id }), { ...article })
                     .then(data => success(data))
                     .catch(error => console.error(error));
             },
             addArticle: function (article, success) {
-                this.apiInvoker.invokePost(Endpoints.Articles(), { article })
+                this.apiInvoker.invokePost(Endpoints.Articles(), { ...article })
                     .then(data => success(data))
                     .catch(error => console.error(error));
             }

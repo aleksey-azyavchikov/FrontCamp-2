@@ -1,16 +1,16 @@
 
-class Article {
+class Todo {
     constructor() {
         this.text = "";
         this.completed = false;
-        this.creationDate = new Date();
+        this.createdDate = new Date();
     }
 
     static configMongoose() {
         let mongoseConfig =  {
             text: String,
             completed: Boolean,
-            creationDate: Date
+            createdDate: Date
         };
 
         return {
@@ -21,4 +21,4 @@ class Article {
     }
 }
 
-module.exports = Article;
+module.exports = Todo;

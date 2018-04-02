@@ -2,26 +2,41 @@
 module.exports = function (ngModule) {
     ngModule.controller("articleShowerCtrl", [
         "$scope", 
-        "httpService",
-        "todoService", 
+        "articleHttpService",
         function (
             $scope, 
-            httpService, 
-            todoService
+            articleHttpService
         ) {
         const ctrl = this;
         ctrl.articles = [];
 
         ctrl.deleteArticle = function (id) {
-            httpService.deleteArticle(id, (data) => {
-                httpService.getArticles((data) => {
+            articleHttpService.deleteArticle(id, (data) => {
+                articleHttpService.getArticles((data) => {
                     ctrl.articles = data.articles;
                     $scope.$apply();
-                })
+                });
             });
         }
 
-        httpService.getArticles((data) => {
+        ctrl.updateArticle = function(id, article) {
+            articleHttpService.updateArticle(id, article, () => {
+                articleHttpService.getArticles((data) => {
+                    ctrl.articles = data.articles;
+                    $scope.$apply();
+                });
+            });
+        }
+        
+        ctrl.onSubmit = function (title) {
+            ctrl.updateArticle(ctrl.selected._id, {...ctrl.selected, title: title })
+        };
+        
+        ctrl.select = function (article) {
+            ctrl.selected = article;
+        }
+        
+        articleHttpService.getArticles((data) => {
             ctrl.articles = data.articles;
             $scope.$apply();
         });
