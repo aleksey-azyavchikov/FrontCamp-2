@@ -33,6 +33,7 @@
         "app:run:dev:native": "npm run ui:build:dev:native && node ./server/bin/www",
         "app:run:prod": "SET NODE_ENV=production && npm run ui:build:dev && node ./server/bin/www",
         "app:run:prod:react": "SET NODE_ENV=production && SET APP_TYPE=react && webpack --config configs/webpack/dev.config.js && node ./server/bin/www",
+        "app:run:prod:angular": "SET NODE_ENV=production && SET APP_TYPE=angular && webpack --config configs/webpack/dev.config.js && node ./server/bin/www",
         "app:run:prod1": "SET NODE_ENV=production && npm run ui:build:prod && node ./server/bin/www",
         "nodemon:server": "nodemon ./server/bin/www",
         "node:server": "node ./server/bin/www",
