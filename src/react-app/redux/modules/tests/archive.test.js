@@ -38,13 +38,24 @@ describe.only("Archive reducer", () => {
         expect(state.editorMode).toBe(EditorMode.Edit);
     });
 
-    it("Test action: async action", (done) => {
+    it("Test action: async action resolve", (done) => {
         const dispatch = jasmine.createSpy("dispatch");
         const promise = actions.articlesFetching(Promise.resolve("value"))(dispatch);
         promise.then(() => {
             expect(dispatch).toHaveBeenCalledTimes(2);
             expect(dispatch).toHaveBeenCalledWith(actions.articlesFetchStarted());
             expect(dispatch).toHaveBeenCalledWith(actions.aticlesFetchFinished("value"));
+            done()
+        });
+    });
+
+    it("Test action: async action exception", (done) => {
+        const dispatch = jasmine.createSpy("dispatch");
+        const promise = actions.articlesFetching(Promise.reject("error"))(dispatch);
+        promise.then(() => {
+            expect(dispatch).toHaveBeenCalledTimes(2);  
+            expect(dispatch).toHaveBeenCalledWith(actions.articlesFetchStarted());
+            expect(dispatch).toHaveBeenCalledWith(actions.articlesFetchRejected("error"));
             done()
         });
     });
