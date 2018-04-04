@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compoentn: Archive table: Display: initial 1`] = `
+<table
+  className="table table-bordered table-hover"
+>
+  <thead
+    className="thead-dark"
+  >
+    <tr>
+      <th
+        scope="col"
+      >
+        №
+      </th>
+      <th
+        scope="col"
+      >
+        Title
+      </th>
+      <th
+        scope="col"
+      >
+        Description
+      </th>
+      <th
+        scope="col"
+      >
+        Date
+      </th>
+      <th
+        scope="col"
+      >
+        Link
+      </th>
+    </tr>
+  </thead>
+  <tbody />
+</table>
+`;

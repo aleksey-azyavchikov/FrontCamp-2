@@ -29,13 +29,6 @@ export const setEditorMode = createAction("Set editor mode");
 export const setSelectedArticle = createAction("Set selected article");
 
 export default createReducer({
-    [articlesFetching]: (state, payload) => httpCallAction(
-        payload.dispatch, 
-        payload.promise, 
-        articlesFetchStarted,
-        aticlesFetchFinished,
-        articlesFetchRejected
-    ),
     [articlesFetchStarted]: (state) => ({...state, isFetching: true, isFetched: false, error: null}),
     [aticlesFetchFinished]: (state, payload) => ({...state, isFetching: false, isFetched: true, articles: payload, error: null }),
     [articlesFetchRejected]: (state, payload) => ({...state, isFetching: false, isFetched: true, error: payload }),

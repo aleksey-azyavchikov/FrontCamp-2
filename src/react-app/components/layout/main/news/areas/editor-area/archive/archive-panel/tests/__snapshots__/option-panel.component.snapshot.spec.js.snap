@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compoent: OptionPanel Display: initial 1`] = `
+<li
+  className="list-inline-item"
+>
+  <span
+    className="panel-option oi undefined icon selected-mode"
+    id={undefined}
+    onClick={[Function]}
+  />
+</li>
+`;

@@ -1,8 +1,8 @@
 import archiveReducer from ".././archive.js"
-import * as actions  from ".././archive.js"
+import * as actions from ".././archive.js"
 import { EditorMode } from "../../../../core/enums/editor-mode.enum.js";
 
-describe("Archive reducer", () => {
+describe.only("Archive reducer", () => {
     it("Should return default state is state is null", () => {
         const state = archiveReducer();
         expect(state).not.toBe(null);
@@ -16,7 +16,7 @@ describe("Archive reducer", () => {
     });
 
     it("Test action: articles fetch finished", () => {
-        const data = [{name: "Name"}];
+        const data = [{ name: "Name" }];
         const state = archiveReducer(undefined, actions.aticlesFetchFinished(data));
         expect(state.isFetched).toBe(true);
         expect(state.isFetching).toBe(false);
@@ -33,8 +33,19 @@ describe("Archive reducer", () => {
         expect(state.error).toBe(message);
     });
 
-    it("Test action: set editro mode", () => {
+    it("Test action: set editor mode as Edit", () => {
         const state = archiveReducer(undefined, actions.setEditorMode(EditorMode.Edit));
         expect(state.editorMode).toBe(EditorMode.Edit);
+    });
+
+    it("Test action: async action", (done) => {
+        const dispatch = jasmine.createSpy("dispatch");
+        const promise = actions.articlesFetching(Promise.resolve("value"))(dispatch);
+        promise.then(() => {
+            expect(dispatch).toHaveBeenCalledTimes(2);
+            expect(dispatch).toHaveBeenCalledWith(actions.articlesFetchStarted());
+            expect(dispatch).toHaveBeenCalledWith(actions.aticlesFetchFinished("value"));
+            done()
+        });
     });
 })

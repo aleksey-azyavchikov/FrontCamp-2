@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compoent: OptionPanel Display: initial 1`] = `
+<div
+  className="panel"
+>
+  <ul
+    className="list-inline"
+  >
+    <li
+      className="list-inline-item"
+    >
+      <span
+        className="panel-option oi oi-plus icon "
+        id="Add"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="list-inline-item"
+    >
+      <span
+        className="panel-option oi oi-pencil icon "
+        id="Edit"
+        onClick={[Function]}
+      />
+    </li>
+  </ul>
+</div>
+`;

@@ -1,6 +1,6 @@
 
 
-import { PureComponent } from "react";
+import React, { PureComponent } from "react";
 
 import "./option-panel.component.scss";
 

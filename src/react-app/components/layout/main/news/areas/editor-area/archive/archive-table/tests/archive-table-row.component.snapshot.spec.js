@@ -1,6 +1,6 @@
 import React from "react";
 import configureStore from "redux-mock-store";
-import { ArchiveTableRow } from "./archive-table-row.component";
+import { ArchiveTableRow } from "../archive-table-row/archive-table-row.component";
 import renderer from "react-test-renderer";
 
 describe("Archive table row", () => {
